@@ -1,0 +1,10 @@
+node_modules
+.idea
+dist
+es6
+build
+# package-lock.json
+debug.log
+.docker
+.cache
+.DS_Store

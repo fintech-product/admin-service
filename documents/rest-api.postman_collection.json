@@ -1,0 +1,534 @@
+{
+  "info": {
+    "_postman_id": "92eab84c-81ae-4f3d-ad48-0d6e494e8218",
+    "name": "cms-backoffice",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17364528"
+  },
+  "item": [
+    {
+      "name": "user",
+      "item": [
+        {
+          "name": "search users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "name": "Content-Type",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/search?page=1&limit=2&email=james&dateOfBirth.min=1974-11-15T17:00:00.000Z&dateOfBirth.max=1976-11-15T17:00:00.000Z&sort=phone,-id",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "search"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "2"
+                },
+                {
+                  "key": "email",
+                  "value": "james"
+                },
+                {
+                  "key": "dateOfBirth.min",
+                  "value": "1974-11-15T17:00:00.000Z"
+                },
+                {
+                  "key": "dateOfBirth.max",
+                  "value": "1976-11-15T17:00:00.000Z"
+                },
+                {
+                  "key": "sort",
+                  "value": "phone,-id"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get all users",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "name": "Content-Type",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create an user",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"wolverine\",\n    \"username\": \"james.howlett\",\n    \"email\": \"james.howlett@gmail.com\",\n    \"phone\": \"0987654321\",\n    \"dateOfBirth\": \"1974-11-16T00:00:00+07:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "update an user",
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"username\": \"james.howlett\",\n    \"email\": \"james.howlett@gmail.com\",\n    \"phone\": \"0987654321\",\n    \"dateOfBirth\": \"1974-11-16T00:00:00+07:00\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/wolverine",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "wolverine"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "patch an user",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"email\": \"james.howlett@gmail.com\",\n    \"phone\": \"0987654321\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/wolverine",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "wolverine"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "delete  an user",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/users/wolverine",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["users", "wolverine"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "news",
+      "item": [
+        {
+          "name": "search news",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"page\": 1,\n    \"limit\": 20,\n    \"title\": \"FPT Software\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/news/search",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["news", "search"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get a news",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/news/20240917001",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["news", "20240917001"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "job",
+      "item": [
+        {
+          "name": "search jobs",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"page\": 1,\n    \"limit\": 20,\n    \"title\": \"Java\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/jobs/search",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["jobs", "search"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get a job",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/jobs/senior-backend",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["jobs", "senior-backend"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "contact",
+      "item": [
+        {
+          "name": "search contacts",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"page\": 1,\n    \"limit\": 20,\n    \"title\": \"Meerana\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/contacts/search",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["contacts", "search"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "get a contact",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8080/contacts/E7UBXeHrp",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8080",
+              "path": ["contacts", "E7UBXeHrp"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "create a contact",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              },
+              {
+                "key": "X-Correlation-Id",
+                "value": "INoxoPGvyLnQsiLN",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n    \"id\": \"wolverine\",\n    \"name\": \"James Howlett\",\n    \"country\": \"USA\",\n    \"company\": \"Marvel\",\n    \"jobTitle\": \"Actor\",\n    \"email\": \"james.howlett@gmail.com\",\n    \"phone\": \"0987654321\",\n    \"message\": \"I want to start a business with you\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://localhost:8082/contacts",
+              "protocol": "http",
+              "host": ["localhost"],
+              "port": "8082",
+              "path": ["contacts"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "health check",
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      },
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "name": "Content-Type",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://localhost:8080/health",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "8080",
+          "path": ["health"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
