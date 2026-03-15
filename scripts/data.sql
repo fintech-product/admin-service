@@ -240,7 +240,7 @@ insert into role_modules(role_id, module_id, permissions) values ('content_appro
 
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('aft2KNdQhi','gareth.bale','gareth.bale@gmail.com','Gareth Bale','https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg','A','M','0987654321','Mr','M');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('al6TZ0p4iE','cristiano.ronaldo','cristiano.ronaldo@gmail.com','Cristiano Ronaldo','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg','I','M','0987654321','Mr','E');
-insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('bkbH1PHu9O','james.rodriguez','james.rodriguez@gmail.com','James Rodríguez','https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/440px-James_Rodriguez_2018.jpg','A','M','0987654321','Mr','E');
+insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('bkbH1PHu9O','james.rodriguez','james.rodriguez@gmail.com','James Rodríguez','https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/250px-James_Rodriguez_2018.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('bL7sQBeO5m','zinedine.zidane','zinedine.zidane@gmail.com','Zinedine Zidane','https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('bphT4IllDy','kaka','kaka@gmail.com','Kaká','https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Kak%C3%A1_visited_Stadium_St._Petersburg.jpg/500px-Kak%C3%A1_visited_Stadium_St._Petersburg.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('cHGwWRCdPx','luis.figo','luis.figo@gmail.com','Luís Figo','https://upload.wikimedia.org/wikipedia/commons/f/fe/Luis_Figo-2009.jpg','A','M','0987654321','Mr','E');
@@ -257,7 +257,7 @@ insert into users (user_id,username,email,display_name,image_url,status,gender,p
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('hDx6jGifRZ','sergio.busquets','sergio.busquets@gmail.com','Sergio Busquets','https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Sergio_Busquets_2018.jpg/440px-Sergio_Busquets_2018.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('i4GSsUQvZa','antoine.griezmann','antoine.griezmann@gmail.com','Antoine Griezmann','https://upload.wikimedia.org/wikipedia/commons/thumb/f/fc/Antoine_Griezmann_in_2018_%28cropped%29.jpg/440px-Antoine_Griezmann_in_2018_%28cropped%29.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('i5gkziUCaz','marc-andre.ter.stegen','marc-andre.ter.stegen@gmail.com','Marc-André ter Stegen','https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Marc-Andr%C3%A9_ter_Stegen.jpg/500px-Marc-Andr%C3%A9_ter_Stegen.jpg','I','M','0987654321','Mr','E');
-insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('jYz18HzzZk','miralem.pjanic','miralem.pjanic@gmail.com','Miralem Pjanić','https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/20150331_2025_AUT_BIH_2130_Miralem_Pjani%C4%87.jpg/440px-20150331_2025_AUT_BIH_2130_Miralem_Pjani%C4%87.jpg','A','M','0987654321','Mrs','M');
+insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('jYz18HzzZk','miralem.pjanic','miralem.pjanic@gmail.com','Miralem Pjanić','https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/20150331_2108_AUT_BIH_2382_%28edited%29.jpg/250px-20150331_2108_AUT_BIH_2382_%28edited%29.jpg','A','M','0987654321','Mrs','M');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('k0Zjb3fVJC','martin.braithwaite','martin.braithwaite@gmail.com','Martin Braithwaite','https://img.a.transfermarkt.technology/portrait/header/95732-1583334177.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('kcUrdo9w3H','ousmane.dembele','ousmane.dembele@gmail.com','Ousmane Dembélé','https://upload.wikimedia.org/wikipedia/commons/7/77/Ousmane_Demb%C3%A9l%C3%A9_2018.jpg','A','M','0987654321','Ms','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('mooFuhbZg2','riqui.puig','riqui.puig@gmail.com','Riqui Puig','https://upload.wikimedia.org/wikipedia/commons/thumb/0/0b/Riqui_Puig_against_Portland_Timbers_%28cropped2%29.jpg/250px-Riqui_Puig_against_Portland_Timbers_%28cropped2%29.jpg','A','M','0987654321','Ms','E');
@@ -294,15 +294,15 @@ insert into user_roles(user_id, role_id) values ('cHGwWRCdPx','it_support');
 insert into user_roles(user_id, role_id) values ('cKAvrWUwa1','call_center');
 insert into user_roles(user_id, role_id) values ('cSojoy4GUs','call_center');
 
-insert into user_roles(user_id, role_id) values ('dXlkg4NA9J','content_writer');
-insert into user_roles(user_id, role_id) values ('emAmlZff9p','content_writer');
-insert into user_roles(user_id, role_id) values ('ePXNMefKJx','content_writer');
+insert into user_roles(user_id, role_id) values ('dXlkg4NA9J','finance_writer');
+insert into user_roles(user_id, role_id) values ('emAmlZff9p','finance_writer');
+insert into user_roles(user_id, role_id) values ('ePXNMefKJx','finance_writer');
 
-insert into user_roles(user_id, role_id) values ('ftMd80w4x2','content_approver');
-insert into user_roles(user_id, role_id) values ('gHZY91SouH','content_approver');
-insert into user_roles(user_id, role_id) values ('gLEDc8dQIp','content_approver');
-insert into user_roles(user_id, role_id) values ('gPrLYi4xOy','content_approver');
-insert into user_roles(user_id, role_id) values ('gv99fpMeFy','content_approver');
+insert into user_roles(user_id, role_id) values ('ftMd80w4x2','finance_approver');
+insert into user_roles(user_id, role_id) values ('gHZY91SouH','finance_approver');
+insert into user_roles(user_id, role_id) values ('gLEDc8dQIp','finance_approver');
+insert into user_roles(user_id, role_id) values ('gPrLYi4xOy','finance_approver');
+insert into user_roles(user_id, role_id) values ('gv99fpMeFy','finance_approver');
 
 insert into audit_logs (id, resource, user_id, ip, "action", "time", status, remark) values('6xydt3Qap', 'authentication', 'bphT4IllDy', '188.239.138.226', 'authenticate', '2023-07-02 21:00:06.811', 'success', '');
 insert into audit_logs (id, resource, user_id, ip, "action", "time", status, remark) values('gRAIVh1tM', 'term', 'bphT4IllDy', '188.239.138.226', 'patch', '2023-07-03 12:09:51.659', 'success', '');
@@ -344,9 +344,16 @@ insert into audit_logs (id, resource, user_id, ip, "action", "time", status, rem
 insert into audit_logs (id, resource, user_id, ip, "action", "time", status, remark) values('SiyKGs1ap', 'user', 'bphT4IllDy', '188.239.138.226', 'patch', '2023-07-03 21:10:38.634', 'fail', 'Data Validation Failed');
 insert into audit_logs (id, resource, user_id, ip, "action", "time", status, remark) values('yYReJsQaM', 'user', 'bphT4IllDy', '188.239.138.226', 'patch', '2023-07-03 21:11:10.110', 'success', '');
 
+/*
+alter table userroles add foreign key (userid) references users (userid);
+alter table userroles add foreign key (roleid) references roles (roleid);
+alter table modules add foreign key (parent) references modules (moduleid);
+alter table rolemodules add foreign key (roleid) references roles (roleid);
+alter table rolemodules add foreign key (moduleid) references modules (moduleid);
+*/
 
 create table currency (
-  code bpchar(3) primary key,
+  code varchar(3) primary key,
   symbol varchar(6) not null,
   decimal_digits int4,
   status char(1)
@@ -372,6 +379,7 @@ create table country (
   country_code varchar(5) primary key,
   country_name varchar(255),
   native_country_name varchar(255),
+  date_format varchar(14),
   decimal_separator varchar(3),
   group_separator varchar(3),
   currency_code char(3),
@@ -488,7 +496,7 @@ insert into currency(code,decimal_digits,symbol) values ('ZWL',2,'Z$');
 
 update currency set status = 'A';
 
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('af-ZA','ZA','South Africa','Suid Afrika','Afrikaans (South Africa)','Afrikaans (Suid Afrika)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
 ('am-ET','ET','Ethiopia','ኢትዮጵያ','Amharic (Ethiopia)','አማርኛ (ኢትዮጵያ)','d/M/yyyy',1,'.',',',2,'ETB',0,'ETB10,000.00'),
 ('ar-AE','AE','U.A.E.','الإمارات العربية المتحدة','Arabic (U.A.E.)','العربية (الإمارات العربية المتحدة)','dd/MM/yyyy',7,'.',',',2,'AED',2,'د.إ.‏ 10,000.00'),
@@ -499,7 +507,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('ar-JO','JO','Jordan','الأردن','Arabic (Jordan)','العربية (الأردن)','dd/MM/yyyy',7,'.',',',3,'JOD',2,'د.ا.‏ 10,000.000'),
 ('ar-KW','KW','Kuwait','الكويت','Arabic (Kuwait)','العربية (الكويت)','dd/MM/yyyy',7,'.',',',3,'KWD',2,'د.ك.‏ 10,000.000'),
 ('ar-LB','LB','Lebanon','لبنان','Arabic (Lebanon)','العربية (لبنان)','dd/MM/yyyy',2,'.',',',2,'LBP',2,'ل.ل.‏ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('ar-LY','LY','Libya','ليبيا','Arabic (Libya)','العربية (ليبيا)','dd/MM/yyyy',7,'.',',',3,'LYD',0,'د.ل.‏10,000.000'),
 ('ar-MA','MA','Morocco','المملكة المغربية','Arabic (Morocco)','العربية (المملكة المغربية)','dd-MM-yyyy',2,'.',',',2,'MAD',2,'د.م.‏ 10,000.00'),
 ('ar-OM','OM','Oman','عمان','Arabic (Oman)','العربية (عمان)','dd/MM/yyyy',7,'.',',',3,'OMR',2,'ر.ع.‏ 10,000.000'),
@@ -510,7 +518,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('ar-YE','YE','Yemen','اليمن','Arabic (Yemen)','العربية (اليمن)','dd/MM/yyyy',7,'.',',',2,'YER',2,'ر.ي.‏ 10,000.00'),
 ('arn-CL','CL','Chile','Chile','Mapudungun (Chile)','Mapudungun (Chile)','dd-MM-yyyy',1,',','.',2,'CLP',2,'$ 10.000,00'),
 ('as-IN','IN','India','ভাৰত','Assamese (India)','অসমীয়া (ভাৰত)','dd-MM-yyyy',2,'.',',',2,'INR',1,'10,000.00ট');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('az-Cyrl-AZ','AZ','Azerbaijan','Азәрбајҹан','Azeri (Cyrillic, Azerbaijan)','Азәрбајҹан (Азәрбајҹан)','dd.MM.yyyy',2,',',' ',2,'AZN',3,'10 000,00 ман.'),
 ('az-Latn-AZ','AZ','Azerbaijan','Azərbaycan','Azeri (Latin, Azerbaijan)','Azərbaycan­ılı (Azərbaycan)','dd.MM.yyyy',2,',',' ',2,'AZN',3,'10 000,00 man.'),
 ('ba-RU','RU','Russia','Россия','Bashkir (Russia)','Башҡорт (Россия)','dd.MM.yy',2,',',' ',2,'RUB',3,'10 000,00 һ.'),
@@ -521,7 +529,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('bo-CN','CN','People''s Republic of China','ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།','Tibetan (PRC)','བོད་ཡིག (ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།)','yyyy/M/d',2,'.',',',2,'CNY',0,'¥10,000.00'),
 ('br-FR','FR','France','Frañs','Breton (France)','brezhoneg (Frañs)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
 ('bs-Cyrl-BA','BA','Bosnia and Herzegovina','Босна и Херцеговина','Bosnian (Cyrillic, Bosnia and Herzegovina)','босански (Босна и Херцеговина)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 КМ');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('bs-Latn-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Bosnian (Latin, Bosnia and Herzegovina)','bosanski (Bosna i Hercegovina)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 KM'),
 ('ca-ES','ES','Spain','Espanya','Catalan (Catalan)','català (català)','dd/MM/yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('co-FR','FR','France','France','Corsican (France)','Corsu (France)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
@@ -532,7 +540,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('de-CH','CH','Switzerland','Schweiz','German (Switzerland)','Deutsch (Schweiz)','dd.MM.yyyy',2,'.','',2,'CHF',2,'Fr. 10''000.00'),
 ('de-DE','DE','Germany','Deutschland','German (Germany)','Deutsch (Deutschland)','dd.MM.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('de-LI','LI','Liechtenstein','Liechtenstein','German (Liechtenstein)','Deutsch (Liechtenstein)','dd.MM.yyyy',2,'.','',2,'CHF',2,'CHF 10''000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('de-LU','LU','Luxembourg','Luxemburg','German (Luxembourg)','Deutsch (Luxemburg)','dd.MM.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('dsb-DE','DE','Germany','Nimska','Lower Sorbian (Germany)','dolnoserbšćina (Nimska)','d. M. yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('dv-MV','MV','Maldives','ދިވެހި ރާއްޖެ','Divehi (Maldives)','ދިވެހިބަސް (ދިވެހި ރާއްޖެ)','dd/MM/yy',1,'.',',',2,'MVR',3,'10,000.00 ރ.'),
@@ -543,7 +551,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('en-CA','CA','Canada','Canada','English (Canada)','English (Canada)','dd/MM/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
 ('en-GB','GB','United Kingdom','United Kingdom','English (United Kingdom)','English (United Kingdom)','dd/MM/yyyy',2,'.',',',2,'GBP',0,'£10,000.00'),
 ('en-IE','IE','Ireland','Ireland','English (Ireland)','English (Ireland)','dd/MM/yyyy',2,'.',',',2,'EUR',0,'€ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('en-IN','IN','India','India','English (India)','English (India)','dd-MM-yyyy',2,'.',',',2,'INR',2,'Rs. 10,000.00'),
 ('en-JM','JM','Jamaica','Jamaica','English (Jamaica)','English (Jamaica)','dd/MM/yyyy',1,'.',',',2,'JMD',0,'J$10,000.00'),
 ('en-MY','MY','Malaysia','Malaysia','English (Malaysia)','English (Malaysia)','d/M/yyyy',1,'.',',',2,'MYR',0,'RM10,000.00'),
@@ -554,7 +562,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('en-US','US','United States','United States','English (United States)','English (United States)','M/d/yyyy',1,'.',',',2,'USD',0,'$10,000.00'),
 ('en-ZA','ZA','South Africa','South Africa','English (South Africa)','English (South Africa)','yyyy/MM/dd',1,',',' ',2,'ZAR',2,'R 10 000.00'),
 ('en-ZW','ZW','Zimbabwe','Zimbabwe','English (Zimbabwe)','English (Zimbabwe)','M/d/yyyy',1,'.',',',2,'ZWL',0,'Z$10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('es-AR','AR','Argentina','Argentina','Spanish (Argentina)','Español (Argentina)','dd/MM/yyyy',1,',','.',2,'ARS',2,'$ 10.000,00'),
 ('es-BO','BO','Bolivia','Bolivia','Spanish (Bolivia)','Español (Bolivia)','dd/MM/yyyy',1,',','.',2,'BOB',2,'$b 10.000,00'),
 ('es-CL','CL','Chile','Chile','Spanish (Chile)','Español (Chile)','dd-MM-yyyy',1,',','.',2,'CLP',2,'$ 10.000,00'),
@@ -565,7 +573,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('es-ES','ES','Spain','España','Spanish (Spain, International Sort)','Español (España, alfabetización internacional)','dd/MM/yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('es-GT','GT','Guatemala','Guatemala','Spanish (Guatemala)','Español (Guatemala)','dd/MM/yyyy',1,'.',',',2,'GTQ',0,'Q10,000.00'),
 ('es-HN','HN','Honduras','Honduras','Spanish (Honduras)','Español (Honduras)','dd/MM/yyyy',1,'.',',',2,'HNL',2,'L. 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('es-MX','MX','Mexico','México','Spanish (Mexico)','Español (México)','dd/MM/yyyy',1,'.',',',2,'MXN',0,'$10,000.00'),
 ('es-NI','NI','Nicaragua','Nicaragua','Spanish (Nicaragua)','Español (Nicaragua)','dd/MM/yyyy',1,'.',',',2,'NIO',2,'C$ 10,000.00'),
 ('es-PA','PA','Panama','Panamá','Spanish (Panama)','Español (Panamá)','MM/dd/yyyy',1,'.',',',2,'PAB',2,'B/. 10,000.00'),
@@ -576,7 +584,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('es-US','US','United States','Estados Unidos','Spanish (United States)','Español (Estados Unidos)','M/d/yyyy',1,'.',',',2,'USD',0,'$10,000.00'),
 ('es-UY','UY','Uruguay','Uruguay','Spanish (Uruguay)','Español (Uruguay)','dd/MM/yyyy',2,',','.',2,'UYU',2,'$U 10.000,00'),
 ('es-VE','VE','Bolivarian Republic of Venezuela','Republica Bolivariana de Venezuela','Spanish (Bolivarian Republic of Venezuela)','Español (Republica Bolivariana de Venezuela)','dd/MM/yyyy',1,',','.',2,'VEF',2,'Bs. F. 10.000,00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('et-EE','EE','Estonia','Eesti','Estonian (Estonia)','eesti (Eesti)','d.MM.yyyy',2,'.',' ',2,'EEK',3,'10 000,00 kr'),
 ('eu-ES','ES','Spain','Espainia','Basque (Basque)','euskara (euskara)','yyyy/MM/dd',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('fa-IR','IR','Iran','ایران','Persian','فارسى (ایران)','MM/dd/yyyy',7,'/',',',2,'IRR',2,'ريال 10,000.00'),
@@ -587,7 +595,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('fr-CA','CA','Canada','Canada','French (Canada)','français (Canada)','yyyy-MM-dd',1,',',' ',2,'CAD',3,'10 000,00 $'),
 ('fr-CH','CH','Switzerland','Suisse','French (Switzerland)','français (Suisse)','dd.MM.yyyy',2,'.','',2,'CHF',2,'fr. 10''000.00'),
 ('fr-FR','FR','France','France','French (France)','français (France)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('fr-LU','LU','Luxembourg','Luxembourg','French (Luxembourg)','français (Luxembourg)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
 ('fr-MC','MC','Principality of Monaco','Principauté de Monaco','French (Monaco)','français (Principauté de Monaco)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
 ('fy-NL','NL','Netherlands','Nederlân','Frisian (Netherlands)','Frysk (Nederlân)','d-M-yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
@@ -598,9 +606,9 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('gu-IN','IN','India','ભારત','Gujarati (India)','ગુજરાતી (ભારત)','dd-MM-yy',2,'.',',',2,'INR',2,'રૂ 10,000.00'),
 ('ha-Latn-NG','NG','Nigeria','Nigeria','Hausa (Latin, Nigeria)','Hausa (Nigeria)','d/M/yyyy',1,'.',',',2,'NIO',2,'N 10,000.00'),
 ('he-IL','IL','Israel','ישראל','Hebrew (Israel)','עברית (ישראל)','dd/MM/yyyy',1,'.',',',2,'ILS',2,'₪ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('hi-IN','IN','India','भारत','Hindi (India)','हिंदी (भारत)','dd-MM-yyyy',2,'.',',',2,'INR',2,'रु 10,000.00'),
-('hr-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Croatian (Latin, Bosnia and Herzegovina)','hrvatski (Bosna i Hercegovina)','d.M.yyyy.',2,',','.',2,'BAM',3,'10.000,00 KM'),
+('hr-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Croatian (Latin, Bosnia and Herzegovina)','hrvatski (Bosna i Hercegovina)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 KM'),
 ('hr-HR','HR','Croatia','Hrvatska','Croatian (Croatia)','hrvatski (Hrvatska)','d.M.yyyy.',2,',','.',2,'HRK',3,'10.000,00 kn'),
 ('hsb-DE','DE','Germany','Němska','Upper Sorbian (Germany)','hornjoserbšćina (Němska)','d. M. yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('hu-HU','HU','Hungary','Magyarország','Hungarian (Hungary)','magyar (Magyarország)','yyyy.MM.dd.',2,',',' ',2,'HUF',3,'10 000,00 Ft'),
@@ -609,7 +617,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('ig-NG','NG','Nigeria','Nigeria','Igbo (Nigeria)','Igbo (Nigeria)','d/M/yyyy',1,'.',',',2,'NIO',2,'N 10,000.00'),
 ('ii-CN','CN','People''s Republic of China','ꍏꉸꏓꂱꇭꉼꇩ','Yi (PRC)','ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)','yyyy/M/d',2,'.',',',2,'CNY',0,'¥10,000.00'),
 ('is-IS','IS','Iceland','Ísland','Icelandic (Iceland)','íslenska (Ísland)','d.M.yyyy',2,',','.',0,'ISK',3,'10.000 kr.');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('it-CH','CH','Switzerland','Svizzera','Italian (Switzerland)','italiano (Svizzera)','dd.MM.yyyy',2,'.','',2,'CHF',2,'fr. 10''000.00'),
 ('it-IT','IT','Italy','Italia','Italian (Italy)','italiano (Italia)','dd/MM/yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
 ('iu-Cans-CA','CA','Canada','ᑲᓇᑕ','Inuktitut (Syllabics, Canada)','ᐃᓄᒃᑎᑐᑦ (ᑲᓇᑕᒥ)','d/M/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
@@ -620,7 +628,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('kl-GL','GL','Greenland','Kalaallit Nunaat','Greenlandic (Greenland)','kalaallisut (Kalaallit Nunaat)','dd-MM-yyyy',2,',','.',2,'DKK',2,'kr. 10.000,00'),
 ('km-KH','KH','Cambodia','កម្ពុជា','Khmer (Cambodia)','ខ្មែរ (កម្ពុជា)','yyyy-MM-dd',1,'.',',',2,'KHR',1,'10,000.00៛'),
 ('kn-IN','IN','India','ಭಾರತ','Kannada (India)','ಕನ್ನಡ (ಭಾರತ)','dd-MM-yy',2,'.',',',2,'INR',2,'ರೂ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('ko-KR','KR','Korea','대한민국','Korean (Korea)','한국어 (대한민국)','yyyy-MM-dd',1,'.',',',0,'KRW',0,'₩10,000'),
 ('kok-IN','IN','India','भारत','Konkani (India)','कोंकणी (भारत)','dd-MM-yyyy',2,'.',',',2,'INR',2,'रु 10,000.00'),
 ('ky-KG','KG','Kyrgyzstan','Кыргызстан','Kyrgyz (Kyrgyzstan)','Кыргыз (Кыргызстан)','dd.MM.yy',2,'-',' ',2,'KGS',3,'10 000,00 сом'),
@@ -631,18 +639,18 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('mi-NZ','NZ','New Zealand','Aotearoa','Maori (New Zealand)','Reo Māori (Aotearoa)','dd/MM/yyyy',2,'.',',',2,'NZD',0,'$10,000.00'),
 ('mk-MK','MK','Macedonia (FYROM)','Македонија','Macedonian (Former Yugoslav Republic of Macedonia)','македонски јазик (Македонија)','dd.MM.yyyy',2,',','.',2,'MKD',3,'10.000,00 ден.'),
 ('ml-IN','IN','India','ഭാരതം','Malayalam (India)','മലയാളം (ഭാരതം)','dd-MM-yy',2,'.',',',2,'INR',2,'ക 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('mn-MN','MN','Mongolia','Монгол улс','Mongolian (Cyrillic, Mongolia)','Монгол хэл (Монгол улс)','yy.MM.dd',2,',',' ',2,'MNT',1,'10 000,00₮'),
 ('mn-Mong-CN','CN','People''s Republic of China','ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ','Mongolian (Traditional Mongolian, PRC)','ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ (ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ)','yyyy/M/d',2,'.',',',2,'CNY',0,'¥10,000.00'),
 ('moh-CA','CA','Canada','Canada','Mohawk (Mohawk)','Kanien''kéha','M/d/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
 ('mr-IN','IN','India','भारत','Marathi (India)','मराठी (भारत)','dd-MM-yyyy',2,'.',',',2,'INR',2,'रु 10,000.00'),
 ('ms-BN','BN','Brunei Darussalam','Brunei Darussalam','Malay (Brunei Darussalam)','Bahasa Melayu (Brunei Darussalam)','dd/MM/yyyy',2,',','.',0,'BND',0,'$10.00'),
-('ms-MY','MY','Malaysia','Malaysia','Malay (Malaysia)','Bahasa Melayu (Malaysia)','dd/MM/yyyy',2,'.',',',0,'MYR',0,'RM10,000'),
+('ms-MY','MY','Malaysia','Malaysia','Malay (Malaysia)','Bahasa Melayu (Malaysia)','dd/MM/yyyy',2,'.',',',2,'MYR',0,'RM10,000'),
 ('mt-MT','MT','Malta','Malta','Maltese (Malta)','Malti (Malta)','dd/MM/yyyy',2,'.',',',2,'EUR',0,'€ 10,000.00'),
 ('nb-NO','NO','Norway','Norge','Norwegian, Bokmål (Norway)','norsk, bokmål (Norge)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
 ('ne-NP','NP','Nepal','नेपाल','Nepali (Nepal)','नेपाली (नेपाल)','M/d/yyyy',1,'.',',',2,'NPR',0,'रु10,000.00'),
 ('nl-BE','BE','Belgium','België','Dutch (Belgium)','Nederlands (België)','d/MM/yyyy',2,',','.',2,'EUR',2,'€ 10.000,00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('nl-NL','NL','Netherlands','Nederland','Dutch (Netherlands)','Nederlands (Nederland)','d-M-yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
 ('nn-NO','NO','Norway','Noreg','Norwegian, Nynorsk (Norway)','norsk, nynorsk (Noreg)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
 ('nso-ZA','ZA','South Africa','Afrika Borwa','Sesotho sa Leboa (South Africa)','Sesotho sa Leboa (Afrika Borwa)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
@@ -653,7 +661,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('prs-AF','AF','Afghanistan','افغانستان','Dari (Afghanistan)','درى (افغانستان)','dd/MM/yy',6,'.',',',2,'AFN',0,'؋10.000,00'),
 ('ps-AF','AF','Afghanistan','افغانستان','Pashto (Afghanistan)','پښتو (افغانستان)','dd/MM/yy',7,'٫','٬',2,'AFN',0,'؋10،000,00'),
 ('pt-BR','BR','Brazil','Brasil','Portuguese (Brazil)','Português (Brasil)','dd/MM/yyyy',1,',','.',2,'BRL',2,'R$ 10.000,00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('pt-PT','PT','Portugal','Portugal','Portuguese (Portugal)','português (Portugal)','dd-MM-yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('qut-GT','GT','Guatemala','Guatemala','K''iche (Guatemala)','K''iche (Guatemala)','dd/MM/yyyy',1,'.',',',2,'GTQ',0,'Q10,000.00'),
 ('quz-BO','BO','Bolivia','Bolivia Suyu','Quechua (Bolivia)','runasimi (Qullasuyu)','dd/MM/yyyy',1,',','.',2,'BOB',2,'$b 10.000,00'),
@@ -664,7 +672,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('ru-RU','RU','Russia','Россия','Russian (Russia)','русский (Россия)','dd.MM.yyyy',2,',',' ',2,'RUB',1,'10 000,00р.'),
 ('rw-RW','RW','Rwanda','Rwanda','Kinyarwanda (Rwanda)','Kinyarwanda (Rwanda)','M/d/yyyy',1,',',' ',2,'RWF',2,'RWF 10 000,00'),
 ('sa-IN','IN','India','भारतम्','Sanskrit (India)','संस्कृत (भारतम्)','dd-MM-yyyy',1,'.',',',2,'INR',2,'रु 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('sah-RU','RU','Russia','Россия','Yakut (Russia)','саха (Россия)','MM.dd.yyyy',2,',',' ',2,'RUB',1,'10 000,00с.'),
 ('se-FI','FI','Finland','Suopma','Sami, Northern (Finland)','davvisámegiella (Suopma)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
 ('se-NO','NO','Norway','Norga','Sami, Northern (Norway)','davvisámegiella (Norga)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
@@ -675,7 +683,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('sma-NO','NO','Norway','Nöörje','Sami, Southern (Norway)','åarjelsaemiengiele (Nöörje)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
 ('sma-SE','SE','Sweden','Sveerje','Sami, Southern (Sweden)','åarjelsaemiengiele (Sveerje)','yyyy-MM-dd',2,',','.',2,'SEK',3,'10 000,00 kr'),
 ('smj-NO','NO','Norway','Vuodna','Sami, Lule (Norway)','julevusámegiella (Vuodna)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('smj-SE','SE','Sweden','Svierik','Sami, Lule (Sweden)','julevusámegiella (Svierik)','yyyy-MM-dd',2,',','.',2,'SEK',3,'10 000,00 kr'),
 ('smn-FI','FI','Finland','Suomâ','Sami, Inari (Finland)','sämikielâ (Suomâ)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
 ('sms-FI','FI','Finland','Lää´ddjânnam','Sami, Skolt (Finland)','sääm´ǩiõll (Lää´ddjânnam)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
@@ -686,7 +694,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('sr-Cyrl-RS','RS','Serbia','Србија','Serbian (Cyrillic, Serbia)','српски (Србија)','d.M.yyyy',2,',','.',2,'RSD',3,'10.000,00 Дин.'),
 ('sr-Latn-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Serbian (Latin, Bosnia and Herzegovina)','srpski (Bosna i Hercegovina)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 KM'),
 ('sr-Latn-CS','CS','Serbia and Montenegro (Former)','Srbija i Crna Gora (Prethodno)','Serbian (Latin, Serbia and Montenegro (Former))','srpski (Srbija i Crna Gora (Prethodno))','d.M.yyyy',2,',','.',2,'CSD',3,'10.000,00 Din.');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('sr-Latn-ME','ME','Montenegro','Crna Gora','Serbian (Latin, Montenegro)','srpski (Crna Gora)','d.M.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
 ('sr-Latn-RS','RS','Serbia','Srbija','Serbian (Latin, Serbia)','srpski (Srbija)','d.M.yyyy',2,',','.',2,'RSD',3,'10.000,00 Din.'),
 ('sv-FI','FI','Finland','Finland','Swedish (Finland)','svenska (Finland)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
@@ -697,7 +705,7 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('te-IN','IN','India','భారత దేశం','Telugu (India)','తెలుగు (భారత దేశం)','dd-MM-yy',2,'.',',',2,'INR',2,'రూ 10,000.00'),
 ('tg-Cyrl-TJ','TJ','Tajikistan','Тоҷикистон','Tajik (Cyrillic, Tajikistan)','Тоҷикӣ (Тоҷикистон)','dd.MM.yy',1,';',' ',2,'TJS',3,'10 000,00 т.р.'),
 ('th-TH','TH','Thailand','ไทย','Thai (Thailand)','ไทย (ไทย)','d/M/yyyy',2,'.',',',2,'THB',0,'฿10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
 ('tk-TM','TM','Turkmenistan','Türkmenistan','Turkmen (Turkmenistan)','türkmençe (Türkmenistan)','dd.MM.yy',2,',',' ',2,'TMT',1,'10 000,00m.'),
 ('tn-ZA','ZA','South Africa','Aforika Borwa','Setswana (South Africa)','Setswana (Aforika Borwa)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
 ('tr-TR','TR','Turkey','Türkiye','Turkish (Turkey)','Türkçe (Türkiye)','dd.MM.yyyy',2,',','.',2,'TRY',3,'10.000,00 TL'),
@@ -706,10 +714,10 @@ insert into locale (code,country_code,country_name,native_country_name,"name",na
 ('ug-CN','CN','People''s Republic of China','جۇڭخۇا خەلق جۇمھۇرىيىتى','Uyghur (PRC)','ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)','yyyy-M-d',1,'.',',',2,'CNY',0,'¥10,000.00'),
 ('uk-UA','UA','Ukraine','Україна','Ukrainian (Ukraine)','українська (Україна)','dd.MM.yyyy',2,',',' ',2,'UAH',1,'10 000,00₴'),
 ('ur-PK','PK','Islamic Republic of Pakistan','پاکستان','Urdu (Islamic Republic of Pakistan)','اُردو (پاکستان)','dd/MM/yyyy',2,'.',',',2,'PKR',0,'Rs10,000.00'),
-('uz-Cyrl-UZ','UZ','Uzbekistan','Ўзбекистон Республикаси','Uzbek (Cyrillic, Uzbekistan)','Ўзбек (Ўзбекистон)','dd.MM.yyyy',2,',',' ',2,'UZS',3,'10 000,00 сўм'),
+('uz-Cyrl-UZ','UZ','Uzbekistan','Ўзбекистон Республикаси','Uzbek (Cyrillic, Uzbekistan)','Ўзбек (Ўзбекистон)','dd.MM.yyyy',2,',',' ',0,'UZS',3,'10 000,00 сўм'),
 ('uz-Latn-UZ','UZ','Uzbekistan','U''zbekiston Respublikasi','Uzbek (Latin, Uzbekistan)','U''zbek (U''zbekiston Respublikasi)','dd/MM yyyy',2,',',' ',0,'UZS',3,'10 000 so''m');
-insert into locale (code,country_code,country_name,native_country_name,"name",native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('vi-VN','VN','Vietnam','Việt Nam','Vietnamese (Vietnam)','Tiếng Việt (Việt Nam)','dd/MM/yyyy',2,',','.',2,'VND',3,'10.000,00 ₫'),
+insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
+('vi-VN','VN','Vietnam','Việt Nam','Vietnamese (Vietnam)','Tiếng Việt (Việt Nam)','dd/MM/yyyy',2,',','.',0,'VND',3,'10.000,00 ₫'),
 ('wo-SN','SN','Senegal','Sénégal','Wolof (Senegal)','Wolof (Sénégal)','dd/MM/yyyy',2,',',' ',2,'XOF',3,'10 000,00 XOF'),
 ('xh-ZA','ZA','South Africa','uMzantsi Afrika','isiXhosa (South Africa)','isiXhosa (uMzantsi Afrika)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
 ('yo-NG','NG','Nigeria','Nigeria','Yoruba (Nigeria)','Yoruba (Nigeria)','d/M/yyyy',1,'.',',',2,'NIO',2,'N 10,000.00'),
@@ -724,6 +732,11 @@ update locale l
 set currency_symbol = c.symbol
     from currency c
 where l.currency_code = c.code;
+
+/* my sql */
+update locale l
+inner join currency c on l.currency_code = c.code
+set l.currency_symbol = c.symbol;
 
 insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
 	 ('AF','Afghanistan','افغانستان','.',',','AFN','؋',2,0,'؋10.000,00','A'),
@@ -856,7 +869,7 @@ insert into country (country_code,country_name,native_country_name,decimal_separ
 	 ('29','Caribbean','Caribbean','.',',','USD','$',2,0,'$10,000.00','A'),
 	 ('UY','Uruguay','Uruguay',',','.','UYU','$U',2,2,'$U 10.000,00','A'),
 	 ('VE','Bolivarian Republic of Venezuela','Republica Bolivariana de Venezuela',',','.','VEF','Bs. F.',2,2,'Bs. F. 10.000,00','A'),
-	 ('VN','Vietnam','Việt Nam',',','.','VND','₫',2,3,'10.000,00 ₫','A');
+	 ('VN','Vietnam','Việt Nam',',','.','VND','₫',0,3,'10.000,00 ₫','A');
 insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
 	 ('SN','Senegal','Sénégal',',',' ','XOF','XOF',2,3,'10 000,00 XOF','A'),
 	 ('YE','Yemen','اليمن','.',',','YER','ر.ي.‏',2,2,'ر.ي.‏ 10,000.00','A'),
@@ -865,3 +878,42 @@ insert into country (country_code,country_name,native_country_name,decimal_separ
 	 ('US','United States','United States','.',',','USD','$',2,0,'$10,000.00','A'),
 	 ('UZ','Uzbekistan','U''zbekiston Respublikasi',',',' ','UZS','лв',0,3,'10 000 so''m','A'),
 	 ('ZA','South Africa','South Africa',',',' ','ZAR','R',2,2,'R 10 000.00','A');
+
+/* postgres */
+update country c
+set date_format = l.date_format, decimal_separator = l.decimal_separator, group_separator = l.group_separator
+  from locale l
+where l.country_code = c.country_code;
+
+/* my sql */
+update country c inner join locale l on l.country_code = c.country_code
+set c.date_format = l.date_format, c.decimal_separator = l.decimal_separator, c.group_separator = l.group_separator;
+
+update country c set decimal_separator = '.', group_separator = ',' where country_code = 'AF';
+update country c set decimal_separator = '.', group_separator = ',' where country_code = 'CA';
+update country c set decimal_separator = ',', group_separator = ' ' where country_code = 'ZA';
+
+update country c set date_format = 'd.M.yyyy' where country_code = 'BA';
+update country c set date_format = 'dd/MM/yyyy' where country_code = 'CA';
+update country c set date_format = 'dd.MM.yyyy' where country_code = 'CH';
+update country c set date_format = 'yyyy/M/d' where country_code = 'CN';
+update country c set date_format = 'dd.MM.yyyy' where country_code = 'DE';
+update country c set date_format = 'dd/MM/yyyy' where country_code = 'ES';
+update country c set date_format = 'dd-MM-yyyy' where country_code = 'IN';
+update country c set date_format = 'dd/MM/yyyy' where country_code = 'LU';
+update country c set date_format = 'dd/MM/yyyy' where country_code = 'MY';
+update country c set date_format = 'dd/MM/yyyy' where country_code = 'NZ';
+update country c set date_format = 'dd.MM.yyyy' where country_code = 'RU';
+update country c set date_format = 'dd.MM.yyyy' where country_code = 'UZ';
+/*
+select * from locale where country_code in('AF', 'CA', 'ZA') order by country_code;
+select * from locale where country_code in('BA', 'CA', 'CH', 'CN', 'DE', 'ES', 'IN', 'LU', 'MY', 'NZ', 'RU', 'UZ');
+
+select * from locale l where code in (
+  select a.code from locale a inner join locale b on a.country_code = b.country_code  and a.code  != b.code) 
+order by country_code, code;
+
+select distinct country_code, country_name, date_format from locale l where code in (
+  select a.code from locale a inner join locale b on a.country_code = b.country_code  and a.code  != b.code) 
+order by country_code;
+*/

@@ -67,8 +67,8 @@ export function route(app: Application, ctx: ApplicationContext, secure?: boolea
   app.get("/audit-logs/search", readAuditLog, ctx.auditLog.search)
   app.get("/audit-logs/:id", readAuditLog, ctx.auditLog.load)
 
-  const readCurrency = ctx.authorize("locale", read)
-  const writeCurrency = ctx.authorize("locale", write)
+  const readCurrency = ctx.authorize("currency", read)
+  const writeCurrency = ctx.authorize("currency", write)
   app.post("/currencies/search", readCurrency, ctx.currency.search)
   app.get("/currencies/search", readCurrency, ctx.currency.search)
   app.get("/currencies/:id", readCurrency, ctx.currency.load)
@@ -77,8 +77,8 @@ export function route(app: Application, ctx: ApplicationContext, secure?: boolea
   app.patch("/currencies/:id", writeCurrency, ctx.currency.patch)
   app.delete("/currencies/:id", writeCurrency, ctx.currency.delete)
 
-  const readCountry = ctx.authorize("locale", read)
-  const writeCountry = ctx.authorize("locale", write)
+  const readCountry = ctx.authorize("country", read)
+  const writeCountry = ctx.authorize("country", write)
   app.post("/countries/search", readCountry, ctx.country.search)
   app.get("/countries/search", readCountry, ctx.country.search)
   app.get("/countries/:id", readCountry, ctx.country.load)

@@ -74,12 +74,19 @@ export class SqlRoleRepository extends SearchRepository<Role, RoleFilter> implem
     }
     return role
   }
-  create(role: Role): Promise<number> {
+  async create(role: Role): Promise<number> {
     const stmts: Statement[] = []
     const stmt = buildToInsert(role, "roles", roleModel, this.db.param)
     stmts.push(stmt)
     insertRoleModules(stmts, role.roleId, role.privileges, this.db.param)
-    return this.db.executeBatch(stmts, true)
+    try {
+      return await this.db.executeBatch(stmts, true)
+    } catch (err: any) {
+      if (err.code === "23505") {
+        return 0
+      }
+      throw err
+    }
   }
   update(role: Role): Promise<number> {
     const stmts: Statement[] = []
