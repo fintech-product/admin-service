@@ -18,7 +18,7 @@ export class UserController {
   async all(req: Request, res: Response) {
     const roleId = req.query.roleId as string
     try {
-      if (roleId) {
+      if (roleId && roleId.length > 0) {
         const users = await this.service.getUsersOfRole(roleId)
         res.status(200).json(users).end()
       } else {
@@ -55,7 +55,7 @@ export class UserController {
     user.updatedBy = userId
     let language = res.locals.lang || "en"
     const resource = getResource(language)
-    const errors = validate<User>(user, userModel, resource, true)
+    const errors = validate<User>(user, userModel, resource)
     if (errors.length > 0) {
       return respondError(res, errors)
     }
@@ -75,7 +75,7 @@ export class UserController {
     user.updatedBy = userId
     let language = res.locals.lang || "en"
     const resource = getResource(language)
-    const errors = validate<User>(user, userModel, resource, true)
+    const errors = validate<User>(user, userModel, resource)
     if (errors.length > 0) {
       return respondError(res, errors)
     }
@@ -95,7 +95,7 @@ export class UserController {
     user.updatedBy = userId
     let language = res.locals.lang || "en"
     const resource = getResource(language)
-    const errors = validate<User>(user, userModel, resource, true, true)
+    const errors = validate<User>(user, userModel, resource, false, true)
     if (errors.length > 0) {
       return respondError(res, errors)
     }

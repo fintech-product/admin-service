@@ -111,7 +111,7 @@ export class RoleController {
     }
   }
   async assign(req: Request, res: Response) {
-    const id = req.params.id
+    const id = req.params.id as string
     const users: string[] = req.body
     if (!Array.isArray(users)) {
       res.status(400).end(`Body must be an array`)

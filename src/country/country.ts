@@ -4,6 +4,7 @@ export interface Country {
   countryCode: string
   countryName?: string
   nativeCountryName?: string
+  dateFormat?: string
   decimalSeparator?: string
   groupSeparator?: string
   currencyCode?: string
@@ -17,6 +18,7 @@ export interface CountryFilter extends Filter {
   countryCode?: string
   countryName?: string
   nativeCountryName?: string
+  dateFormat?: string
   decimalSeparator?: string
   groupSeparator?: string
   currencyCode?: string
@@ -57,6 +59,10 @@ export const countryModel: Attributes = {
   nativeCountryName: {
     column: "native_country_name",
     length: 255,
+  },
+  dateFormat: {
+    column: "date_format",
+    length: 13,
   },
   decimalSeparator: {
     column: "decimal_separator",

@@ -109,64 +109,6 @@ create table notifications (
   status char(1)
 );
 
-/*
-alter table user_roles add foreign key (user_id) references users (user_id);
-alter table user_roles add foreign key (role_id) references roles (role_id);
-
-alter table modules add foreign key (parent) references modules (module_id);
-
-alter table role_modules add foreign key (role_id) references roles (role_id);
-alter table role_modules add foreign key (module_id) references modules (module_id);
-
-drop table modules;
-drop table users;
-drop table roles;
-drop table user_roles;
-drop table role_modules;
-drop table audit_logs;
-*/
-
-create table categories (
-  id varchar(40) primary key,
-  name varchar(255) not null,
-  status char(1) not null,
-  path varchar(255),
-  resource_key varchar(255),
-  icon varchar(255),
-  sequence int not null,
-  type varchar(40),
-  parent varchar(40),
-  created_by varchar(40),
-  created_at timestamptz,
-  updated_by varchar(40),
-  updated_at timestamptz,
-  version integer
-);
-/*
-home
-services
-news => dynamic
-careers => dynamic
-contact => dynamic
-about
- + milestones
- + companies
- + leadership
-*/
-
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('home','Home','A','/','home','home',1,'content','');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('services','Services','A','/services','services','settings',2,'content','');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('news','News','A','/news','news','credit_card',3,'','');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('careers','Careers','A','/careers','careers','work',4,'','');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('contact','Contact','A','/contact','contact','mail',5,'','');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('about','About','A','/about','about','assignment',6,'','');
-
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('milestones','Milestones','A','/milestones','milestones','public',1,'content','about');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('companies','Companies','A','/companies','companies','account_balance',2,'content','about');
-insert into categories (id,name,status,path,resource_key,icon,sequence,type,parent) values ('leadership','Leadership','A','/leadership','leadership','person',3,'content','about');
-
-update categories set version = 1;
-
 insert into code_masters(master, code, name, sequence, status) values ('language','en','English',1,'A');
 insert into code_masters(master, code, name, sequence, status) values ('language','vi','Tiếng Việt',2,'A');
 insert into code_masters(master, code, name, sequence, status) values ('date_format','yyyy/M/d','yyyy/M/d',1,'A');
@@ -199,18 +141,16 @@ insert into modules (module_id,module_name,status,path,resource_key,icon,sequenc
 insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('role','Role Management','A','/roles','role','credit_card',2,7,'admin');
 insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('audit_log','Audit Log','A','/audit-logs','audit_log','zoom_in',4,1,'admin');
 
-insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('category','Category','A','/categories','category','menu',1,15,'setup');
-insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('content','Content','A','/contents','content','public',2,7,'setup');
-insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('article','Article','A','/articles','article','public',3,15,'setup');
-insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('job','Job','A','/jobs','jobs','local_atm',4,15,'setup');
-insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('contact','Contact','A','/contacts','contact','public',5,7,'setup');
+insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('currency','Currency Management','A','/currencies','currency','local_atm',1,7,'setup');
+insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('country','Country Management','A','/countries','country','public',2,7,'setup');
+insert into modules (module_id,module_name,status,path,resource_key,icon,sequence,actions,parent) values ('locale','Locale Management','A','/locales','locale','public',3,7,'setup');
 
 insert into roles (role_id, role_name, status, remark) values ('admin','Admin','A','Admin');
 insert into roles (role_id, role_name, status, remark) values ('call_center','Call Center','A','Call Center');
 insert into roles (role_id, role_name, status, remark) values ('it_support','IT Support','A','IT Support');
 insert into roles (role_id, role_name, status, remark) values ('operator','Operator Group','A','Operator Group');
-insert into roles (role_id, role_name, status, remark) values ('content_writer','Content Writer','A','Content Writer');
-insert into roles (role_id, role_name, status, remark) values ('content_approver','Content Approver','A','Content Approver');
+insert into roles (role_id, role_name, status, remark) values ('finance_writer','Finance Writer','A','Finance Writer');
+insert into roles (role_id, role_name, status, remark) values ('finance_approver','Finance Approver','A','Finance Approver');
 
 insert into role_modules(role_id, module_id, permissions) values ('admin', 'setup', 7);
 insert into role_modules(role_id, module_id, permissions) values ('admin', 'report', 7);
@@ -224,21 +164,19 @@ insert into role_modules(role_id, module_id, permissions) values ('it_support', 
 insert into role_modules(role_id, module_id, permissions) values ('it_support', 'role', 7);
 insert into role_modules(role_id, module_id, permissions) values ('it_support', 'audit_log', 1);
 insert into role_modules(role_id, module_id, permissions) values ('it_support', 'setup', 7);
-insert into role_modules(role_id, module_id, permissions) values ('it_support', 'category', 7);
-insert into role_modules(role_id, module_id, permissions) values ('it_support', 'content', 7);
-insert into role_modules(role_id, module_id, permissions) values ('it_support', 'article', 7);
-insert into role_modules(role_id, module_id, permissions) values ('it_support', 'job', 7);
-insert into role_modules(role_id, module_id, permissions) values ('it_support', 'contact', 7);
+insert into role_modules(role_id, module_id, permissions) values ('it_support', 'currency', 7);
+insert into role_modules(role_id, module_id, permissions) values ('it_support', 'country', 7);
+insert into role_modules(role_id, module_id, permissions) values ('it_support', 'locale', 7);
 
 insert into role_modules(role_id, module_id, permissions) values ('call_center', 'admin', 1);
 insert into role_modules(role_id, module_id, permissions) values ('call_center', 'audit_log', 1);
 
-insert into role_modules(role_id, module_id, permissions) values ('content_writer', 'setup', 7);
-insert into role_modules(role_id, module_id, permissions) values ('content_writer', 'article', 7);
-insert into role_modules(role_id, module_id, permissions) values ('content_approver', 'setup', 7);
-insert into role_modules(role_id, module_id, permissions) values ('content_approver', 'article', 9);
+insert into role_modules(role_id, module_id, permissions) values ('finance_writer', 'setup', 7);
+insert into role_modules(role_id, module_id, permissions) values ('finance_writer', 'currency', 7);
+insert into role_modules(role_id, module_id, permissions) values ('finance_approver', 'setup', 7);
+insert into role_modules(role_id, module_id, permissions) values ('finance_approver', 'currency', 9);
 
-insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('aft2KNdQhi','gareth.bale','gareth.bale@gmail.com','Gareth Bale','https://upload.wikimedia.org/wikipedia/commons/thumb/4/41/Liver-RM_%282%29_%28cropped%29.jpg/440px-Liver-RM_%282%29_%28cropped%29.jpg','A','M','0987654321','Mr','M');
+insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('aft2KNdQhi','gareth.bale','gareth.bale@gmail.com','Gareth Bale','https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/2022_FIFA_World_Cup_United_States_1%E2%80%931_Wales_-_%2832%29_%28cropped%29.jpg/250px-2022_FIFA_World_Cup_United_States_1%E2%80%931_Wales_-_%2832%29_%28cropped%29.jpg','A','M','0987654321','Mr','M');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('al6TZ0p4iE','cristiano.ronaldo','cristiano.ronaldo@gmail.com','Cristiano Ronaldo','https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Cristiano_Ronaldo_2018.jpg/400px-Cristiano_Ronaldo_2018.jpg','I','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('bkbH1PHu9O','james.rodriguez','james.rodriguez@gmail.com','James Rodríguez','https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/James_Rodriguez_2018.jpg/250px-James_Rodriguez_2018.jpg','A','M','0987654321','Mr','E');
 insert into users (user_id,username,email,display_name,image_url,status,gender,phone,title,position) values ('bL7sQBeO5m','zinedine.zidane','zinedine.zidane@gmail.com','Zinedine Zidane','https://upload.wikimedia.org/wikipedia/commons/f/f3/Zinedine_Zidane_by_Tasnim_03.jpg','A','M','0987654321','Mr','E');
@@ -390,521 +328,451 @@ create table country (
   status char(1)
 );
 
-insert into currency(code,decimal_digits,symbol) values ('AED',2,'د.إ');
-insert into currency(code,decimal_digits,symbol) values ('AFN',2,'؋');
-insert into currency(code,decimal_digits,symbol) values ('ALL',2,'Lek');
-insert into currency(code,decimal_digits,symbol) values ('AMD',2,'դր.');
-insert into currency(code,decimal_digits,symbol) values ('ARS',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('AUD',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('AZN',2,'ман.');
-insert into currency(code,decimal_digits,symbol) values ('BAM',2,'KM');
-insert into currency(code,decimal_digits,symbol) values ('BDT',2,'৳');
-insert into currency(code,decimal_digits,symbol) values ('BGN',2,'лв.');
-insert into currency(code,decimal_digits,symbol) values ('BHD',3,'BD');
-insert into currency(code,decimal_digits,symbol) values ('BND',0,'$');
-insert into currency(code,decimal_digits,symbol) values ('BOB',2,'$b');
-insert into currency(code,decimal_digits,symbol) values ('BRL',2,'R$');
-insert into currency(code,decimal_digits,symbol) values ('BYR',2,'р.');
-insert into currency(code,decimal_digits,symbol) values ('BZD',2,'BZ$');
-insert into currency(code,decimal_digits,symbol) values ('CAD',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('CHF',2,'Fr.');
-insert into currency(code,decimal_digits,symbol) values ('CLP',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('CNY',2,'¥');
-insert into currency(code,decimal_digits,symbol) values ('COP',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('CRC',2,'₡');
-insert into currency(code,decimal_digits,symbol) values ('CSD',2,'Дин.');
-insert into currency(code,decimal_digits,symbol) values ('CZK',2,'Kč');
-insert into currency(code,decimal_digits,symbol) values ('DKK',2,'kr.');
-insert into currency(code,decimal_digits,symbol) values ('DOP',2,'RD$');
-insert into currency(code,decimal_digits,symbol) values ('DZD',2,'DA');
-insert into currency(code,decimal_digits,symbol) values ('EEK',2,'kr');
-insert into currency(code,decimal_digits,symbol) values ('EGP',2,'£');
-insert into currency(code,decimal_digits,symbol) values ('ETB',2,'Br');
-insert into currency(code,decimal_digits,symbol) values ('EUR',2,'€');
-insert into currency(code,decimal_digits,symbol) values ('GBP',2,'£');
-insert into currency(code,decimal_digits,symbol) values ('GEL',2,'Lari');
-insert into currency(code,decimal_digits,symbol) values ('GTQ',2,'Q');
-insert into currency(code,decimal_digits,symbol) values ('HKD',2,'HK$');
-insert into currency(code,decimal_digits,symbol) values ('HNL',2,'L.');
-insert into currency(code,decimal_digits,symbol) values ('HRK',2,'kn');
-insert into currency(code,decimal_digits,symbol) values ('HUF',2,'Ft');
-insert into currency(code,decimal_digits,symbol) values ('IDR',0,'Rp');
-insert into currency(code,decimal_digits,symbol) values ('ILS',2,'₪');
-insert into currency(code,decimal_digits,symbol) values ('INR',2,'₹');
-insert into currency(code,decimal_digits,symbol) values ('IQD',2,'ID');
-insert into currency(code,decimal_digits,symbol) values ('IRR',2,'ريال');
-insert into currency(code,decimal_digits,symbol) values ('ISK',0,'kr.');
-insert into currency(code,decimal_digits,symbol) values ('JMD',2,'J$');
-insert into currency(code,decimal_digits,symbol) values ('JOD',3,'د.أ');
-insert into currency(code,decimal_digits,symbol) values ('JPY',0,'¥');
-insert into currency(code,decimal_digits,symbol) values ('KES',2,'S');
-insert into currency(code,decimal_digits,symbol) values ('KGS',2,'сом');
-insert into currency(code,decimal_digits,symbol) values ('KHR',2,'៛');
-insert into currency(code,decimal_digits,symbol) values ('KRW',0,'₩');
-insert into currency(code,decimal_digits,symbol) values ('KWD',3,'KD');
-insert into currency(code,decimal_digits,symbol) values ('KZT',2,'Т');
-insert into currency(code,decimal_digits,symbol) values ('LAK',2,'₭');
-insert into currency(code,decimal_digits,symbol) values ('LBP',2,'LL');
-insert into currency(code,decimal_digits,symbol) values ('LKR',2,'රු.');
-insert into currency(code,decimal_digits,symbol) values ('LTL',2,'Lt');
-insert into currency(code,decimal_digits,symbol) values ('LVL',2,'Ls');
-insert into currency(code,decimal_digits,symbol) values ('LYD',3,'LD');
-insert into currency(code,decimal_digits,symbol) values ('MAD',2,'DH');
-insert into currency(code,decimal_digits,symbol) values ('MKD',2,'ден.');
-insert into currency(code,decimal_digits,symbol) values ('MNT',2,'₮');
-insert into currency(code,decimal_digits,symbol) values ('MOP',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('MVR',2,'ރ.');
-insert into currency(code,decimal_digits,symbol) values ('MXN',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('MYR',2,'RM');
-insert into currency(code,decimal_digits,symbol) values ('NIO',2,'C$');
-insert into currency(code,decimal_digits,symbol) values ('NOK',2,'kr');
-insert into currency(code,decimal_digits,symbol) values ('NPR',2,'रु');
-insert into currency(code,decimal_digits,symbol) values ('NZD',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('OMR',3,'R.O');
-insert into currency(code,decimal_digits,symbol) values ('PAB',2,'B/.');
-insert into currency(code,decimal_digits,symbol) values ('PEN',2,'S/.');
-insert into currency(code,decimal_digits,symbol) values ('PHP',2,'₱');
-insert into currency(code,decimal_digits,symbol) values ('PKR',2,'Rs');
-insert into currency(code,decimal_digits,symbol) values ('PLN',2,'zł');
-insert into currency(code,decimal_digits,symbol) values ('PYG',2,'Gs');
-insert into currency(code,decimal_digits,symbol) values ('QAR',2,'QR');
-insert into currency(code,decimal_digits,symbol) values ('RON',2,'lei');
-insert into currency(code,decimal_digits,symbol) values ('RSD',2,'Дин.');
-insert into currency(code,decimal_digits,symbol) values ('RUB',2,'һ.');
-insert into currency(code,decimal_digits,symbol) values ('RWF',2,'R₣');
-insert into currency(code,decimal_digits,symbol) values ('SAR',2,'SR');
-insert into currency(code,decimal_digits,symbol) values ('SEK',2,'kr');
-insert into currency(code,decimal_digits,symbol) values ('SGD',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('SYP',2,'LS');
-insert into currency(code,decimal_digits,symbol) values ('THB',2,'฿');
-insert into currency(code,decimal_digits,symbol) values ('TJS',2,'т.р.');
-insert into currency(code,decimal_digits,symbol) values ('TMT',2,'m.');
-insert into currency(code,decimal_digits,symbol) values ('TND',3,'DT');
-insert into currency(code,decimal_digits,symbol) values ('TRY',2,'TL');
-insert into currency(code,decimal_digits,symbol) values ('TTD',2,'TT$');
-insert into currency(code,decimal_digits,symbol) values ('TWD',2,'NT$');
-insert into currency(code,decimal_digits,symbol) values ('UAH',2,'₴');
-insert into currency(code,decimal_digits,symbol) values ('USD',2,'$');
-insert into currency(code,decimal_digits,symbol) values ('UYU',2,'$U');
-insert into currency(code,decimal_digits,symbol) values ('UZS',0,'лв');
-insert into currency(code,decimal_digits,symbol) values ('VEF',2,'Bs.');
-insert into currency(code,decimal_digits,symbol) values ('VND',0,'₫');
-insert into currency(code,decimal_digits,symbol) values ('XOF',2,'XOF');
-insert into currency(code,decimal_digits,symbol) values ('YER',2,'﷼');
-insert into currency(code,decimal_digits,symbol) values ('ZAR',2,'R');
-insert into currency(code,decimal_digits,symbol) values ('ZWL',2,'Z$');
+insert into currency (code,symbol,decimal_digits,status) values
+  ('AED','د.إ',2,'A'),
+  ('AFN','؋',2,'A'),
+  ('ALL','Lek',2,'A'),
+  ('AMD','դր.',2,'A'),
+  ('ARS','$',2,'A'),
+  ('AUD','$',2,'A'),
+  ('AZN','ман.',2,'A'),
+  ('BAM','KM',2,'A'),
+  ('BDT','৳',2,'A'),
+  ('BGN','лв.',2,'A'),
+  ('BHD','BD',3,'A'),
+  ('BND','$',0,'A'),
+  ('BOB','$b',2,'A'),
+  ('BRL','R$',2,'A'),
+  ('BYR','р.',2,'A'),
+  ('BZD','BZ$',2,'A'),
+  ('CAD','$',2,'A'),
+  ('CHF','Fr.',2,'A'),
+  ('CLP','$',2,'A'),
+  ('CNY','¥',2,'A'),
+  ('COP','$',2,'A'),
+  ('CRC','₡',2,'A'),
+  ('CSD','Дин.',2,'A'),
+  ('CZK','Kč',2,'A'),
+  ('DKK','kr.',2,'A'),
+  ('DOP','RD$',2,'A'),
+  ('DZD','DA',2,'A'),
+  ('EEK','kr',2,'A'),
+  ('EGP','£',2,'A'),
+  ('ETB','Br',2,'A'),
+  ('EUR','€',2,'A'),
+  ('GBP','£',2,'A'),
+  ('GEL','Lari',2,'A'),
+  ('GTQ','Q',2,'A'),
+  ('HKD','HK$',2,'A'),
+  ('HNL','L.',2,'A'),
+  ('HRK','kn',2,'A'),
+  ('HUF','Ft',2,'A'),
+  ('IDR','Rp',0,'A'),
+  ('ILS','₪',2,'A'),
+  ('INR','₹',2,'A'),
+  ('IQD','ID',2,'A'),
+  ('IRR','ريال',2,'A'),
+  ('ISK','kr.',0,'A'),
+  ('JMD','J$',2,'A'),
+  ('JOD','د.أ',3,'A'),
+  ('JPY','¥',0,'A'),
+  ('KES','S',2,'A'),
+  ('KGS','сом',2,'A'),
+  ('KHR','៛',2,'A'),
+  ('KRW','₩',0,'A'),
+  ('KWD','KD',3,'A'),
+  ('KZT','Т',2,'A'),
+  ('LAK','₭',2,'A'),
+  ('LBP','LL',2,'A'),
+  ('LKR','රු.',2,'A'),
+  ('LTL','Lt',2,'A'),
+  ('LVL','Ls',2,'A'),
+  ('LYD','LD',3,'A'),
+  ('MAD','DH',2,'A'),
+  ('MKD','ден.',2,'A'),
+  ('MNT','₮',2,'A'),
+  ('MOP','$',2,'A'),
+  ('MVR','ރ.',2,'A'),
+  ('MXN','$',2,'A'),
+  ('MYR','RM',2,'A'),
+  ('NIO','C$',2,'A'),
+  ('NOK','kr',2,'A'),
+  ('NPR','रु',2,'A'),
+  ('NZD','$',2,'A'),
+  ('OMR','R.O',3,'A'),
+  ('PAB','B/.',2,'A'),
+  ('PEN','S/.',2,'A'),
+  ('PHP','₱',2,'A'),
+  ('PKR','Rs',2,'A'),
+  ('PLN','zł',2,'A'),
+  ('PYG','Gs',2,'A'),
+  ('QAR','QR',2,'A'),
+  ('RON','lei',2,'A'),
+  ('RSD','Дин.',2,'A'),
+  ('RUB','һ.',2,'A'),
+  ('RWF','R₣',2,'A'),
+  ('SAR','SR',2,'A'),
+  ('SEK','kr',2,'A'),
+  ('SGD','$',2,'A'),
+  ('SYP','LS',2,'A'),
+  ('THB','฿',2,'A'),
+  ('TJS','т.р.',2,'A'),
+  ('TMT','m.',2,'A'),
+  ('TND','DT',3,'A'),
+  ('TRY','TL',2,'A'),
+  ('TTD','TT$',2,'A'),
+  ('TWD','NT$',2,'A'),
+  ('UAH','₴',2,'A'),
+  ('USD','$',2,'A'),
+  ('UYU','$U',2,'A'),
+  ('UZS','лв',0,'A'),
+  ('VEF','Bs.',2,'A'),
+  ('VND','₫',0,'A'),
+  ('XOF','XOF',2,'A'),
+  ('YER','﷼',2,'A'),
+  ('ZAR','R',2,'A'),
+  ('ZWL','Z$',2,'A');
 
-update currency set status = 'A';
+insert into locale (code,name,native_name,country_code,country_name,native_country_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample) values
+  ('af-ZA','Afrikaans (South Africa)','Afrikaans (Suid Afrika)','ZA','South Africa','Suid Afrika','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00'),
+  ('am-ET','Amharic (Ethiopia)','አማርኛ (ኢትዮጵያ)','ET','Ethiopia','ኢትዮጵያ','d/M/yyyy',1,'.',',','ETB','Br',2,0,'ETB10,000.00'),
+  ('ar-AE','Arabic (U.A.E.)','العربية (الإمارات العربية المتحدة)','AE','U.A.E.','الإمارات العربية المتحدة','dd/MM/yyyy',7,'.',',','AED','د.إ',2,2,'د.إ.‏ 10,000.00'),
+  ('ar-BH','Arabic (Bahrain)','العربية (البحرين)','BH','Bahrain','البحرين','dd/MM/yyyy',7,'.',',','BHD','BD',3,2,'د.ب.‏ 10,000.000'),
+  ('ar-DZ','Arabic (Algeria)','العربية (الجزائر)','DZ','Algeria','الجزائر','dd-MM-yyyy',7,'.',',','DZD','DA',2,2,'د.ج.‏ 10,000.00'),
+  ('ar-EG','Arabic (Egypt)','العربية (مصر)','EG','Egypt','مصر','dd/MM/yyyy',7,'.',',','EGP','£',2,2,'ج.م.‏ 10,000.00'),
+  ('ar-IQ','Arabic (Iraq)','العربية (العراق)','IQ','Iraq','العراق','dd/MM/yyyy',7,'.',',','IQD','ID',2,2,'د.ع.‏ 10,000.00'),
+  ('ar-JO','Arabic (Jordan)','العربية (الأردن)','JO','Jordan','الأردن','dd/MM/yyyy',7,'.',',','JOD','د.أ',3,2,'د.ا.‏ 10,000.000'),
+  ('ar-KW','Arabic (Kuwait)','العربية (الكويت)','KW','Kuwait','الكويت','dd/MM/yyyy',7,'.',',','KWD','KD',3,2,'د.ك.‏ 10,000.000'),
+  ('ar-LB','Arabic (Lebanon)','العربية (لبنان)','LB','Lebanon','لبنان','dd/MM/yyyy',2,'.',',','LBP','LL',2,2,'ل.ل.‏ 10,000.00'),
+  ('ar-LY','Arabic (Libya)','العربية (ليبيا)','LY','Libya','ليبيا','dd/MM/yyyy',7,'.',',','LYD','LD',3,0,'د.ل.‏10,000.000'),
+  ('ar-MA','Arabic (Morocco)','العربية (المملكة المغربية)','MA','Morocco','المملكة المغربية','dd-MM-yyyy',2,'.',',','MAD','DH',2,2,'د.م.‏ 10,000.00'),
+  ('ar-OM','Arabic (Oman)','العربية (عمان)','OM','Oman','عمان','dd/MM/yyyy',7,'.',',','OMR','R.O',3,2,'ر.ع.‏ 10,000.000'),
+  ('ar-QA','Arabic (Qatar)','العربية (قطر)','QA','Qatar','قطر','dd/MM/yyyy',7,'.',',','QAR','QR',2,2,'ر.ق.‏ 10,000.00'),
+  ('ar-SA','Arabic (Saudi Arabia)','العربية (المملكة العربية السعودية)','SA','Saudi Arabia','المملكة العربية السعودية','dd/MM/yy',7,'.',',','SAR','SR',2,2,'ر.س.‏ 10,000.00'),
+  ('ar-SY','Arabic (Syria)','العربية (سوريا)','SY','Syria','سوريا','dd/MM/yyyy',7,'.',',','SYP','LS',2,2,'ل.س.‏ 10,000.00'),
+  ('ar-TN','Arabic (Tunisia)','العربية (تونس)','TN','Tunisia','تونس','dd-MM-yyyy',2,'.',',','TND','DT',3,2,'د.ت.‏ 10,000.000'),
+  ('ar-YE','Arabic (Yemen)','العربية (اليمن)','YE','Yemen','اليمن','dd/MM/yyyy',7,'.',',','YER','﷼',2,2,'ر.ي.‏ 10,000.00'),
+  ('arn-CL','Mapudungun (Chile)','Mapudungun (Chile)','CL','Chile','Chile','dd-MM-yyyy',1,',','.','CLP','$',2,2,'$ 10.000,00'),
+  ('as-IN','Assamese (India)','অসমীয়া (ভাৰত)','IN','India','ভাৰত','dd-MM-yyyy',2,'.',',','INR','₹',2,1,'10,000.00ট'),
+  ('az-Cyrl-AZ','Azeri (Cyrillic, Azerbaijan)','Азәрбајҹан (Азәрбајҹан)','AZ','Azerbaijan','Азәрбајҹан','dd.MM.yyyy',2,',',' ','AZN','ман.',2,3,'10 000,00 ман.'),
+  ('az-Latn-AZ','Azeri (Latin, Azerbaijan)','Azərbaycan­ılı (Azərbaycan)','AZ','Azerbaijan','Azərbaycan','dd.MM.yyyy',2,',',' ','AZN','ман.',2,3,'10 000,00 man.'),
+  ('ba-RU','Bashkir (Russia)','Башҡорт (Россия)','RU','Russia','Россия','dd.MM.yy',2,',',' ','RUB','һ.',2,3,'10 000,00 һ.'),
+  ('be-BY','Belarusian (Belarus)','Беларускі (Беларусь)','BY','Belarus','Беларусь','dd.MM.yyyy',2,',',' ','BYR','р.',2,3,'10 000,00 р.'),
+  ('bg-BG','Bulgarian (Bulgaria)','български (България)','BG','Bulgaria','България','d.M.yyyy ''г.''',2,',',' ','BGN','лв.',2,3,'10 000,00 лв.'),
+  ('bn-BD','Bengali (Bangladesh)','বাংলা (বাংলাদেশ)','BD','Bangladesh','বাংলাদেশ','dd-MM-yy',2,'.',',','BDT','৳',2,2,'৳ 10,000.00'),
+  ('bn-IN','Bengali (India)','বাংলা (ভারত)','IN','India','ভারত','dd-MM-yy',2,'.',',','INR','₹',2,2,'টা 10,000.00'),
+  ('bo-CN','Tibetan (PRC)','བོད་ཡིག (ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།)','CN','People''s Republic of China','ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།','yyyy/M/d',2,'.',',','CNY','¥',2,0,'¥10,000.00'),
+  ('br-FR','Breton (France)','brezhoneg (Frañs)','FR','France','Frañs','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('bs-Cyrl-BA','Bosnian (Cyrillic, Bosnia and Herzegovina)','босански (Босна и Херцеговина)','BA','Bosnia and Herzegovina','Босна и Херцеговина','d.M.yyyy',2,',','.','BAM','KM',2,3,'10.000,00 КМ'),
+  ('bs-Latn-BA','Bosnian (Latin, Bosnia and Herzegovina)','bosanski (Bosna i Hercegovina)','BA','Bosnia and Herzegovina','Bosna i Hercegovina','d.M.yyyy',2,',','.','BAM','KM',2,3,'10.000,00 KM'),
+  ('ca-ES','Catalan (Catalan)','català (català)','ES','Spain','Espanya','dd/MM/yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('co-FR','Corsican (France)','Corsu (France)','FR','France','France','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('cs-CZ','Czech (Czech Republic)','čeština (Česká republika)','CZ','Czech Republic','Česká republika','d.M.yyyy',2,',',' ','CZK','Kč',2,3,'10 000,00 Kč'),
+  ('cy-GB','Welsh (United Kingdom)','Cymraeg (y Deyrnas Unedig)','GB','United Kingdom','y Deyrnas Unedig','dd/MM/yyyy',2,'.',',','GBP','£',2,0,'£10,000.00'),
+  ('da-DK','Danish (Denmark)','dansk (Danmark)','DK','Denmark','Danmark','dd-MM-yyyy',2,',','.','DKK','kr.',2,2,'kr. 10.000,00'),
+  ('de-AT','German (Austria)','Deutsch (Österreich)','AT','Austria','Österreich','dd.MM.yyyy',2,',','.','EUR','€',2,2,'€ 10.000,00'),
+  ('de-CH','German (Switzerland)','Deutsch (Schweiz)','CH','Switzerland','Schweiz','dd.MM.yyyy',2,'.','''','CHF','Fr.',2,2,'Fr. 10''000.00'),
+  ('de-DE','German (Germany)','Deutsch (Deutschland)','DE','Germany','Deutschland','dd.MM.yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('de-LI','German (Liechtenstein)','Deutsch (Liechtenstein)','LI','Liechtenstein','Liechtenstein','dd.MM.yyyy',2,'.','''','CHF','Fr.',2,2,'CHF 10''000.00'),
+  ('de-LU','German (Luxembourg)','Deutsch (Luxemburg)','LU','Luxembourg','Luxemburg','dd.MM.yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('dsb-DE','Lower Sorbian (Germany)','dolnoserbšćina (Nimska)','DE','Germany','Nimska','d. M. yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('dv-MV','Divehi (Maldives)','ދިވެހިބަސް (ދިވެހި ރާއްޖެ)','MV','Maldives','ދިވެހި ރާއްޖެ','dd/MM/yy',1,'.',',','MVR','ރ.',2,3,'10,000.00 ރ.'),
+  ('el-GR','Greek (Greece)','Ελληνικά (Ελλάδα)','GR','Greece','Ελλάδα','d/M/yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('en-029','English (Caribbean)','English (Caribbean)','29','Caribbean','Caribbean','MM/dd/yyyy',2,'.',',','USD','$',2,0,'$10,000.00'),
+  ('en-AU','English (Australia)','English (Australia)','AU','Australia','Australia','d/MM/yyyy',2,'.',',','AUD','$',2,0,'$10,000.00'),
+  ('en-BZ','English (Belize)','English (Belize)','BZ','Belize','Belize','dd/MM/yyyy',1,'.',',','BZD','BZ$',2,0,'BZ$10,000.00'),
+  ('en-CA','English (Canada)','English (Canada)','CA','Canada','Canada','dd/MM/yyyy',1,'.',',','CAD','$',2,0,'$10,000.00'),
+  ('en-GB','English (United Kingdom)','English (United Kingdom)','GB','United Kingdom','United Kingdom','dd/MM/yyyy',2,'.',',','GBP','£',2,0,'£10,000.00'),
+  ('en-IE','English (Ireland)','English (Ireland)','IE','Ireland','Ireland','dd/MM/yyyy',2,'.',',','EUR','€',2,0,'€ 10,000.00'),
+  ('en-IN','English (India)','English (India)','IN','India','India','dd-MM-yyyy',2,'.',',','INR','₹',2,2,'Rs. 10,000.00'),
+  ('en-JM','English (Jamaica)','English (Jamaica)','JM','Jamaica','Jamaica','dd/MM/yyyy',1,'.',',','JMD','J$',2,0,'J$10,000.00'),
+  ('en-MY','English (Malaysia)','English (Malaysia)','MY','Malaysia','Malaysia','d/M/yyyy',1,'.',',','MYR','RM',2,0,'RM10,000.00'),
+  ('en-NZ','English (New Zealand)','English (New Zealand)','NZ','New Zealand','New Zealand','d/MM/yyyy',2,'.',',','NZD','$',2,0,'$10,000.00'),
+  ('en-PH','English (Republic of the Philippines)','English (Philippines)','PH','Philippines','Philippines','M/d/yyyy',1,'.',',','PHP','₱',2,0,'Php10,000.00'),
+  ('en-SG','English (Singapore)','English (Singapore)','SG','Singapore','Singapore','d/M/yyyy',1,'.',',','SGD','$',2,0,'$10,000.00'),
+  ('en-TT','English (Trinidad and Tobago)','English (Trinidad y Tobago)','TT','Trinidad and Tobago','Trinidad y Tobago','dd/MM/yyyy',1,'.',',','TTD','TT$',2,0,'TT$10,000.00'),
+  ('en-US','English (United States)','English (United States)','US','United States','United States','M/d/yyyy',1,'.',',','USD','$',2,0,'$10,000.00'),
+  ('en-ZA','English (South Africa)','English (South Africa)','ZA','South Africa','South Africa','yyyy/MM/dd',1,',',' ','ZAR','R',2,2,'R 10 000.00'),
+  ('en-ZW','English (Zimbabwe)','English (Zimbabwe)','ZW','Zimbabwe','Zimbabwe','M/d/yyyy',1,'.',',','ZWL','Z$',2,0,'Z$10,000.00'),
+  ('es-AR','Spanish (Argentina)','Español (Argentina)','AR','Argentina','Argentina','dd/MM/yyyy',1,',','.','ARS','$',2,2,'$ 10.000,00'),
+  ('es-BO','Spanish (Bolivia)','Español (Bolivia)','BO','Bolivia','Bolivia','dd/MM/yyyy',1,',','.','BOB','$b',2,2,'$b 10.000,00'),
+  ('es-CL','Spanish (Chile)','Español (Chile)','CL','Chile','Chile','dd-MM-yyyy',1,',','.','CLP','$',2,2,'$ 10.000,00'),
+  ('es-CO','Spanish (Colombia)','Español (Colombia)','CO','Colombia','Colombia','dd/MM/yyyy',1,',','.','COP','$',2,2,'$ 10.000,00'),
+  ('es-CR','Spanish (Costa Rica)','Español (Costa Rica)','CR','Costa Rica','Costa Rica','dd/MM/yyyy',1,',','.','CRC','₡',2,0,'₡10.000,00'),
+  ('es-DO','Spanish (Dominican Republic)','Español (República Dominicana)','DO','Dominican Republic','República Dominicana','dd/MM/yyyy',1,'.',',','DOP','RD$',2,0,'RD$10,000.00'),
+  ('es-EC','Spanish (Ecuador)','Español (Ecuador)','EC','Ecuador','Ecuador','dd/MM/yyyy',1,',','.','USD','$',2,2,'$ 10.000,00'),
+  ('es-ES','Spanish (Spain, International Sort)','Español (España, alfabetización internacional)','ES','Spain','España','dd/MM/yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('es-GT','Spanish (Guatemala)','Español (Guatemala)','GT','Guatemala','Guatemala','dd/MM/yyyy',1,'.',',','GTQ','Q',2,0,'Q10,000.00'),
+  ('es-HN','Spanish (Honduras)','Español (Honduras)','HN','Honduras','Honduras','dd/MM/yyyy',1,'.',',','HNL','L.',2,2,'L. 10,000.00'),
+  ('es-MX','Spanish (Mexico)','Español (México)','MX','Mexico','México','dd/MM/yyyy',1,'.',',','MXN','$',2,0,'$10,000.00'),
+  ('es-NI','Spanish (Nicaragua)','Español (Nicaragua)','NI','Nicaragua','Nicaragua','dd/MM/yyyy',1,'.',',','NIO','C$',2,2,'C$ 10,000.00'),
+  ('es-PA','Spanish (Panama)','Español (Panamá)','PA','Panama','Panamá','MM/dd/yyyy',1,'.',',','PAB','B/.',2,2,'B/. 10,000.00'),
+  ('es-PE','Spanish (Peru)','Español (Perú)','PE','Peru','Perú','dd/MM/yyyy',1,'.',',','PEN','S/.',2,2,'S/. 10,000.00'),
+  ('es-PR','Spanish (Puerto Rico)','Español (Puerto Rico)','PR','Puerto Rico','Puerto Rico','dd/MM/yyyy',1,'.',',','USD','$',2,2,'$10,000.00'),
+  ('es-PY','Spanish (Paraguay)','Español (Paraguay)','PY','Paraguay','Paraguay','dd/MM/yyyy',2,',','.','PYG','Gs',2,2,'Gs 10.000,00'),
+  ('es-SV','Spanish (El Salvador)','Español (El Salvador)','SV','El Salvador','El Salvador','dd/MM/yyyy',1,'.',',','USD','$',2,0,'$10,000.00'),
+  ('es-US','Spanish (United States)','Español (Estados Unidos)','US','United States','Estados Unidos','M/d/yyyy',1,'.',',','USD','$',2,0,'$10,000.00'),
+  ('es-UY','Spanish (Uruguay)','Español (Uruguay)','UY','Uruguay','Uruguay','dd/MM/yyyy',2,',','.','UYU','$U',2,2,'$U 10.000,00'),
+  ('es-VE','Spanish (Bolivarian Republic of Venezuela)','Español (Republica Bolivariana de Venezuela)','VE','Bolivarian Republic of Venezuela','Republica Bolivariana de Venezuela','dd/MM/yyyy',1,',','.','VEF','Bs.',2,2,'Bs. F. 10.000,00'),
+  ('et-EE','Estonian (Estonia)','eesti (Eesti)','EE','Estonia','Eesti','d.MM.yyyy',2,'.',' ','EEK','kr',2,3,'10 000,00 kr'),
+  ('eu-ES','Basque (Basque)','euskara (euskara)','ES','Spain','Espainia','yyyy/MM/dd',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('fa-IR','Persian','فارسى (ایران)','IR','Iran','ایران','MM/dd/yyyy',7,'٫',',','IRR','ريال',2,2,'ريال 10,000.00'),
+  ('fi-FI','Finnish (Finland)','suomi (Suomi)','FI','Finland','Suomi','d.M.yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('fil-PH','Filipino (Philippines)','Filipino (Pilipinas)','PH','Philippines','Pilipinas','M/d/yyyy',1,'.',',','PHP','₱',2,0,'PhP10,000.00'),
+  ('fo-FO','Faroese (Faroe Islands)','føroyskt (Føroyar)','FO','Faroe Islands','Føroyar','dd-MM-yyyy',2,',','.','DKK','kr.',2,2,'kr. 10.000,00'),
+  ('fr-BE','French (Belgium)','français (Belgique)','BE','Belgium','Belgique','d/MM/yyyy',2,',','.','EUR','€',2,2,'€ 10.000,00'),
+  ('fr-CA','French (Canada)','français (Canada)','CA','Canada','Canada','yyyy-MM-dd',1,',',' ','CAD','$',2,3,'10 000,00 $'),
+  ('fr-CH','French (Switzerland)','français (Suisse)','CH','Switzerland','Suisse','dd.MM.yyyy',2,'.','''','CHF','Fr.',2,2,'fr. 10''000.00'),
+  ('fr-FR','French (France)','français (France)','FR','France','France','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('fr-LU','French (Luxembourg)','français (Luxembourg)','LU','Luxembourg','Luxembourg','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('fr-MC','French (Monaco)','français (Principauté de Monaco)','MC','Principality of Monaco','Principauté de Monaco','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('fy-NL','Frisian (Netherlands)','Frysk (Nederlân)','NL','Netherlands','Nederlân','d-M-yyyy',2,',','.','EUR','€',2,2,'€ 10.000,00'),
+  ('ga-IE','Irish (Ireland)','Gaeilge (Éire)','IE','Ireland','Éire','dd/MM/yyyy',2,'.',',','EUR','€',2,0,'€ 10,000.00'),
+  ('gd-GB','Scottish Gaelic (United Kingdom)','Gàidhlig (An Rìoghachd Aonaichte)','GB','United Kingdom','An Rìoghachd Aonaichte','dd/MM/yyyy',2,'.',',','GBP','£',2,0,'£10,000.00'),
+  ('gl-ES','Galician (Galician)','galego (galego)','ES','Spain','España','dd/MM/yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('gsw-FR','Alsatian (France)','Elsässisch (Frànkrisch)','FR','France','Frànkrisch','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('gu-IN','Gujarati (India)','ગુજરાતી (ભારત)','IN','India','ભારત','dd-MM-yy',2,'.',',','INR','₹',2,2,'રૂ 10,000.00'),
+  ('ha-Latn-NG','Hausa (Latin, Nigeria)','Hausa (Nigeria)','NG','Nigeria','Nigeria','d/M/yyyy',1,'.',',','NIO','C$',2,2,'N 10,000.00'),
+  ('he-IL','Hebrew (Israel)','עברית (ישראל)','IL','Israel','ישראל','dd/MM/yyyy',1,'.',',','ILS','₪',2,2,'₪ 10,000.00'),
+  ('hi-IN','Hindi (India)','हिंदी (भारत)','IN','India','भारत','dd-MM-yyyy',2,'.',',','INR','₹',2,2,'रु 10,000.00'),
+  ('hr-BA','Croatian (Latin, Bosnia and Herzegovina)','hrvatski (Bosna i Hercegovina)','BA','Bosnia and Herzegovina','Bosna i Hercegovina','d.M.yyyy',2,',','.','BAM','KM',2,3,'10.000,00 KM'),
+  ('hr-HR','Croatian (Croatia)','hrvatski (Hrvatska)','HR','Croatia','Hrvatska','d.M.yyyy.',2,',','.','HRK','kn',2,3,'10.000,00 kn'),
+  ('hsb-DE','Upper Sorbian (Germany)','hornjoserbšćina (Němska)','DE','Germany','Němska','d. M. yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('hu-HU','Hungarian (Hungary)','magyar (Magyarország)','HU','Hungary','Magyarország','yyyy.MM.dd.',2,',',' ','HUF','Ft',2,3,'10 000,00 Ft'),
+  ('hy-AM','Armenian (Armenia)','Հայերեն (Հայաստան)','AM','Armenia','Հայաստան','dd.MM.yyyy',2,'.',',','AMD','դր.',2,3,'10,000.00 դր.'),
+  ('id-ID','Indonesian (Indonesia)','Bahasa Indonesia (Indonesia)','ID','Indonesia','Indonesia','dd/MM/yyyy',2,',','.','IDR','Rp',0,0,'Rp10.000'),
+  ('ig-NG','Igbo (Nigeria)','Igbo (Nigeria)','NG','Nigeria','Nigeria','d/M/yyyy',1,'.',',','NIO','C$',2,2,'N 10,000.00'),
+  ('ii-CN','Yi (PRC)','ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)','CN','People''s Republic of China','ꍏꉸꏓꂱꇭꉼꇩ','yyyy/M/d',2,'.',',','CNY','¥',2,0,'¥10,000.00'),
+  ('is-IS','Icelandic (Iceland)','íslenska (Ísland)','IS','Iceland','Ísland','d.M.yyyy',2,',','.','ISK','kr.',0,3,'10.000 kr.'),
+  ('it-CH','Italian (Switzerland)','italiano (Svizzera)','CH','Switzerland','Svizzera','dd.MM.yyyy',2,'.','''','CHF','Fr.',2,2,'fr. 10''000.00'),
+  ('it-IT','Italian (Italy)','italiano (Italia)','IT','Italy','Italia','dd/MM/yyyy',2,',','.','EUR','€',2,2,'€ 10.000,00'),
+  ('iu-Cans-CA','Inuktitut (Syllabics, Canada)','ᐃᓄᒃᑎᑐᑦ (ᑲᓇᑕᒥ)','CA','Canada','ᑲᓇᑕ','d/M/yyyy',1,'.',',','CAD','$',2,0,'$10,000.00'),
+  ('iu-Latn-CA','Inuktitut (Latin, Canada)','Inuktitut (Kanatami)','CA','Canada','kanata','d/MM/yyyy',1,'.',',','CAD','$',2,0,'$10,000.00'),
+  ('ja-JP','Japanese (Japan)','日本語 (日本)','JP','Japan','日本','yyyy/MM/dd',1,'.',',','JPY','¥',0,0,'¥10,000'),
+  ('ka-GE','Georgian (Georgia)','ქართული (საქართველო)','GE','Georgia','საქართველო','dd.MM.yyyy',2,',',' ','GEL','Lari',2,3,'10 000,00 Lari'),
+  ('kk-KZ','Kazakh (Kazakhstan)','Қазақ (Қазақстан)','KZ','Kazakhstan','Қазақстан','dd.MM.yyyy',2,',',' ','KZT','Т',2,0,'Т10 000,00'),
+  ('kl-GL','Greenlandic (Greenland)','kalaallisut (Kalaallit Nunaat)','GL','Greenland','Kalaallit Nunaat','dd-MM-yyyy',2,',','.','DKK','kr.',2,2,'kr. 10.000,00'),
+  ('km-KH','Khmer (Cambodia)','ខ្មែរ (កម្ពុជា)','KH','Cambodia','កម្ពុជា','yyyy-MM-dd',1,'.',',','KHR','៛',2,1,'10,000.00៛'),
+  ('kn-IN','Kannada (India)','ಕನ್ನಡ (ಭಾರತ)','IN','India','ಭಾರತ','dd-MM-yy',2,'.',',','INR','₹',2,2,'ರೂ 10,000.00'),
+  ('ko-KR','Korean (Korea)','한국어 (대한민국)','KR','Korea','대한민국','yyyy-MM-dd',1,'.',',','KRW','₩',0,0,'₩10,000'),
+  ('kok-IN','Konkani (India)','कोंकणी (भारत)','IN','India','भारत','dd-MM-yyyy',2,'.',',','INR','₹',2,2,'रु 10,000.00'),
+  ('ky-KG','Kyrgyz (Kyrgyzstan)','Кыргыз (Кыргызстан)','KG','Kyrgyzstan','Кыргызстан','dd.MM.yy',2,',',' ','KGS','сом',2,3,'10 000,00 сом'),
+  ('lb-LU','Luxembourgish (Luxembourg)','Lëtzebuergesch (Luxembourg)','LU','Luxembourg','Luxembourg','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('lo-LA','Lao (Lao P.D.R.)','ລາວ (ສ.ປ.ປ. ລາວ)','LA','Lao P.D.R.','ສ.ປ.ປ. ລາວ','dd/MM/yyyy',1,'.',',','LAK','₭',2,1,'10,000.00₭'),
+  ('lt-LT','Lithuanian (Lithuania)','lietuvių (Lietuva)','LT','Lithuania','Lietuva','yyyy.MM.dd',2,',','.','LTL','Lt',2,3,'10.000,00 Lt'),
+  ('lv-LV','Latvian (Latvia)','latviešu (Latvija)','LV','Latvia','Latvija','yyyy.MM.dd.',2,',',' ','LVL','Ls',2,2,'Ls 10 000,00'),
+  ('mi-NZ','Maori (New Zealand)','Reo Māori (Aotearoa)','NZ','New Zealand','Aotearoa','dd/MM/yyyy',2,'.',',','NZD','$',2,0,'$10,000.00'),
+  ('mk-MK','Macedonian (Former Yugoslav Republic of Macedonia)','македонски јазик (Македонија)','MK','Macedonia (FYROM)','Македонија','dd.MM.yyyy',2,',','.','MKD','ден.',2,3,'10.000,00 ден.'),
+  ('ml-IN','Malayalam (India)','മലയാളം (ഭാരതം)','IN','India','ഭാരതം','dd-MM-yy',2,'.',',','INR','₹',2,2,'ക 10,000.00'),
+  ('mn-MN','Mongolian (Cyrillic, Mongolia)','Монгол хэл (Монгол улс)','MN','Mongolia','Монгол улс','yy.MM.dd',2,',',' ','MNT','₮',2,1,'10 000,00₮'),
+  ('mn-Mong-CN','Mongolian (Traditional Mongolian, PRC)','ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ (ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ)','CN','People''s Republic of China','ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ','yyyy/M/d',2,'.',',','CNY','¥',2,0,'¥10,000.00'),
+  ('moh-CA','Mohawk (Mohawk)','Kanien''kéha','CA','Canada','Canada','M/d/yyyy',1,'.',',','CAD','$',2,0,'$10,000.00'),
+  ('mr-IN','Marathi (India)','मराठी (भारत)','IN','India','भारत','dd-MM-yyyy',2,'.',',','INR','₹',2,2,'रु 10,000.00'),
+  ('ms-BN','Malay (Brunei Darussalam)','Bahasa Melayu (Brunei Darussalam)','BN','Brunei Darussalam','Brunei Darussalam','dd/MM/yyyy',2,',','.','BND','$',0,0,'$10.00'),
+  ('ms-MY','Malay (Malaysia)','Bahasa Melayu (Malaysia)','MY','Malaysia','Malaysia','dd/MM/yyyy',2,'.',',','MYR','RM',2,0,'RM10,000'),
+  ('mt-MT','Maltese (Malta)','Malti (Malta)','MT','Malta','Malta','dd/MM/yyyy',2,'.',',','EUR','€',2,0,'€ 10,000.00'),
+  ('nb-NO','Norwegian, Bokmål (Norway)','norsk, bokmål (Norge)','NO','Norway','Norge','dd.MM.yyyy',2,',',' ','NOK','kr',2,2,'kr 10 000,00'),
+  ('ne-NP','Nepali (Nepal)','नेपाली (नेपाल)','NP','Nepal','नेपाल','M/d/yyyy',1,'.',',','NPR','रु',2,0,'रु10,000.00'),
+  ('nl-BE','Dutch (Belgium)','Nederlands (België)','BE','Belgium','België','d/MM/yyyy',2,',','.','EUR','€',2,2,'€ 10.000,00'),
+  ('nl-NL','Dutch (Netherlands)','Nederlands (Nederland)','NL','Netherlands','Nederland','d-M-yyyy',2,',','.','EUR','€',2,2,'€ 10.000,00'),
+  ('nn-NO','Norwegian, Nynorsk (Norway)','norsk, nynorsk (Noreg)','NO','Norway','Noreg','dd.MM.yyyy',2,',',' ','NOK','kr',2,2,'kr 10 000,00'),
+  ('nso-ZA','Sesotho sa Leboa (South Africa)','Sesotho sa Leboa (Afrika Borwa)','ZA','South Africa','Afrika Borwa','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00'),
+  ('oc-FR','Occitan (France)','Occitan (França)','FR','France','França','dd/MM/yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('or-IN','Oriya (India)','ଓଡ଼ିଆ (ଭାରତ)','IN','India','ଭାରତ','dd-MM-yy',1,'.',',','INR','₹',2,2,'ଟ 10,000.00'),
+  ('pa-IN','Punjabi (India)','ਪੰਜਾਬੀ (ਭਾਰਤ)','IN','India','ਭਾਰਤ','dd-MM-yy',2,'.',',','INR','₹',2,2,'ਰੁ 10,000.00'),
+  ('pl-PL','Polish (Poland)','polski (Polska)','PL','Poland','Polska','yyyy-MM-dd',2,',',' ','PLN','zł',2,3,'10 000,00 zł'),
+  ('prs-AF','Dari (Afghanistan)','درى (افغانستان)','AF','Afghanistan','افغانستان','dd/MM/yy',6,'.',',','AFN','؋',2,0,'؋10.000,00'),
+  ('ps-AF','Pashto (Afghanistan)','پښتو (افغانستان)','AF','Afghanistan','افغانستان','dd/MM/yy',7,'٫','٬','AFN','؋',2,0,'؋10،000,00'),
+  ('pt-BR','Portuguese (Brazil)','Português (Brasil)','BR','Brazil','Brasil','dd/MM/yyyy',1,',','.','BRL','R$',2,2,'R$ 10.000,00'),
+  ('pt-PT','Portuguese (Portugal)','português (Portugal)','PT','Portugal','Portugal','dd-MM-yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('qut-GT','K''iche (Guatemala)','K''iche (Guatemala)','GT','Guatemala','Guatemala','dd/MM/yyyy',1,'.',',','GTQ','Q',2,0,'Q10,000.00'),
+  ('quz-BO','Quechua (Bolivia)','runasimi (Qullasuyu)','BO','Bolivia','Bolivia Suyu','dd/MM/yyyy',1,',','.','BOB','$b',2,2,'$b 10.000,00'),
+  ('quz-EC','Quechua (Ecuador)','runasimi (Ecuador)','EC','Ecuador','Ecuador Suyu','dd/MM/yyyy',1,',','.','USD','$',2,2,'$ 10.000,00'),
+  ('quz-PE','Quechua (Peru)','runasimi (Piruw)','PE','Peru','Peru Suyu','dd/MM/yyyy',1,'.',',','PEN','S/.',2,2,'S/. 10,000.00'),
+  ('rm-CH','Romansh (Switzerland)','Rumantsch (Svizra)','CH','Switzerland','Svizra','dd/MM/yyyy',2,'.','''','CHF','Fr.',2,2,'fr. 10''000.00'),
+  ('ro-RO','Romanian (Romania)','română (România)','RO','Romania','România','dd.MM.yyyy',2,',','.','RON','lei',2,3,'10.000,00 lei'),
+  ('ru-RU','Russian (Russia)','русский (Россия)','RU','Russia','Россия','dd.MM.yyyy',2,',',' ','RUB','һ.',2,1,'10 000,00р.'),
+  ('rw-RW','Kinyarwanda (Rwanda)','Kinyarwanda (Rwanda)','RW','Rwanda','Rwanda','M/d/yyyy',1,',',' ','RWF','R₣',2,2,'RWF 10 000,00'),
+  ('sa-IN','Sanskrit (India)','संस्कृत (भारतम्)','IN','India','भारतम्','dd-MM-yyyy',1,'.',',','INR','₹',2,2,'रु 10,000.00'),
+  ('sah-RU','Yakut (Russia)','саха (Россия)','RU','Russia','Россия','MM.dd.yyyy',2,',',' ','RUB','һ.',2,1,'10 000,00с.'),
+  ('se-FI','Sami, Northern (Finland)','davvisámegiella (Suopma)','FI','Finland','Suopma','d.M.yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('se-NO','Sami, Northern (Norway)','davvisámegiella (Norga)','NO','Norway','Norga','dd.MM.yyyy',2,',',' ','NOK','kr',2,2,'kr 10 000,00'),
+  ('se-SE','Sami, Northern (Sweden)','davvisámegiella (Ruoŧŧa)','SE','Sweden','Ruoŧŧa','yyyy-MM-dd',2,',','.','SEK','kr',2,3,'10 000,00 kr'),
+  ('si-LK','Sinhala (Sri Lanka)','සිංහල (ශ්‍රී ලංකා)','LK','Sri Lanka','ශ්‍රී ලංකා','yyyy-MM-dd',2,'.',',','LKR','රු.',2,2,'රු. 10,000.00'),
+  ('sk-SK','Slovak (Slovakia)','slovenčina (Slovenská republika)','SK','Slovakia','Slovenská republika','d. M. yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('sl-SI','Slovenian (Slovenia)','slovenski (Slovenija)','SI','Slovenia','Slovenija','d.M.yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('sma-NO','Sami, Southern (Norway)','åarjelsaemiengiele (Nöörje)','NO','Norway','Nöörje','dd.MM.yyyy',2,',',' ','NOK','kr',2,2,'kr 10 000,00'),
+  ('sma-SE','Sami, Southern (Sweden)','åarjelsaemiengiele (Sveerje)','SE','Sweden','Sveerje','yyyy-MM-dd',2,',','.','SEK','kr',2,3,'10 000,00 kr'),
+  ('smj-NO','Sami, Lule (Norway)','julevusámegiella (Vuodna)','NO','Norway','Vuodna','dd.MM.yyyy',2,',',' ','NOK','kr',2,2,'kr 10 000,00'),
+  ('smj-SE','Sami, Lule (Sweden)','julevusámegiella (Svierik)','SE','Sweden','Svierik','yyyy-MM-dd',2,',','.','SEK','kr',2,3,'10 000,00 kr'),
+  ('smn-FI','Sami, Inari (Finland)','sämikielâ (Suomâ)','FI','Finland','Suomâ','d.M.yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('sms-FI','Sami, Skolt (Finland)','sääm´ǩiõll (Lää´ddjânnam)','FI','Finland','Lää´ddjânnam','d.M.yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('sq-AL','Albanian (Albania)','shqipe (Shqipëria)','AL','Albania','Shqipëria','yyyy-MM-dd',2,',','.','ALL','Lek',2,1,'10.000,00Lek'),
+  ('sr-Cyrl-BA','Serbian (Cyrillic, Bosnia and Herzegovina)','српски (Босна и Херцеговина)','BA','Bosnia and Herzegovina','Босна и Херцеговина','d.M.yyyy',2,',','.','BAM','KM',2,3,'10.000,00 КМ'),
+  ('sr-Cyrl-CS','Serbian (Cyrillic, Serbia and Montenegro (Former))','српски (Србија и Црна Гора (Претходно))','CS','Serbia and Montenegro (Former)','Србија и Црна Гора (Претходно)','d.M.yyyy',2,',','.','CSD','Дин.',2,3,'10.000,00 Дин.'),
+  ('sr-Cyrl-ME','Serbian (Cyrillic, Montenegro)','српски (Црна Гора)','ME','Montenegro','Црна Гора','d.M.yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('sr-Cyrl-RS','Serbian (Cyrillic, Serbia)','српски (Србија)','RS','Serbia','Србија','d.M.yyyy',2,',','.','RSD','Дин.',2,3,'10.000,00 Дин.'),
+  ('sr-Latn-BA','Serbian (Latin, Bosnia and Herzegovina)','srpski (Bosna i Hercegovina)','BA','Bosnia and Herzegovina','Bosna i Hercegovina','d.M.yyyy',2,',','.','BAM','KM',2,3,'10.000,00 KM'),
+  ('sr-Latn-CS','Serbian (Latin, Serbia and Montenegro (Former))','srpski (Srbija i Crna Gora (Prethodno))','CS','Serbia and Montenegro (Former)','Srbija i Crna Gora (Prethodno)','d.M.yyyy',2,',','.','CSD','Дин.',2,3,'10.000,00 Din.'),
+  ('sr-Latn-ME','Serbian (Latin, Montenegro)','srpski (Crna Gora)','ME','Montenegro','Crna Gora','d.M.yyyy',2,',','.','EUR','€',2,3,'10.000,00 €'),
+  ('sr-Latn-RS','Serbian (Latin, Serbia)','srpski (Srbija)','RS','Serbia','Srbija','d.M.yyyy',2,',','.','RSD','Дин.',2,3,'10.000,00 Din.'),
+  ('sv-FI','Swedish (Finland)','svenska (Finland)','FI','Finland','Finland','d.M.yyyy',2,',',' ','EUR','€',2,3,'10 000,00 €'),
+  ('sv-SE','Swedish (Sweden)','svenska (Sverige)','SE','Sweden','Sverige','yyyy-MM-dd',2,',','.','SEK','kr',2,3,'10 000,00 kr'),
+  ('sw-KE','Kiswahili (Kenya)','Kiswahili (Kenya)','KE','Kenya','Kenya','M/d/yyyy',1,'.',',','KES','S',2,0,'S10,000.00'),
+  ('syr-SY','Syriac (Syria)','ܣܘܪܝܝܐ (سوريا)','SY','Syria','سوريا','dd/MM/yyyy',7,'.',',','SYP','LS',2,2,'ل.س.‏ 10,000.00'),
+  ('ta-IN','Tamil (India)','தமிழ் (இந்தியா)','IN','India','இந்தியா','dd-MM-yyyy',2,'.',',','INR','₹',2,2,'ரூ 10,000.00'),
+  ('te-IN','Telugu (India)','తెలుగు (భారత దేశం)','IN','India','భారత దేశం','dd-MM-yy',2,'.',',','INR','₹',2,2,'రూ 10,000.00'),
+  ('tg-Cyrl-TJ','Tajik (Cyrillic, Tajikistan)','Тоҷикӣ (Тоҷикистон)','TJ','Tajikistan','Тоҷикистон','dd.MM.yy',1,',',' ','TJS','т.р.',2,3,'10 000,00 т.р.'),
+  ('th-TH','Thai (Thailand)','ไทย (ไทย)','TH','Thailand','ไทย','d/M/yyyy',2,'.',',','THB','฿',2,0,'฿10,000.00'),
+  ('tk-TM','Turkmen (Turkmenistan)','türkmençe (Türkmenistan)','TM','Turkmenistan','Türkmenistan','dd.MM.yy',2,',',' ','TMT','m.',2,1,'10 000,00m.'),
+  ('tn-ZA','Setswana (South Africa)','Setswana (Aforika Borwa)','ZA','South Africa','Aforika Borwa','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00'),
+  ('tr-TR','Turkish (Turkey)','Türkçe (Türkiye)','TR','Turkey','Türkiye','dd.MM.yyyy',2,',','.','TRY','TL',2,3,'10.000,00 TL'),
+  ('tt-RU','Tatar (Russia)','Татар (Россия)','RU','Russia','Россия','dd.MM.yyyy',2,',',' ','RUB','һ.',2,3,'10 000,00 р.'),
+  ('tzm-Latn-DZ','Tamazight (Latin, Algeria)','Tamazight (Djazaïr)','DZ','Algeria','Djazaïr','dd-MM-yyyy',7,'.',',','DZD','DA',2,3,'10.000,00 DZD'),
+  ('ug-CN','Uyghur (PRC)','ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)','CN','People''s Republic of China','جۇڭخۇا خەلق جۇمھۇرىيىتى','yyyy-M-d',1,'.',',','CNY','¥',2,0,'¥10,000.00'),
+  ('uk-UA','Ukrainian (Ukraine)','українська (Україна)','UA','Ukraine','Україна','dd.MM.yyyy',2,',',' ','UAH','₴',2,1,'10 000,00₴'),
+  ('ur-PK','Urdu (Islamic Republic of Pakistan)','اُردو (پاکستان)','PK','Islamic Republic of Pakistan','پاکستان','dd/MM/yyyy',2,'.',',','PKR','Rs',2,0,'Rs10,000.00'),
+  ('uz-Cyrl-UZ','Uzbek (Cyrillic, Uzbekistan)','Ўзбек (Ўзбекистон)','UZ','Uzbekistan','Ўзбекистон Республикаси','dd.MM.yyyy',2,',',' ','UZS','лв',0,3,'10 000,00 сўм'),
+  ('uz-Latn-UZ','Uzbek (Latin, Uzbekistan)','U''zbek (U''zbekiston Respublikasi)','UZ','Uzbekistan','U''zbekiston Respublikasi','dd/MM yyyy',2,',',' ','UZS','лв',0,3,'10 000 so''m'),
+  ('vi-VN','Vietnamese (Vietnam)','Tiếng Việt (Việt Nam)','VN','Vietnam','Việt Nam','dd/MM/yyyy',2,',','.','VND','₫',0,3,'10.000,00 ₫'),
+  ('wo-SN','Wolof (Senegal)','Wolof (Sénégal)','SN','Senegal','Sénégal','dd/MM/yyyy',2,',',' ','XOF','XOF',2,3,'10 000,00 XOF'),
+  ('xh-ZA','isiXhosa (South Africa)','isiXhosa (uMzantsi Afrika)','ZA','South Africa','uMzantsi Afrika','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00'),
+  ('yo-NG','Yoruba (Nigeria)','Yoruba (Nigeria)','NG','Nigeria','Nigeria','d/M/yyyy',1,'.',',','NIO','C$',2,2,'N 10,000.00'),
+  ('zh-CN','Chinese (Simplified, PRC)','中文(中华人民共和国)','CN','People''s Republic of China','中华人民共和国','yyyy/M/d',1,'.',',','CNY','¥',2,0,'¥10,000.00'),
+  ('zh-HK','Chinese (Traditional, Hong Kong S.A.R.)','中文(香港特別行政區)','HK','Hong Kong S.A.R.','香港特別行政區','d/M/yyyy',1,'.',',','HKD','HK$',2,0,'HK$10,000.00'),
+  ('zh-MO','Chinese (Traditional, Macao S.A.R.)','中文(澳門特別行政區)','MO','Macao S.A.R.','澳門特別行政區','d/M/yyyy',1,'.',',','MOP','$',2,0,'MOP10,000.00'),
+  ('zh-SG','Chinese (Simplified, Singapore)','中文(新加坡)','SG','Singapore','新加坡','d/M/yyyy',1,'.',',','SGD','$',2,0,'$10,000.00'),
+  ('zh-TW','Chinese (Traditional, Taiwan)','中文(台灣)','TW','Taiwan','台灣','yyyy/M/d',1,'.',',','TWD','NT$',2,0,'NT$10,000.00'),
+  ('zu-ZA','isiZulu (South Africa)','isiZulu (iNingizimu Afrika)','ZA','South Africa','iNingizimu Afrika','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00');
 
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('af-ZA','ZA','South Africa','Suid Afrika','Afrikaans (South Africa)','Afrikaans (Suid Afrika)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
-('am-ET','ET','Ethiopia','ኢትዮጵያ','Amharic (Ethiopia)','አማርኛ (ኢትዮጵያ)','d/M/yyyy',1,'.',',',2,'ETB',0,'ETB10,000.00'),
-('ar-AE','AE','U.A.E.','الإمارات العربية المتحدة','Arabic (U.A.E.)','العربية (الإمارات العربية المتحدة)','dd/MM/yyyy',7,'.',',',2,'AED',2,'د.إ.‏ 10,000.00'),
-('ar-BH','BH','Bahrain','البحرين','Arabic (Bahrain)','العربية (البحرين)','dd/MM/yyyy',7,'.',',',3,'BHD',2,'د.ب.‏ 10,000.000'),
-('ar-DZ','DZ','Algeria','الجزائر','Arabic (Algeria)','العربية (الجزائر)','dd-MM-yyyy',7,'.',',',2,'DZD',2,'د.ج.‏ 10,000.00'),
-('ar-EG','EG','Egypt','مصر','Arabic (Egypt)','العربية (مصر)','dd/MM/yyyy',7,'.',',',2,'EGP',2,'ج.م.‏ 10,000.00'),
-('ar-IQ','IQ','Iraq','العراق','Arabic (Iraq)','العربية (العراق)','dd/MM/yyyy',7,'.',',',2,'IQD',2,'د.ع.‏ 10,000.00'),
-('ar-JO','JO','Jordan','الأردن','Arabic (Jordan)','العربية (الأردن)','dd/MM/yyyy',7,'.',',',3,'JOD',2,'د.ا.‏ 10,000.000'),
-('ar-KW','KW','Kuwait','الكويت','Arabic (Kuwait)','العربية (الكويت)','dd/MM/yyyy',7,'.',',',3,'KWD',2,'د.ك.‏ 10,000.000'),
-('ar-LB','LB','Lebanon','لبنان','Arabic (Lebanon)','العربية (لبنان)','dd/MM/yyyy',2,'.',',',2,'LBP',2,'ل.ل.‏ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('ar-LY','LY','Libya','ليبيا','Arabic (Libya)','العربية (ليبيا)','dd/MM/yyyy',7,'.',',',3,'LYD',0,'د.ل.‏10,000.000'),
-('ar-MA','MA','Morocco','المملكة المغربية','Arabic (Morocco)','العربية (المملكة المغربية)','dd-MM-yyyy',2,'.',',',2,'MAD',2,'د.م.‏ 10,000.00'),
-('ar-OM','OM','Oman','عمان','Arabic (Oman)','العربية (عمان)','dd/MM/yyyy',7,'.',',',3,'OMR',2,'ر.ع.‏ 10,000.000'),
-('ar-QA','QA','Qatar','قطر','Arabic (Qatar)','العربية (قطر)','dd/MM/yyyy',7,'.',',',2,'QAR',2,'ر.ق.‏ 10,000.00'),
-('ar-SA','SA','Saudi Arabia','المملكة العربية السعودية','Arabic (Saudi Arabia)','العربية (المملكة العربية السعودية)','dd/MM/yy',7,'.',',',2,'SAR',2,'ر.س.‏ 10,000.00'),
-('ar-SY','SY','Syria','سوريا','Arabic (Syria)','العربية (سوريا)','dd/MM/yyyy',7,'.',',',2,'SYP',2,'ل.س.‏ 10,000.00'),
-('ar-TN','TN','Tunisia','تونس','Arabic (Tunisia)','العربية (تونس)','dd-MM-yyyy',2,'.',',',3,'TND',2,'د.ت.‏ 10,000.000'),
-('ar-YE','YE','Yemen','اليمن','Arabic (Yemen)','العربية (اليمن)','dd/MM/yyyy',7,'.',',',2,'YER',2,'ر.ي.‏ 10,000.00'),
-('arn-CL','CL','Chile','Chile','Mapudungun (Chile)','Mapudungun (Chile)','dd-MM-yyyy',1,',','.',2,'CLP',2,'$ 10.000,00'),
-('as-IN','IN','India','ভাৰত','Assamese (India)','অসমীয়া (ভাৰত)','dd-MM-yyyy',2,'.',',',2,'INR',1,'10,000.00ট');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('az-Cyrl-AZ','AZ','Azerbaijan','Азәрбајҹан','Azeri (Cyrillic, Azerbaijan)','Азәрбајҹан (Азәрбајҹан)','dd.MM.yyyy',2,',',' ',2,'AZN',3,'10 000,00 ман.'),
-('az-Latn-AZ','AZ','Azerbaijan','Azərbaycan','Azeri (Latin, Azerbaijan)','Azərbaycan­ılı (Azərbaycan)','dd.MM.yyyy',2,',',' ',2,'AZN',3,'10 000,00 man.'),
-('ba-RU','RU','Russia','Россия','Bashkir (Russia)','Башҡорт (Россия)','dd.MM.yy',2,',',' ',2,'RUB',3,'10 000,00 һ.'),
-('be-BY','BY','Belarus','Беларусь','Belarusian (Belarus)','Беларускі (Беларусь)','dd.MM.yyyy',2,',',' ',2,'BYR',3,'10 000,00 р.'),
-('bg-BG','BG','Bulgaria','България','Bulgarian (Bulgaria)','български (България)','d.M.yyyy ''г.''',2,',',' ',2,'BGN',3,'10 000,00 лв.'),
-('bn-BD','BD','Bangladesh','বাংলাদেশ','Bengali (Bangladesh)','বাংলা (বাংলাদেশ)','dd-MM-yy',2,'.',',',2,'BDT',2,'৳ 10,000.00'),
-('bn-IN','IN','India','ভারত','Bengali (India)','বাংলা (ভারত)','dd-MM-yy',2,'.',',',2,'INR',2,'টা 10,000.00'),
-('bo-CN','CN','People''s Republic of China','ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།','Tibetan (PRC)','བོད་ཡིག (ཀྲུང་ཧྭ་མི་དམངས་སྤྱི་མཐུན་རྒྱལ་ཁབ།)','yyyy/M/d',2,'.',',',2,'CNY',0,'¥10,000.00'),
-('br-FR','FR','France','Frañs','Breton (France)','brezhoneg (Frañs)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('bs-Cyrl-BA','BA','Bosnia and Herzegovina','Босна и Херцеговина','Bosnian (Cyrillic, Bosnia and Herzegovina)','босански (Босна и Херцеговина)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 КМ');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('bs-Latn-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Bosnian (Latin, Bosnia and Herzegovina)','bosanski (Bosna i Hercegovina)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 KM'),
-('ca-ES','ES','Spain','Espanya','Catalan (Catalan)','català (català)','dd/MM/yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('co-FR','FR','France','France','Corsican (France)','Corsu (France)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('cs-CZ','CZ','Czech Republic','Česká republika','Czech (Czech Republic)','čeština (Česká republika)','d.M.yyyy',2,',',' ',2,'CZK',3,'10 000,00 Kč'),
-('cy-GB','GB','United Kingdom','y Deyrnas Unedig','Welsh (United Kingdom)','Cymraeg (y Deyrnas Unedig)','dd/MM/yyyy',2,'.',',',2,'GBP',0,'£10,000.00'),
-('da-DK','DK','Denmark','Danmark','Danish (Denmark)','dansk (Danmark)','dd-MM-yyyy',2,',','.',2,'DKK',2,'kr. 10.000,00'),
-('de-AT','AT','Austria','Österreich','German (Austria)','Deutsch (Österreich)','dd.MM.yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
-('de-CH','CH','Switzerland','Schweiz','German (Switzerland)','Deutsch (Schweiz)','dd.MM.yyyy',2,'.','',2,'CHF',2,'Fr. 10''000.00'),
-('de-DE','DE','Germany','Deutschland','German (Germany)','Deutsch (Deutschland)','dd.MM.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('de-LI','LI','Liechtenstein','Liechtenstein','German (Liechtenstein)','Deutsch (Liechtenstein)','dd.MM.yyyy',2,'.','',2,'CHF',2,'CHF 10''000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('de-LU','LU','Luxembourg','Luxemburg','German (Luxembourg)','Deutsch (Luxemburg)','dd.MM.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('dsb-DE','DE','Germany','Nimska','Lower Sorbian (Germany)','dolnoserbšćina (Nimska)','d. M. yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('dv-MV','MV','Maldives','ދިވެހި ރާއްޖެ','Divehi (Maldives)','ދިވެހިބަސް (ދިވެހި ރާއްޖެ)','dd/MM/yy',1,'.',',',2,'MVR',3,'10,000.00 ރ.'),
-('el-GR','GR','Greece','Ελλάδα','Greek (Greece)','Ελληνικά (Ελλάδα)','d/M/yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('en-029','29','Caribbean','Caribbean','English (Caribbean)','English (Caribbean)','MM/dd/yyyy',2,'.',',',2,'USD',0,'$10,000.00'),
-('en-AU','AU','Australia','Australia','English (Australia)','English (Australia)','d/MM/yyyy',2,'.',',',2,'AUD',0,'$10,000.00'),
-('en-BZ','BZ','Belize','Belize','English (Belize)','English (Belize)','dd/MM/yyyy',1,'.',',',2,'BZD',0,'BZ$10,000.00'),
-('en-CA','CA','Canada','Canada','English (Canada)','English (Canada)','dd/MM/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
-('en-GB','GB','United Kingdom','United Kingdom','English (United Kingdom)','English (United Kingdom)','dd/MM/yyyy',2,'.',',',2,'GBP',0,'£10,000.00'),
-('en-IE','IE','Ireland','Ireland','English (Ireland)','English (Ireland)','dd/MM/yyyy',2,'.',',',2,'EUR',0,'€ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('en-IN','IN','India','India','English (India)','English (India)','dd-MM-yyyy',2,'.',',',2,'INR',2,'Rs. 10,000.00'),
-('en-JM','JM','Jamaica','Jamaica','English (Jamaica)','English (Jamaica)','dd/MM/yyyy',1,'.',',',2,'JMD',0,'J$10,000.00'),
-('en-MY','MY','Malaysia','Malaysia','English (Malaysia)','English (Malaysia)','d/M/yyyy',1,'.',',',2,'MYR',0,'RM10,000.00'),
-('en-NZ','NZ','New Zealand','New Zealand','English (New Zealand)','English (New Zealand)','d/MM/yyyy',2,'.',',',2,'NZD',0,'$10,000.00'),
-('en-PH','PH','Philippines','Philippines','English (Republic of the Philippines)','English (Philippines)','M/d/yyyy',1,'.',',',2,'PHP',0,'Php10,000.00'),
-('en-SG','SG','Singapore','Singapore','English (Singapore)','English (Singapore)','d/M/yyyy',1,'.',',',2,'SGD',0,'$10,000.00'),
-('en-TT','TT','Trinidad and Tobago','Trinidad y Tobago','English (Trinidad and Tobago)','English (Trinidad y Tobago)','dd/MM/yyyy',1,'.',',',2,'TTD',0,'TT$10,000.00'),
-('en-US','US','United States','United States','English (United States)','English (United States)','M/d/yyyy',1,'.',',',2,'USD',0,'$10,000.00'),
-('en-ZA','ZA','South Africa','South Africa','English (South Africa)','English (South Africa)','yyyy/MM/dd',1,',',' ',2,'ZAR',2,'R 10 000.00'),
-('en-ZW','ZW','Zimbabwe','Zimbabwe','English (Zimbabwe)','English (Zimbabwe)','M/d/yyyy',1,'.',',',2,'ZWL',0,'Z$10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('es-AR','AR','Argentina','Argentina','Spanish (Argentina)','Español (Argentina)','dd/MM/yyyy',1,',','.',2,'ARS',2,'$ 10.000,00'),
-('es-BO','BO','Bolivia','Bolivia','Spanish (Bolivia)','Español (Bolivia)','dd/MM/yyyy',1,',','.',2,'BOB',2,'$b 10.000,00'),
-('es-CL','CL','Chile','Chile','Spanish (Chile)','Español (Chile)','dd-MM-yyyy',1,',','.',2,'CLP',2,'$ 10.000,00'),
-('es-CO','CO','Colombia','Colombia','Spanish (Colombia)','Español (Colombia)','dd/MM/yyyy',1,',','.',2,'COP',2,'$ 10.000,00'),
-('es-CR','CR','Costa Rica','Costa Rica','Spanish (Costa Rica)','Español (Costa Rica)','dd/MM/yyyy',1,',','.',2,'CRC',0,'₡10.000,00'),
-('es-DO','DO','Dominican Republic','República Dominicana','Spanish (Dominican Republic)','Español (República Dominicana)','dd/MM/yyyy',1,'.',',',2,'DOP',0,'RD$10,000.00'),
-('es-EC','EC','Ecuador','Ecuador','Spanish (Ecuador)','Español (Ecuador)','dd/MM/yyyy',1,',','.',2,'USD',2,'$ 10.000,00'),
-('es-ES','ES','Spain','España','Spanish (Spain, International Sort)','Español (España, alfabetización internacional)','dd/MM/yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('es-GT','GT','Guatemala','Guatemala','Spanish (Guatemala)','Español (Guatemala)','dd/MM/yyyy',1,'.',',',2,'GTQ',0,'Q10,000.00'),
-('es-HN','HN','Honduras','Honduras','Spanish (Honduras)','Español (Honduras)','dd/MM/yyyy',1,'.',',',2,'HNL',2,'L. 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('es-MX','MX','Mexico','México','Spanish (Mexico)','Español (México)','dd/MM/yyyy',1,'.',',',2,'MXN',0,'$10,000.00'),
-('es-NI','NI','Nicaragua','Nicaragua','Spanish (Nicaragua)','Español (Nicaragua)','dd/MM/yyyy',1,'.',',',2,'NIO',2,'C$ 10,000.00'),
-('es-PA','PA','Panama','Panamá','Spanish (Panama)','Español (Panamá)','MM/dd/yyyy',1,'.',',',2,'PAB',2,'B/. 10,000.00'),
-('es-PE','PE','Peru','Perú','Spanish (Peru)','Español (Perú)','dd/MM/yyyy',1,'.',',',2,'PEN',2,'S/. 10,000.00'),
-('es-PR','PR','Puerto Rico','Puerto Rico','Spanish (Puerto Rico)','Español (Puerto Rico)','dd/MM/yyyy',1,'.',',',2,'USD',2,'$10,000.00'),
-('es-PY','PY','Paraguay','Paraguay','Spanish (Paraguay)','Español (Paraguay)','dd/MM/yyyy',2,',','.',2,'PYG',2,'Gs 10.000,00'),
-('es-SV','SV','El Salvador','El Salvador','Spanish (El Salvador)','Español (El Salvador)','dd/MM/yyyy',1,'.',',',2,'USD',0,'$10,000.00'),
-('es-US','US','United States','Estados Unidos','Spanish (United States)','Español (Estados Unidos)','M/d/yyyy',1,'.',',',2,'USD',0,'$10,000.00'),
-('es-UY','UY','Uruguay','Uruguay','Spanish (Uruguay)','Español (Uruguay)','dd/MM/yyyy',2,',','.',2,'UYU',2,'$U 10.000,00'),
-('es-VE','VE','Bolivarian Republic of Venezuela','Republica Bolivariana de Venezuela','Spanish (Bolivarian Republic of Venezuela)','Español (Republica Bolivariana de Venezuela)','dd/MM/yyyy',1,',','.',2,'VEF',2,'Bs. F. 10.000,00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('et-EE','EE','Estonia','Eesti','Estonian (Estonia)','eesti (Eesti)','d.MM.yyyy',2,'.',' ',2,'EEK',3,'10 000,00 kr'),
-('eu-ES','ES','Spain','Espainia','Basque (Basque)','euskara (euskara)','yyyy/MM/dd',2,',','.',2,'EUR',3,'10.000,00 €'),
-('fa-IR','IR','Iran','ایران','Persian','فارسى (ایران)','MM/dd/yyyy',7,'/',',',2,'IRR',2,'ريال 10,000.00'),
-('fi-FI','FI','Finland','Suomi','Finnish (Finland)','suomi (Suomi)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('fil-PH','PH','Philippines','Pilipinas','Filipino (Philippines)','Filipino (Pilipinas)','M/d/yyyy',1,'.',',',2,'PHP',0,'PhP10,000.00'),
-('fo-FO','FO','Faroe Islands','Føroyar','Faroese (Faroe Islands)','føroyskt (Føroyar)','dd-MM-yyyy',2,',','.',2,'DKK',2,'kr. 10.000,00'),
-('fr-BE','BE','Belgium','Belgique','French (Belgium)','français (Belgique)','d/MM/yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
-('fr-CA','CA','Canada','Canada','French (Canada)','français (Canada)','yyyy-MM-dd',1,',',' ',2,'CAD',3,'10 000,00 $'),
-('fr-CH','CH','Switzerland','Suisse','French (Switzerland)','français (Suisse)','dd.MM.yyyy',2,'.','',2,'CHF',2,'fr. 10''000.00'),
-('fr-FR','FR','France','France','French (France)','français (France)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('fr-LU','LU','Luxembourg','Luxembourg','French (Luxembourg)','français (Luxembourg)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('fr-MC','MC','Principality of Monaco','Principauté de Monaco','French (Monaco)','français (Principauté de Monaco)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('fy-NL','NL','Netherlands','Nederlân','Frisian (Netherlands)','Frysk (Nederlân)','d-M-yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
-('ga-IE','IE','Ireland','Éire','Irish (Ireland)','Gaeilge (Éire)','dd/MM/yyyy',2,'.',',',2,'EUR',0,'€ 10,000.00'),
-('gd-GB','GB','United Kingdom','An Rìoghachd Aonaichte','Scottish Gaelic (United Kingdom)','Gàidhlig (An Rìoghachd Aonaichte)','dd/MM/yyyy',2,'.',',',2,'GBP',0,'£10,000.00'),
-('gl-ES','ES','Spain','España','Galician (Galician)','galego (galego)','dd/MM/yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('gsw-FR','FR','France','Frànkrisch','Alsatian (France)','Elsässisch (Frànkrisch)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('gu-IN','IN','India','ભારત','Gujarati (India)','ગુજરાતી (ભારત)','dd-MM-yy',2,'.',',',2,'INR',2,'રૂ 10,000.00'),
-('ha-Latn-NG','NG','Nigeria','Nigeria','Hausa (Latin, Nigeria)','Hausa (Nigeria)','d/M/yyyy',1,'.',',',2,'NIO',2,'N 10,000.00'),
-('he-IL','IL','Israel','ישראל','Hebrew (Israel)','עברית (ישראל)','dd/MM/yyyy',1,'.',',',2,'ILS',2,'₪ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('hi-IN','IN','India','भारत','Hindi (India)','हिंदी (भारत)','dd-MM-yyyy',2,'.',',',2,'INR',2,'रु 10,000.00'),
-('hr-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Croatian (Latin, Bosnia and Herzegovina)','hrvatski (Bosna i Hercegovina)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 KM'),
-('hr-HR','HR','Croatia','Hrvatska','Croatian (Croatia)','hrvatski (Hrvatska)','d.M.yyyy.',2,',','.',2,'HRK',3,'10.000,00 kn'),
-('hsb-DE','DE','Germany','Němska','Upper Sorbian (Germany)','hornjoserbšćina (Němska)','d. M. yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('hu-HU','HU','Hungary','Magyarország','Hungarian (Hungary)','magyar (Magyarország)','yyyy.MM.dd.',2,',',' ',2,'HUF',3,'10 000,00 Ft'),
-('hy-AM','AM','Armenia','Հայաստան','Armenian (Armenia)','Հայերեն (Հայաստան)','dd.MM.yyyy',2,'.',',',2,'AMD',3,'10,000.00 դր.'),
-('id-ID','ID','Indonesia','Indonesia','Indonesian (Indonesia)','Bahasa Indonesia (Indonesia)','dd/MM/yyyy',2,',','.',0,'IDR',0,'Rp10.000'),
-('ig-NG','NG','Nigeria','Nigeria','Igbo (Nigeria)','Igbo (Nigeria)','d/M/yyyy',1,'.',',',2,'NIO',2,'N 10,000.00'),
-('ii-CN','CN','People''s Republic of China','ꍏꉸꏓꂱꇭꉼꇩ','Yi (PRC)','ꆈꌠꁱꂷ (ꍏꉸꏓꂱꇭꉼꇩ)','yyyy/M/d',2,'.',',',2,'CNY',0,'¥10,000.00'),
-('is-IS','IS','Iceland','Ísland','Icelandic (Iceland)','íslenska (Ísland)','d.M.yyyy',2,',','.',0,'ISK',3,'10.000 kr.');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('it-CH','CH','Switzerland','Svizzera','Italian (Switzerland)','italiano (Svizzera)','dd.MM.yyyy',2,'.','',2,'CHF',2,'fr. 10''000.00'),
-('it-IT','IT','Italy','Italia','Italian (Italy)','italiano (Italia)','dd/MM/yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
-('iu-Cans-CA','CA','Canada','ᑲᓇᑕ','Inuktitut (Syllabics, Canada)','ᐃᓄᒃᑎᑐᑦ (ᑲᓇᑕᒥ)','d/M/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
-('iu-Latn-CA','CA','Canada','kanata','Inuktitut (Latin, Canada)','Inuktitut (Kanatami)','d/MM/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
-('ja-JP','JP','Japan','日本','Japanese (Japan)','日本語 (日本)','yyyy/MM/dd',1,'.',',',0,'JPY',0,'¥10,000'),
-('ka-GE','GE','Georgia','საქართველო','Georgian (Georgia)','ქართული (საქართველო)','dd.MM.yyyy',2,',',' ',2,'GEL',3,'10 000,00 Lari'),
-('kk-KZ','KZ','Kazakhstan','Қазақстан','Kazakh (Kazakhstan)','Қазақ (Қазақстан)','dd.MM.yyyy',2,'-',' ',2,'KZT',0,'Т10 000,00'),
-('kl-GL','GL','Greenland','Kalaallit Nunaat','Greenlandic (Greenland)','kalaallisut (Kalaallit Nunaat)','dd-MM-yyyy',2,',','.',2,'DKK',2,'kr. 10.000,00'),
-('km-KH','KH','Cambodia','កម្ពុជា','Khmer (Cambodia)','ខ្មែរ (កម្ពុជា)','yyyy-MM-dd',1,'.',',',2,'KHR',1,'10,000.00៛'),
-('kn-IN','IN','India','ಭಾರತ','Kannada (India)','ಕನ್ನಡ (ಭಾರತ)','dd-MM-yy',2,'.',',',2,'INR',2,'ರೂ 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('ko-KR','KR','Korea','대한민국','Korean (Korea)','한국어 (대한민국)','yyyy-MM-dd',1,'.',',',0,'KRW',0,'₩10,000'),
-('kok-IN','IN','India','भारत','Konkani (India)','कोंकणी (भारत)','dd-MM-yyyy',2,'.',',',2,'INR',2,'रु 10,000.00'),
-('ky-KG','KG','Kyrgyzstan','Кыргызстан','Kyrgyz (Kyrgyzstan)','Кыргыз (Кыргызстан)','dd.MM.yy',2,'-',' ',2,'KGS',3,'10 000,00 сом'),
-('lb-LU','LU','Luxembourg','Luxembourg','Luxembourgish (Luxembourg)','Lëtzebuergesch (Luxembourg)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('lo-LA','LA','Lao P.D.R.','ສ.ປ.ປ. ລາວ','Lao (Lao P.D.R.)','ລາວ (ສ.ປ.ປ. ລາວ)','dd/MM/yyyy',1,'.',',',2,'LAK',1,'10,000.00₭'),
-('lt-LT','LT','Lithuania','Lietuva','Lithuanian (Lithuania)','lietuvių (Lietuva)','yyyy.MM.dd',2,',','.',2,'LTL',3,'10.000,00 Lt'),
-('lv-LV','LV','Latvia','Latvija','Latvian (Latvia)','latviešu (Latvija)','yyyy.MM.dd.',2,',',' ',2,'LVL',2,'Ls 10 000,00'),
-('mi-NZ','NZ','New Zealand','Aotearoa','Maori (New Zealand)','Reo Māori (Aotearoa)','dd/MM/yyyy',2,'.',',',2,'NZD',0,'$10,000.00'),
-('mk-MK','MK','Macedonia (FYROM)','Македонија','Macedonian (Former Yugoslav Republic of Macedonia)','македонски јазик (Македонија)','dd.MM.yyyy',2,',','.',2,'MKD',3,'10.000,00 ден.'),
-('ml-IN','IN','India','ഭാരതം','Malayalam (India)','മലയാളം (ഭാരതം)','dd-MM-yy',2,'.',',',2,'INR',2,'ക 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('mn-MN','MN','Mongolia','Монгол улс','Mongolian (Cyrillic, Mongolia)','Монгол хэл (Монгол улс)','yy.MM.dd',2,',',' ',2,'MNT',1,'10 000,00₮'),
-('mn-Mong-CN','CN','People''s Republic of China','ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ','Mongolian (Traditional Mongolian, PRC)','ᠮᠤᠨᠭᠭᠤᠯ ᠬᠡᠯᠡ (ᠪᠦᠭᠦᠳᠡ ᠨᠠᠢᠷᠠᠮᠳᠠᠬᠤ ᠳᠤᠮᠳᠠᠳᠤ ᠠᠷᠠᠳ ᠣᠯᠣᠰ)','yyyy/M/d',2,'.',',',2,'CNY',0,'¥10,000.00'),
-('moh-CA','CA','Canada','Canada','Mohawk (Mohawk)','Kanien''kéha','M/d/yyyy',1,'.',',',2,'CAD',0,'$10,000.00'),
-('mr-IN','IN','India','भारत','Marathi (India)','मराठी (भारत)','dd-MM-yyyy',2,'.',',',2,'INR',2,'रु 10,000.00'),
-('ms-BN','BN','Brunei Darussalam','Brunei Darussalam','Malay (Brunei Darussalam)','Bahasa Melayu (Brunei Darussalam)','dd/MM/yyyy',2,',','.',0,'BND',0,'$10.00'),
-('ms-MY','MY','Malaysia','Malaysia','Malay (Malaysia)','Bahasa Melayu (Malaysia)','dd/MM/yyyy',2,'.',',',2,'MYR',0,'RM10,000'),
-('mt-MT','MT','Malta','Malta','Maltese (Malta)','Malti (Malta)','dd/MM/yyyy',2,'.',',',2,'EUR',0,'€ 10,000.00'),
-('nb-NO','NO','Norway','Norge','Norwegian, Bokmål (Norway)','norsk, bokmål (Norge)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
-('ne-NP','NP','Nepal','नेपाल','Nepali (Nepal)','नेपाली (नेपाल)','M/d/yyyy',1,'.',',',2,'NPR',0,'रु10,000.00'),
-('nl-BE','BE','Belgium','België','Dutch (Belgium)','Nederlands (België)','d/MM/yyyy',2,',','.',2,'EUR',2,'€ 10.000,00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('nl-NL','NL','Netherlands','Nederland','Dutch (Netherlands)','Nederlands (Nederland)','d-M-yyyy',2,',','.',2,'EUR',2,'€ 10.000,00'),
-('nn-NO','NO','Norway','Noreg','Norwegian, Nynorsk (Norway)','norsk, nynorsk (Noreg)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
-('nso-ZA','ZA','South Africa','Afrika Borwa','Sesotho sa Leboa (South Africa)','Sesotho sa Leboa (Afrika Borwa)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
-('oc-FR','FR','France','França','Occitan (France)','Occitan (França)','dd/MM/yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('or-IN','IN','India','ଭାରତ','Oriya (India)','ଓଡ଼ିଆ (ଭାରତ)','dd-MM-yy',1,'.',',',2,'INR',2,'ଟ 10,000.00'),
-('pa-IN','IN','India','ਭਾਰਤ','Punjabi (India)','ਪੰਜਾਬੀ (ਭਾਰਤ)','dd-MM-yy',2,'.',',',2,'INR',2,'ਰੁ 10,000.00'),
-('pl-PL','PL','Poland','Polska','Polish (Poland)','polski (Polska)','yyyy-MM-dd',2,',',' ',2,'PLN',3,'10 000,00 zł'),
-('prs-AF','AF','Afghanistan','افغانستان','Dari (Afghanistan)','درى (افغانستان)','dd/MM/yy',6,'.',',',2,'AFN',0,'؋10.000,00'),
-('ps-AF','AF','Afghanistan','افغانستان','Pashto (Afghanistan)','پښتو (افغانستان)','dd/MM/yy',7,'٫','٬',2,'AFN',0,'؋10،000,00'),
-('pt-BR','BR','Brazil','Brasil','Portuguese (Brazil)','Português (Brasil)','dd/MM/yyyy',1,',','.',2,'BRL',2,'R$ 10.000,00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('pt-PT','PT','Portugal','Portugal','Portuguese (Portugal)','português (Portugal)','dd-MM-yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('qut-GT','GT','Guatemala','Guatemala','K''iche (Guatemala)','K''iche (Guatemala)','dd/MM/yyyy',1,'.',',',2,'GTQ',0,'Q10,000.00'),
-('quz-BO','BO','Bolivia','Bolivia Suyu','Quechua (Bolivia)','runasimi (Qullasuyu)','dd/MM/yyyy',1,',','.',2,'BOB',2,'$b 10.000,00'),
-('quz-EC','EC','Ecuador','Ecuador Suyu','Quechua (Ecuador)','runasimi (Ecuador)','dd/MM/yyyy',1,',','.',2,'USD',2,'$ 10.000,00'),
-('quz-PE','PE','Peru','Peru Suyu','Quechua (Peru)','runasimi (Piruw)','dd/MM/yyyy',1,'.',',',2,'PEN',2,'S/. 10,000.00'),
-('rm-CH','CH','Switzerland','Svizra','Romansh (Switzerland)','Rumantsch (Svizra)','dd/MM/yyyy',2,'.','',2,'CHF',2,'fr. 10''000.00'),
-('ro-RO','RO','Romania','România','Romanian (Romania)','română (România)','dd.MM.yyyy',2,',','.',2,'RON',3,'10.000,00 lei'),
-('ru-RU','RU','Russia','Россия','Russian (Russia)','русский (Россия)','dd.MM.yyyy',2,',',' ',2,'RUB',1,'10 000,00р.'),
-('rw-RW','RW','Rwanda','Rwanda','Kinyarwanda (Rwanda)','Kinyarwanda (Rwanda)','M/d/yyyy',1,',',' ',2,'RWF',2,'RWF 10 000,00'),
-('sa-IN','IN','India','भारतम्','Sanskrit (India)','संस्कृत (भारतम्)','dd-MM-yyyy',1,'.',',',2,'INR',2,'रु 10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('sah-RU','RU','Russia','Россия','Yakut (Russia)','саха (Россия)','MM.dd.yyyy',2,',',' ',2,'RUB',1,'10 000,00с.'),
-('se-FI','FI','Finland','Suopma','Sami, Northern (Finland)','davvisámegiella (Suopma)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('se-NO','NO','Norway','Norga','Sami, Northern (Norway)','davvisámegiella (Norga)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
-('se-SE','SE','Sweden','Ruoŧŧa','Sami, Northern (Sweden)','davvisámegiella (Ruoŧŧa)','yyyy-MM-dd',2,',','.',2,'SEK',3,'10 000,00 kr'),
-('si-LK','LK','Sri Lanka','ශ්‍රී ලංකා','Sinhala (Sri Lanka)','සිංහල (ශ්‍රී ලංකා)','yyyy-MM-dd',2,'.',',',2,'LKR',2,'රු. 10,000.00'),
-('sk-SK','SK','Slovakia','Slovenská republika','Slovak (Slovakia)','slovenčina (Slovenská republika)','d. M. yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('sl-SI','SI','Slovenia','Slovenija','Slovenian (Slovenia)','slovenski (Slovenija)','d.M.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('sma-NO','NO','Norway','Nöörje','Sami, Southern (Norway)','åarjelsaemiengiele (Nöörje)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00'),
-('sma-SE','SE','Sweden','Sveerje','Sami, Southern (Sweden)','åarjelsaemiengiele (Sveerje)','yyyy-MM-dd',2,',','.',2,'SEK',3,'10 000,00 kr'),
-('smj-NO','NO','Norway','Vuodna','Sami, Lule (Norway)','julevusámegiella (Vuodna)','dd.MM.yyyy',2,',',' ',2,'NOK',2,'kr 10 000,00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('smj-SE','SE','Sweden','Svierik','Sami, Lule (Sweden)','julevusámegiella (Svierik)','yyyy-MM-dd',2,',','.',2,'SEK',3,'10 000,00 kr'),
-('smn-FI','FI','Finland','Suomâ','Sami, Inari (Finland)','sämikielâ (Suomâ)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('sms-FI','FI','Finland','Lää´ddjânnam','Sami, Skolt (Finland)','sääm´ǩiõll (Lää´ddjânnam)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('sq-AL','AL','Albania','Shqipëria','Albanian (Albania)','shqipe (Shqipëria)','yyyy-MM-dd',2,',','.',2,'ALL',1,'10.000,00Lek'),
-('sr-Cyrl-BA','BA','Bosnia and Herzegovina','Босна и Херцеговина','Serbian (Cyrillic, Bosnia and Herzegovina)','српски (Босна и Херцеговина)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 КМ'),
-('sr-Cyrl-CS','CS','Serbia and Montenegro (Former)','Србија и Црна Гора (Претходно)','Serbian (Cyrillic, Serbia and Montenegro (Former))','српски (Србија и Црна Гора (Претходно))','d.M.yyyy',2,',','.',2,'CSD',3,'10.000,00 Дин.'),
-('sr-Cyrl-ME','ME','Montenegro','Црна Гора','Serbian (Cyrillic, Montenegro)','српски (Црна Гора)','d.M.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('sr-Cyrl-RS','RS','Serbia','Србија','Serbian (Cyrillic, Serbia)','српски (Србија)','d.M.yyyy',2,',','.',2,'RSD',3,'10.000,00 Дин.'),
-('sr-Latn-BA','BA','Bosnia and Herzegovina','Bosna i Hercegovina','Serbian (Latin, Bosnia and Herzegovina)','srpski (Bosna i Hercegovina)','d.M.yyyy',2,',','.',2,'BAM',3,'10.000,00 KM'),
-('sr-Latn-CS','CS','Serbia and Montenegro (Former)','Srbija i Crna Gora (Prethodno)','Serbian (Latin, Serbia and Montenegro (Former))','srpski (Srbija i Crna Gora (Prethodno))','d.M.yyyy',2,',','.',2,'CSD',3,'10.000,00 Din.');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('sr-Latn-ME','ME','Montenegro','Crna Gora','Serbian (Latin, Montenegro)','srpski (Crna Gora)','d.M.yyyy',2,',','.',2,'EUR',3,'10.000,00 €'),
-('sr-Latn-RS','RS','Serbia','Srbija','Serbian (Latin, Serbia)','srpski (Srbija)','d.M.yyyy',2,',','.',2,'RSD',3,'10.000,00 Din.'),
-('sv-FI','FI','Finland','Finland','Swedish (Finland)','svenska (Finland)','d.M.yyyy',2,',',' ',2,'EUR',3,'10 000,00 €'),
-('sv-SE','SE','Sweden','Sverige','Swedish (Sweden)','svenska (Sverige)','yyyy-MM-dd',2,',','.',2,'SEK',3,'10 000,00 kr'),
-('sw-KE','KE','Kenya','Kenya','Kiswahili (Kenya)','Kiswahili (Kenya)','M/d/yyyy',1,'.',',',2,'KES',0,'S10,000.00'),
-('syr-SY','SY','Syria','سوريا','Syriac (Syria)','ܣܘܪܝܝܐ (سوريا)','dd/MM/yyyy',7,'.',',',2,'SYP',2,'ل.س.‏ 10,000.00'),
-('ta-IN','IN','India','இந்தியா','Tamil (India)','தமிழ் (இந்தியா)','dd-MM-yyyy',2,'.',',',2,'INR',2,'ரூ 10,000.00'),
-('te-IN','IN','India','భారత దేశం','Telugu (India)','తెలుగు (భారత దేశం)','dd-MM-yy',2,'.',',',2,'INR',2,'రూ 10,000.00'),
-('tg-Cyrl-TJ','TJ','Tajikistan','Тоҷикистон','Tajik (Cyrillic, Tajikistan)','Тоҷикӣ (Тоҷикистон)','dd.MM.yy',1,';',' ',2,'TJS',3,'10 000,00 т.р.'),
-('th-TH','TH','Thailand','ไทย','Thai (Thailand)','ไทย (ไทย)','d/M/yyyy',2,'.',',',2,'THB',0,'฿10,000.00');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('tk-TM','TM','Turkmenistan','Türkmenistan','Turkmen (Turkmenistan)','türkmençe (Türkmenistan)','dd.MM.yy',2,',',' ',2,'TMT',1,'10 000,00m.'),
-('tn-ZA','ZA','South Africa','Aforika Borwa','Setswana (South Africa)','Setswana (Aforika Borwa)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
-('tr-TR','TR','Turkey','Türkiye','Turkish (Turkey)','Türkçe (Türkiye)','dd.MM.yyyy',2,',','.',2,'TRY',3,'10.000,00 TL'),
-('tt-RU','RU','Russia','Россия','Tatar (Russia)','Татар (Россия)','dd.MM.yyyy',2,',',' ',2,'RUB',3,'10 000,00 р.'),
-('tzm-Latn-DZ','DZ','Algeria','Djazaïr','Tamazight (Latin, Algeria)','Tamazight (Djazaïr)','dd-MM-yyyy',7,'.',',',2,'DZD',3,'10.000,00 DZD'),
-('ug-CN','CN','People''s Republic of China','جۇڭخۇا خەلق جۇمھۇرىيىتى','Uyghur (PRC)','ئۇيغۇرچە (جۇڭخۇا خەلق جۇمھۇرىيىتى)','yyyy-M-d',1,'.',',',2,'CNY',0,'¥10,000.00'),
-('uk-UA','UA','Ukraine','Україна','Ukrainian (Ukraine)','українська (Україна)','dd.MM.yyyy',2,',',' ',2,'UAH',1,'10 000,00₴'),
-('ur-PK','PK','Islamic Republic of Pakistan','پاکستان','Urdu (Islamic Republic of Pakistan)','اُردو (پاکستان)','dd/MM/yyyy',2,'.',',',2,'PKR',0,'Rs10,000.00'),
-('uz-Cyrl-UZ','UZ','Uzbekistan','Ўзбекистон Республикаси','Uzbek (Cyrillic, Uzbekistan)','Ўзбек (Ўзбекистон)','dd.MM.yyyy',2,',',' ',0,'UZS',3,'10 000,00 сўм'),
-('uz-Latn-UZ','UZ','Uzbekistan','U''zbekiston Respublikasi','Uzbek (Latin, Uzbekistan)','U''zbek (U''zbekiston Respublikasi)','dd/MM yyyy',2,',',' ',0,'UZS',3,'10 000 so''m');
-insert into locale (code,country_code,country_name,native_country_name,name,native_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_decimal_digits,currency_code,currency_pattern,currency_sample) VALUES
-('vi-VN','VN','Vietnam','Việt Nam','Vietnamese (Vietnam)','Tiếng Việt (Việt Nam)','dd/MM/yyyy',2,',','.',0,'VND',3,'10.000,00 ₫'),
-('wo-SN','SN','Senegal','Sénégal','Wolof (Senegal)','Wolof (Sénégal)','dd/MM/yyyy',2,',',' ',2,'XOF',3,'10 000,00 XOF'),
-('xh-ZA','ZA','South Africa','uMzantsi Afrika','isiXhosa (South Africa)','isiXhosa (uMzantsi Afrika)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00'),
-('yo-NG','NG','Nigeria','Nigeria','Yoruba (Nigeria)','Yoruba (Nigeria)','d/M/yyyy',1,'.',',',2,'NIO',2,'N 10,000.00'),
-('zh-CN','CN','People''s Republic of China','中华人民共和国','Chinese (Simplified, PRC)','中文(中华人民共和国)','yyyy/M/d',1,'.',',',2,'CNY',0,'¥10,000.00'),
-('zh-HK','HK','Hong Kong S.A.R.','香港特別行政區','Chinese (Traditional, Hong Kong S.A.R.)','中文(香港特別行政區)','d/M/yyyy',1,'.',',',2,'HKD',0,'HK$10,000.00'),
-('zh-MO','MO','Macao S.A.R.','澳門特別行政區','Chinese (Traditional, Macao S.A.R.)','中文(澳門特別行政區)','d/M/yyyy',1,'.',',',2,'MOP',0,'MOP10,000.00'),
-('zh-SG','SG','Singapore','新加坡','Chinese (Simplified, Singapore)','中文(新加坡)','d/M/yyyy',1,'.',',',2,'SGD',0,'$10,000.00'),
-('zh-TW','TW','Taiwan','台灣','Chinese (Traditional, Taiwan)','中文(台灣)','yyyy/M/d',1,'.',',',2,'TWD',0,'NT$10,000.00'),
-('zu-ZA','ZA','South Africa','iNingizimu Afrika','isiZulu (South Africa)','isiZulu (iNingizimu Afrika)','yyyy/MM/dd',1,'.',',',2,'ZAR',2,'R 10,000.00');
-
-update locale l
-set currency_symbol = c.symbol
-    from currency c
-where l.currency_code = c.code;
-
-/* my sql */
-update locale l
-inner join currency c on l.currency_code = c.code
-set l.currency_symbol = c.symbol;
-
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('AF','Afghanistan','افغانستان','.',',','AFN','؋',2,0,'؋10.000,00','A'),
-	 ('AZ','Azerbaijan','Azərbaycan',',',' ','AZN','ман.',2,3,'10 000,00 man.','A'),
-	 ('BA','Bosnia and Herzegovina','Bosna i Hercegovina',',','.','BAM','KM',2,3,'10.000,00 KM','A'),
-	 ('BO','Bolivia','Bolivia',',','.','BOB','$b',2,2,'$b 10.000,00','A'),
-	 ('BR','Brazil','Brasil',',','.','BRL','R$',2,2,'R$ 10.000,00','A'),
-	 ('AL','Albania','Shqipëria',',','.','ALL','Lek',2,1,'10.000,00Lek','A'),
-	 ('AE','U.A.E.','الإمارات العربية المتحدة','.',',','AED','د.إ.‏',2,2,'د.إ.‏ 10,000.00','A'),
-	 ('AM','Armenia','Հայաստան','.',',','AMD','դր.',2,3,'10,000.00 դր.','A'),
-	 ('AR','Argentina','Argentina',',','.','ARS','$',2,2,'$ 10.000,00','A'),
-	 ('AU','Australia','Australia','.',',','AUD','$',2,0,'$10,000.00','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('BD','Bangladesh','বাংলাদেশ','.',',','BDT','৳',2,2,'৳ 10,000.00','A'),
-	 ('BG','Bulgaria','България',',',' ','BGN','лв.',2,3,'10 000,00 лв.','A'),
-	 ('BH','Bahrain','البحرين','.',',','BHD','د.ب.‏',3,2,'د.ب.‏ 10,000.000','A'),
-	 ('BN','Brunei Darussalam','Brunei Darussalam',',','.','BND','$',0,0,'$10.00','A'),
-	 ('BY','Belarus','Беларусь',',',' ','BYR','р.',2,3,'10 000,00 р.','A'),
-	 ('CA','Canada','Canada','.',',','CAD','$',2,0,'$10,000.00','A'),
-	 ('CH','Switzerland','Schweiz','.','','CHF','Fr.',2,2,'Fr. 10''000.00','A'),
-	 ('CL','Chile','Chile',',','.','CLP','$',2,2,'$ 10.000,00','A'),
-	 ('CN','People''s Republic of China','中华人民共和国','.',',','CNY','¥',2,0,'¥10,000.00','A'),
-	 ('FR','France','France',',',' ','EUR','€',2,3,'10 000,00 €','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('CS','Serbia and Montenegro (Former)','Srbija i Crna Gora (Prethodno)',',','.','CSD','Дин.',2,3,'10.000,00 Din.','A'),
-	 ('DZ','Algeria','الجزائر','.',',','DZD','د.ج.‏',2,2,'د.ج.‏ 10,000.00','A'),
-	 ('FI','Finland','Suomi',',',' ','EUR','€',2,3,'10 000,00 €','A'),
-	 ('ME','Montenegro','Crna Gora',',','.','EUR','€',2,3,'10.000,00 €','A'),
-	 ('NL','Netherlands','Nederland',',','.','EUR','€',2,2,'€ 10.000,00','A'),
-	 ('BE','Belgium','België',',','.','EUR','€',2,2,'€ 10.000,00','A'),
-	 ('LU','Luxembourg','Luxembourg',',',' ','EUR','€',2,3,'10 000,00 €','A'),
-	 ('DE','Germany','Deutschland',',','.','EUR','€',2,3,'10.000,00 €','A'),
-	 ('ES','Spain','España',',','.','EUR','€',2,3,'10.000,00 €','A'),
-	 ('IE','Ireland','Éire','.',',','EUR','€',2,0,'€ 10,000.00','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('GB','United Kingdom','United Kingdom','.',',','GBP','£',2,0,'£10,000.00','A'),
-	 ('GT','Guatemala','Guatemala','.',',','GTQ','Q',2,0,'Q10,000.00','A'),
-	 ('IN','India','भारत','.',',','INR',' ₹‎',2,2,'रु 10,000.00','A'),
-	 ('MY','Malaysia','Malaysia','.',',','MYR','RM',0,0,'RM10,000','A'),
-	 ('NO','Norway','Noreg',',',' ','NOK','kr',2,2,'kr 10 000,00','A'),
-	 ('NZ','New Zealand','New Zealand','.',',','NZD','$',2,0,'$10,000.00','A'),
-	 ('PE','Peru','Perú','.',',','PEN','S/.',2,2,'S/. 10,000.00','A'),
-	 ('PH','Philippines','Pilipinas','.',',','PHP','₱‎',2,0,'PhP10,000.00','A'),
-	 ('RS','Serbia','Srbija',',','.','RSD','Дин.',2,3,'10.000,00 Din.','A'),
-	 ('RU','Russia','Россия',',',' ','RUB','һ.',2,1,'10 000,00р.','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('SE','Sweden','Sverige',',','.','SEK','kr',2,3,'10 000,00 kr','A'),
-	 ('SG','Singapore','Singapore','.',',','SGD','$',2,0,'$10,000.00','A'),
-	 ('SY','Syria','سوريا','.',',','SYP','ل.س.‏',2,2,'ل.س.‏ 10,000.00','A'),
-	 ('LI','Liechtenstein','Liechtenstein','.','','CHF','Fr.',2,2,'CHF 10''000.00','A'),
-	 ('AT','Austria','Österreich',',','.','EUR','€',2,2,'€ 10.000,00','A'),
-	 ('CO','Colombia','Colombia',',','.','COP','$',2,2,'$ 10.000,00','A'),
-	 ('CR','Costa Rica','Costa Rica',',','.','CRC','₡',2,0,'₡10.000,00','A'),
-	 ('CZ','Czech Republic','Česká republika',',',' ','CZK','Kč',2,3,'10 000,00 Kč','A'),
-	 ('GL','Greenland','Kalaallit Nunaat',',','.','DKK','kr.',2,2,'kr. 10.000,00','A'),
-	 ('FO','Faroe Islands','Føroyar',',','.','DKK','kr.',2,2,'kr. 10.000,00','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('DK','Denmark','Danmark',',','.','DKK','kr.',2,2,'kr. 10.000,00','A'),
-	 ('DO','Dominican Republic','República Dominicana','.',',','DOP','RD$',2,0,'RD$10,000.00','A'),
-	 ('EE','Estonia','Eesti','.',' ','EEK','kr',2,3,'10 000,00 kr','A'),
-	 ('EG','Egypt','مصر','.',',','EGP','ج.م.‏',2,2,'ج.م.‏ 10,000.00','A'),
-	 ('ET','Ethiopia','ኢትዮጵያ','.',',','ETB','ETB',2,0,'ETB10,000.00','A'),
-	 ('SI','Slovenia','Slovenija',',','.','EUR','€',2,3,'10.000,00 €','A'),
-	 ('SK','Slovakia','Slovenská republika',',',' ','EUR','€',2,3,'10 000,00 €','A'),
-	 ('PT','Portugal','Portugal',',','.','EUR','€',2,3,'10.000,00 €','A'),
-	 ('MT','Malta','Malta','.',',','EUR','€',2,0,'€ 10,000.00','A'),
-	 ('IT','Italy','Italia',',','.','EUR','€',2,2,'€ 10.000,00','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('MC','Principality of Monaco','Principauté de Monaco',',',' ','EUR','€',2,3,'10 000,00 €','A'),
-	 ('GR','Greece','Ελλάδα',',','.','EUR','€',2,3,'10.000,00 €','A'),
-	 ('GE','Georgia','საქართველო',',',' ','GEL','Lari',2,3,'10 000,00 Lari','A'),
-	 ('HK','Hong Kong S.A.R.','香港特別行政區','.',',','HKD','HK$',2,0,'HK$10,000.00','A'),
-	 ('HN','Honduras','Honduras','.',',','HNL','L.',2,2,'L. 10,000.00','A'),
-	 ('HR','Croatia','Hrvatska',',','.','HRK','kn',2,3,'10.000,00 kn','A'),
-	 ('HU','Hungary','Magyarország',',',' ','HUF','Ft',2,3,'10 000,00 Ft','A'),
-	 ('BZ','Belize','Belize','.',',','BZD','BZ$',2,0,'BZ$10,000.00','A'),
-	 ('ID','Indonesia','Indonesia',',','.','IDR','Rp',0,0,'Rp10.000','A'),
-	 ('IL','Israel','ישראל','.',',','ILS','₪',2,2,'₪ 10,000.00','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('IQ','Iraq','العراق','.',',','IQD','د.ع.‏',2,2,'د.ع.‏ 10,000.00','A'),
-	 ('IR','Iran','ایران','/',',','IRR','ريال',2,2,'ريال 10,000.00','A'),
-	 ('IS','Iceland','Ísland',',','.','ISK','kr.',0,3,'10.000 kr.','A'),
-	 ('JM','Jamaica','Jamaica','.',',','JMD','J$',2,0,'J$10,000.00','A'),
-	 ('JO','Jordan','الأردن','.',',','JOD','د.ا.‏',3,2,'د.ا.‏ 10,000.000','A'),
-	 ('JP','Japan','日本','.',',','JPY','¥',0,0,'¥10,000','A'),
-	 ('KE','Kenya','Kenya','.',',','KES','S',2,0,'S10,000.00','A'),
-	 ('KG','Kyrgyzstan','Кыргызстан','-',' ','KGS','сом',2,3,'10 000,00 сом','A'),
-	 ('KH','Cambodia','កម្ពុជា','.',',','KHR','៛',2,1,'10,000.00៛','A'),
-	 ('KR','Korea','대한민국','.',',','KRW','₩',0,0,'₩10,000','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('KW','Kuwait','الكويت','.',',','KWD','د.ك.‏',3,2,'د.ك.‏ 10,000.000','A'),
-	 ('KZ','Kazakhstan','Қазақстан','-',' ','KZT','Т',2,0,'Т10 000,00','A'),
-	 ('LA','Lao P.D.R.','ສ.ປ.ປ. ລາວ','.',',','LAK','₭',2,1,'10,000.00₭','A'),
-	 ('LB','Lebanon','لبنان','.',',','LBP','ل.ل.‏',2,2,'ل.ل.‏ 10,000.00','A'),
-	 ('LK','Sri Lanka','ශ්‍රී ලංකා','.',',','LKR','රු.',2,2,'රු. 10,000.00','A'),
-	 ('LT','Lithuania','Lietuva',',','.','LTL','Lt',2,3,'10.000,00 Lt','A'),
-	 ('LV','Latvia','Latvija',',',' ','LVL','Ls',2,2,'Ls 10 000,00','A'),
-	 ('LY','Libya','ليبيا','.',',','LYD','د.ل.‏',3,0,'د.ل.‏10,000.000','A'),
-	 ('MA','Morocco','المملكة المغربية','.',',','MAD','د.م.‏',2,2,'د.م.‏ 10,000.00','A'),
-	 ('MK','Macedonia (FYROM)','Македонија',',','.','MKD','ден.',2,3,'10.000,00 ден.','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('MN','Mongolia','Монгол улс',',',' ','MNT','₮',2,1,'10 000,00₮','A'),
-	 ('MO','Macao S.A.R.','澳門特別行政區','.',',','MOP','MOP',2,0,'MOP10,000.00','A'),
-	 ('PR','Puerto Rico','Puerto Rico','.',',','USD','$',2,2,'$10,000.00','A'),
-	 ('MV','Maldives','ދިވެހި ރާއްޖެ','.',',','MVR','ރ.',2,3,'10,000.00 ރ.','A'),
-	 ('MX','Mexico','México','.',',','MXN','$',2,0,'$10,000.00','A'),
-	 ('NG','Nigeria','Nigeria','.',',','NIO','C$',2,2,'N 10,000.00','A'),
-	 ('NI','Nicaragua','Nicaragua','.',',','NIO','C$',2,2,'C$ 10,000.00','A'),
-	 ('NP','Nepal','नेपाल','.',',','NPR','रु',2,0,'रु10,000.00','A'),
-	 ('OM','Oman','عمان','.',',','OMR','ر.ع.‏',3,2,'ر.ع.‏ 10,000.000','A'),
-	 ('PA','Panama','Panamá','.',',','PAB','B/.',2,2,'B/. 10,000.00','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('PK','Islamic Republic of Pakistan','پاکستان','.',',','PKR','Rs',2,0,'Rs10,000.00','A'),
-	 ('PL','Poland','Polska',',',' ','PLN','zł',2,3,'10 000,00 zł','A'),
-	 ('PY','Paraguay','Paraguay',',','.','PYG','Gs',2,2,'Gs 10.000,00','A'),
-	 ('QA','Qatar','قطر','.',',','QAR','ر.ق.‏',2,2,'ر.ق.‏ 10,000.00','A'),
-	 ('RO','Romania','România',',','.','RON','lei',2,3,'10.000,00 lei','A'),
-	 ('RW','Rwanda','Rwanda',',',' ','RWF','RWF',2,2,'RWF 10 000,00','A'),
-	 ('SA','Saudi Arabia','المملكة العربية السعودية','.',',','SAR','ر.س.‏',2,2,'ر.س.‏ 10,000.00','A'),
-	 ('TH','Thailand','ไทย','.',',','THB','฿',2,0,'฿10,000.00','A'),
-	 ('TJ','Tajikistan','Тоҷикистон',';',' ','TJS','т.р.',2,3,'10 000,00 т.р.','A'),
-	 ('TM','Turkmenistan','Türkmenistan',',',' ','TMT','m.',2,1,'10 000,00m.','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('TN','Tunisia','تونس','.',',','TND','د.ت.‏',3,2,'د.ت.‏ 10,000.000','A'),
-	 ('TR','Turkey','Türkiye',',','.','TRY','TL',2,3,'10.000,00 TL','A'),
-	 ('TT','Trinidad and Tobago','Trinidad y Tobago','.',',','TTD','TT$',2,0,'TT$10,000.00','A'),
-	 ('TW','Taiwan','台灣','.',',','TWD','NT$',2,0,'NT$10,000.00','A'),
-	 ('UA','Ukraine','Україна',',',' ','UAH','₴',2,1,'10 000,00₴','A'),
-	 ('SV','El Salvador','El Salvador','.',',','USD','$',2,0,'$10,000.00','A'),
-	 ('29','Caribbean','Caribbean','.',',','USD','$',2,0,'$10,000.00','A'),
-	 ('UY','Uruguay','Uruguay',',','.','UYU','$U',2,2,'$U 10.000,00','A'),
-	 ('VE','Bolivarian Republic of Venezuela','Republica Bolivariana de Venezuela',',','.','VEF','Bs. F.',2,2,'Bs. F. 10.000,00','A'),
-	 ('VN','Vietnam','Việt Nam',',','.','VND','₫',0,3,'10.000,00 ₫','A');
-insert into country (country_code,country_name,native_country_name,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
-	 ('SN','Senegal','Sénégal',',',' ','XOF','XOF',2,3,'10 000,00 XOF','A'),
-	 ('YE','Yemen','اليمن','.',',','YER','ر.ي.‏',2,2,'ر.ي.‏ 10,000.00','A'),
-	 ('ZW','Zimbabwe','Zimbabwe','.',',','ZWL','Z$',2,0,'Z$10,000.00','A'),
-	 ('EC','Ecuador','Ecuador',',','.','USD','$',2,2,'$ 10.000,00','A'),
-	 ('US','United States','United States','.',',','USD','$',2,0,'$10,000.00','A'),
-	 ('UZ','Uzbekistan','U''zbekiston Respublikasi',',',' ','UZS','лв',0,3,'10 000 so''m','A'),
-	 ('ZA','South Africa','South Africa',',',' ','ZAR','R',2,2,'R 10 000.00','A');
-
-/* postgres */
-update country c
-set date_format = l.date_format, decimal_separator = l.decimal_separator, group_separator = l.group_separator
-  from locale l
-where l.country_code = c.country_code;
-
-/* my sql */
-update country c inner join locale l on l.country_code = c.country_code
-set c.date_format = l.date_format, c.decimal_separator = l.decimal_separator, c.group_separator = l.group_separator;
-
-update country c set decimal_separator = '.', group_separator = ',' where country_code = 'AF';
-update country c set decimal_separator = '.', group_separator = ',' where country_code = 'CA';
-update country c set decimal_separator = ',', group_separator = ' ' where country_code = 'ZA';
-
-update country c set date_format = 'd.M.yyyy' where country_code = 'BA';
-update country c set date_format = 'dd/MM/yyyy' where country_code = 'CA';
-update country c set date_format = 'dd.MM.yyyy' where country_code = 'CH';
-update country c set date_format = 'yyyy/M/d' where country_code = 'CN';
-update country c set date_format = 'dd.MM.yyyy' where country_code = 'DE';
-update country c set date_format = 'dd/MM/yyyy' where country_code = 'ES';
-update country c set date_format = 'dd-MM-yyyy' where country_code = 'IN';
-update country c set date_format = 'dd/MM/yyyy' where country_code = 'LU';
-update country c set date_format = 'dd/MM/yyyy' where country_code = 'MY';
-update country c set date_format = 'dd/MM/yyyy' where country_code = 'NZ';
-update country c set date_format = 'dd.MM.yyyy' where country_code = 'RU';
-update country c set date_format = 'dd.MM.yyyy' where country_code = 'UZ';
+insert into country (country_code,country_name,native_country_name,date_format,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample,status) values
+  ('29','Caribbean','Caribbean','MM/dd/yyyy','.',',','USD','$',2,0,'$10,000.00','A'),
+  ('AE','U.A.E.','الإمارات العربية المتحدة','dd/MM/yyyy','.',',','AED','د.إ',2,2,'د.إ.‏ 10,000.00','A'),
+  ('AF','Afghanistan','افغانستان','dd/MM/yy','.',',','AFN','؋',2,0,'؋10.000,00','A'),
+  ('AL','Albania','Shqipëria','yyyy-MM-dd',',','.','ALL','Lek',2,1,'10.000,00Lek','A'),
+  ('AM','Armenia','Հայաստան','dd.MM.yyyy','.',',','AMD','դր.',2,3,'10,000.00 դր.','A'),
+  ('AR','Argentina','Argentina','dd/MM/yyyy',',','.','ARS','$',2,2,'$ 10.000,00','A'),
+  ('AT','Austria','Österreich','dd.MM.yyyy',',','.','EUR','€',2,2,'€ 10.000,00','A'),
+  ('AU','Australia','Australia','d/MM/yyyy','.',',','AUD','$',2,0,'$10,000.00','A'),
+  ('AZ','Azerbaijan','Azərbaycan','dd.MM.yyyy',',',' ','AZN','ман.',2,3,'10 000,00 man.','A'),
+  ('BA','Bosnia and Herzegovina','Bosna i Hercegovina','d.M.yyyy',',','.','BAM','KM',2,3,'10.000,00 KM','A'),
+  ('BD','Bangladesh','বাংলাদেশ','dd-MM-yy','.',',','BDT','৳',2,2,'৳ 10,000.00','A'),
+  ('BE','Belgium','België','d/MM/yyyy',',','.','EUR','€',2,2,'€ 10.000,00','A'),
+  ('BG','Bulgaria','България','d.M.yyyy ''г.''',',',' ','BGN','лв.',2,3,'10 000,00 лв.','A'),
+  ('BH','Bahrain','البحرين','dd/MM/yyyy','.',',','BHD','BD',3,2,'د.ب.‏ 10,000.000','A'),
+  ('BN','Brunei Darussalam','Brunei Darussalam','dd/MM/yyyy',',','.','BND','$',0,0,'$10.00','A'),
+  ('BO','Bolivia','Bolivia','dd/MM/yyyy',',','.','BOB','$b',2,2,'$b 10.000,00','A'),
+  ('BR','Brazil','Brasil','dd/MM/yyyy',',','.','BRL','R$',2,2,'R$ 10.000,00','A'),
+  ('BY','Belarus','Беларусь','dd.MM.yyyy',',',' ','BYR','р.',2,3,'10 000,00 р.','A'),
+  ('BZ','Belize','Belize','dd/MM/yyyy','.',',','BZD','BZ$',2,0,'BZ$10,000.00','A'),
+  ('CA','Canada','Canada','dd/MM/yyyy','.',',','CAD','$',2,0,'$10,000.00','A'),
+  ('CH','Switzerland','Schweiz','dd.MM.yyyy','.','''','CHF','Fr.',2,2,'Fr. 10''000.00','A'),
+  ('CL','Chile','Chile','dd-MM-yyyy',',','.','CLP','$',2,2,'$ 10.000,00','A'),
+  ('CN','People''s Republic of China','中华人民共和国','yyyy/M/d','.',',','CNY','¥',2,0,'¥10,000.00','A'),
+  ('CO','Colombia','Colombia','dd/MM/yyyy',',','.','COP','$',2,2,'$ 10.000,00','A'),
+  ('CR','Costa Rica','Costa Rica','dd/MM/yyyy',',','.','CRC','₡',2,0,'₡10.000,00','A'),
+  ('CS','Serbia and Montenegro (Former)','Srbija i Crna Gora (Prethodno)','d.M.yyyy',',','.','CSD','Дин.',2,3,'10.000,00 Din.','A'),
+  ('CZ','Czech Republic','Česká republika','d.M.yyyy',',',' ','CZK','Kč',2,3,'10 000,00 Kč','A'),
+  ('DE','Germany','Deutschland','dd.MM.yyyy',',','.','EUR','€',2,3,'10.000,00 €','A'),
+  ('DK','Denmark','Danmark','dd-MM-yyyy',',','.','DKK','kr.',2,2,'kr. 10.000,00','A'),
+  ('DO','Dominican Republic','República Dominicana','dd/MM/yyyy','.',',','DOP','RD$',2,0,'RD$10,000.00','A'),
+  ('DZ','Algeria','الجزائر','dd-MM-yyyy','.',',','DZD','DA',2,2,'د.ج.‏ 10,000.00','A'),
+  ('EC','Ecuador','Ecuador','dd/MM/yyyy',',','.','USD','$',2,2,'$ 10.000,00','A'),
+  ('EE','Estonia','Eesti','d.MM.yyyy','.',' ','EEK','kr',2,3,'10 000,00 kr','A'),
+  ('EG','Egypt','مصر','dd/MM/yyyy','.',',','EGP','£',2,2,'ج.م.‏ 10,000.00','A'),
+  ('ES','Spain','España','dd/MM/yyyy',',','.','EUR','€',2,3,'10.000,00 €','A'),
+  ('ET','Ethiopia','ኢትዮጵያ','d/M/yyyy','.',',','ETB','Br',2,0,'ETB10,000.00','A'),
+  ('FI','Finland','Suomi','d.M.yyyy',',',' ','EUR','€',2,3,'10 000,00 €','A'),
+  ('FO','Faroe Islands','Føroyar','dd-MM-yyyy',',','.','DKK','kr.',2,2,'kr. 10.000,00','A'),
+  ('FR','France','France','dd/MM/yyyy',',',' ','EUR','€',2,3,'10 000,00 €','A'),
+  ('GB','United Kingdom','United Kingdom','dd/MM/yyyy','.',',','GBP','£',2,0,'£10,000.00','A'),
+  ('GE','Georgia','საქართველო','dd.MM.yyyy',',',' ','GEL','Lari',2,3,'10 000,00 Lari','A'),
+  ('GL','Greenland','Kalaallit Nunaat','dd-MM-yyyy',',','.','DKK','kr.',2,2,'kr. 10.000,00','A'),
+  ('GR','Greece','Ελλάδα','d/M/yyyy',',','.','EUR','€',2,3,'10.000,00 €','A'),
+  ('GT','Guatemala','Guatemala','dd/MM/yyyy','.',',','GTQ','Q',2,0,'Q10,000.00','A'),
+  ('HK','Hong Kong S.A.R.','香港特別行政區','d/M/yyyy','.',',','HKD','HK$',2,0,'HK$10,000.00','A'),
+  ('HN','Honduras','Honduras','dd/MM/yyyy','.',',','HNL','L.',2,2,'L. 10,000.00','A'),
+  ('HR','Croatia','Hrvatska','d.M.yyyy.',',','.','HRK','kn',2,3,'10.000,00 kn','A'),
+  ('HU','Hungary','Magyarország','yyyy.MM.dd.',',',' ','HUF','Ft',2,3,'10 000,00 Ft','A'),
+  ('ID','Indonesia','Indonesia','dd/MM/yyyy',',','.','IDR','Rp',0,0,'Rp10.000','A'),
+  ('IE','Ireland','Éire','dd/MM/yyyy','.',',','EUR','€',2,0,'€ 10,000.00','A'),
+  ('IL','Israel','ישראל','dd/MM/yyyy','.',',','ILS','₪',2,2,'₪ 10,000.00','A'),
+  ('IN','India','भारत','dd-MM-yyyy','.',',','INR','₹',2,2,'रु 10,000.00','A'),
+  ('IQ','Iraq','العراق','dd/MM/yyyy','.',',','IQD','ID',2,2,'د.ع.‏ 10,000.00','A'),
+  ('IR','Iran','ایران','MM/dd/yyyy','٫',',','IRR','ريال',2,2,'ريال 10,000.00','A'),
+  ('IS','Iceland','Ísland','d.M.yyyy',',','.','ISK','kr.',0,3,'10.000 kr.','A'),
+  ('IT','Italy','Italia','dd/MM/yyyy',',','.','EUR','€',2,2,'€ 10.000,00','A'),
+  ('JM','Jamaica','Jamaica','dd/MM/yyyy','.',',','JMD','J$',2,0,'J$10,000.00','A'),
+  ('JO','Jordan','الأردن','dd/MM/yyyy','.',',','JOD','د.أ',3,2,'د.ا.‏ 10,000.000','A'),
+  ('JP','Japan','日本','yyyy/MM/dd','.',',','JPY','¥',0,0,'¥10,000','A'),
+  ('KE','Kenya','Kenya','M/d/yyyy','.',',','KES','S',2,0,'S10,000.00','A'),
+  ('KG','Kyrgyzstan','Кыргызстан','dd.MM.yy',',',' ','KGS','сом',2,3,'10 000,00 сом','A'),
+  ('KH','Cambodia','កម្ពុជា','yyyy-MM-dd','.',',','KHR','៛',2,1,'10,000.00៛','A'),
+  ('KR','Korea','대한민국','yyyy-MM-dd','.',',','KRW','₩',0,0,'₩10,000','A'),
+  ('KW','Kuwait','الكويت','dd/MM/yyyy','.',',','KWD','KD',3,2,'د.ك.‏ 10,000.000','A'),
+  ('KZ','Kazakhstan','Қазақстан','dd.MM.yyyy',',',' ','KZT','Т',2,0,'Т10 000,00','A'),
+  ('LA','Lao P.D.R.','ສ.ປ.ປ. ລາວ','dd/MM/yyyy','.',',','LAK','₭',2,1,'10,000.00₭','A'),
+  ('LB','Lebanon','لبنان','dd/MM/yyyy','.',',','LBP','LL',2,2,'ل.ل.‏ 10,000.00','A'),
+  ('LI','Liechtenstein','Liechtenstein','dd.MM.yyyy','.','','CHF','Fr.',2,2,'CHF 10''000.00','A'),
+  ('LK','Sri Lanka','ශ්‍රී ලංකා','yyyy-MM-dd','.',',','LKR','රු.',2,2,'රු. 10,000.00','A'),
+  ('LT','Lithuania','Lietuva','yyyy.MM.dd',',','.','LTL','Lt',2,3,'10.000,00 Lt','A'),
+  ('LU','Luxembourg','Luxembourg','dd/MM/yyyy',',','.','EUR','€',2,3,'10 000,00 €','A'),
+  ('LV','Latvia','Latvija','yyyy.MM.dd.',',',' ','LVL','Ls',2,2,'Ls 10 000,00','A'),
+  ('LY','Libya','ليبيا','dd/MM/yyyy','.',',','LYD','LD',3,0,'د.ل.‏10,000.000','A'),
+  ('MA','Morocco','المملكة المغربية','dd-MM-yyyy','.',',','MAD','DH',2,2,'د.م.‏ 10,000.00','A'),
+  ('MC','Principality of Monaco','Principauté de Monaco','dd/MM/yyyy',',',' ','EUR','€',2,3,'10 000,00 €','A'),
+  ('ME','Montenegro','Crna Gora','d.M.yyyy',',','.','EUR','€',2,3,'10.000,00 €','A'),
+  ('MK','Macedonia (FYROM)','Македонија','dd.MM.yyyy',',','.','MKD','ден.',2,3,'10.000,00 ден.','A'),
+  ('MN','Mongolia','Монгол улс','yy.MM.dd',',',' ','MNT','₮',2,1,'10 000,00₮','A'),
+  ('MO','Macao S.A.R.','澳門特別行政區','d/M/yyyy','.',',','MOP','$',2,0,'MOP10,000.00','A'),
+  ('MT','Malta','Malta','dd/MM/yyyy','.',',','EUR','€',2,0,'€ 10,000.00','A'),
+  ('MV','Maldives','ދިވެހި ރާއްޖެ','dd/MM/yy','.',',','MVR','ރ.',2,3,'10,000.00 ރ.','A'),
+  ('MX','Mexico','México','dd/MM/yyyy','.',',','MXN','$',2,0,'$10,000.00','A'),
+  ('MY','Malaysia','Malaysia','dd/MM/yyyy','.',',','MYR','RM',0,0,'RM10,000','A'),
+  ('NG','Nigeria','Nigeria','d/M/yyyy','.',',','NIO','C$',2,2,'N 10,000.00','A'),
+  ('NI','Nicaragua','Nicaragua','dd/MM/yyyy','.',',','NIO','C$',2,2,'C$ 10,000.00','A'),
+  ('NL','Netherlands','Nederland','d-M-yyyy',',','.','EUR','€',2,2,'€ 10.000,00','A'),
+  ('NO','Norway','Noreg','dd.MM.yyyy',',',' ','NOK','kr',2,2,'kr 10 000,00','A'),
+  ('NP','Nepal','नेपाल','M/d/yyyy','.',',','NPR','रु',2,0,'रु10,000.00','A'),
+  ('NZ','New Zealand','New Zealand','dd/MM/yyyy','.',',','NZD','$',2,0,'$10,000.00','A'),
+  ('OM','Oman','عمان','dd/MM/yyyy','.',',','OMR','R.O',3,2,'ر.ع.‏ 10,000.000','A'),
+  ('PA','Panama','Panamá','MM/dd/yyyy','.',',','PAB','B/.',2,2,'B/. 10,000.00','A'),
+  ('PE','Peru','Perú','dd/MM/yyyy','.',',','PEN','S/.',2,2,'S/. 10,000.00','A'),
+  ('PH','Philippines','Pilipinas','M/d/yyyy','.',',','PHP','₱',2,0,'PhP10,000.00','A'),
+  ('PK','Islamic Republic of Pakistan','پاکستان','dd/MM/yyyy','.',',','PKR','Rs',2,0,'Rs10,000.00','A'),
+  ('PL','Poland','Polska','yyyy-MM-dd',',',' ','PLN','zł',2,3,'10 000,00 zł','A'),
+  ('PR','Puerto Rico','Puerto Rico','dd/MM/yyyy','.',',','USD','$',2,2,'$10,000.00','A'),
+  ('PT','Portugal','Portugal','dd-MM-yyyy',',','.','EUR','€',2,3,'10.000,00 €','A'),
+  ('PY','Paraguay','Paraguay','dd/MM/yyyy',',','.','PYG','Gs',2,2,'Gs 10.000,00','A'),
+  ('QA','Qatar','قطر','dd/MM/yyyy','.',',','QAR','QR',2,2,'ر.ق.‏ 10,000.00','A'),
+  ('RO','Romania','România','dd.MM.yyyy',',','.','RON','lei',2,3,'10.000,00 lei','A'),
+  ('RS','Serbia','Srbija','d.M.yyyy',',','.','RSD','Дин.',2,3,'10.000,00 Din.','A'),
+  ('RU','Russia','Россия','dd.MM.yyyy',',',' ','RUB','һ.',2,1,'10 000,00р.','A'),
+  ('RW','Rwanda','Rwanda','M/d/yyyy',',',' ','RWF','R₣',2,2,'RWF 10 000,00','A'),
+  ('SA','Saudi Arabia','المملكة العربية السعودية','dd/MM/yy','.',',','SAR','SR',2,2,'ر.س.‏ 10,000.00','A'),
+  ('SE','Sweden','Sverige','yyyy-MM-dd',',','.','SEK','kr',2,3,'10 000,00 kr','A'),
+  ('SG','Singapore','Singapore','d/M/yyyy','.',',','SGD','$',2,0,'$10,000.00','A'),
+  ('SI','Slovenia','Slovenija','d.M.yyyy',',','.','EUR','€',2,3,'10.000,00 €','A'),
+  ('SK','Slovakia','Slovenská republika','d. M. yyyy',',',' ','EUR','€',2,3,'10 000,00 €','A'),
+  ('SN','Senegal','Sénégal','dd/MM/yyyy',',',' ','XOF','XOF',2,3,'10 000,00 XOF','A'),
+  ('SV','El Salvador','El Salvador','dd/MM/yyyy','.',',','USD','$',2,0,'$10,000.00','A'),
+  ('SY','Syria','سوريا','dd/MM/yyyy','.',',','SYP','LS',2,2,'ل.س.‏ 10,000.00','A'),
+  ('TH','Thailand','ไทย','d/M/yyyy','.',',','THB','฿',2,0,'฿10,000.00','A'),
+  ('TJ','Tajikistan','Тоҷикистон','dd.MM.yy',',',' ','TJS','т.р.',2,3,'10 000,00 т.р.','A'),
+  ('TM','Turkmenistan','Türkmenistan','dd.MM.yy',',',' ','TMT','m.',2,1,'10 000,00m.','A'),
+  ('TN','Tunisia','تونس','dd-MM-yyyy','.',',','TND','DT',3,2,'د.ت.‏ 10,000.000','A'),
+  ('TR','Turkey','Türkiye','dd.MM.yyyy',',','.','TRY','TL',2,3,'10.000,00 TL','A'),
+  ('TT','Trinidad and Tobago','Trinidad y Tobago','dd/MM/yyyy','.',',','TTD','TT$',2,0,'TT$10,000.00','A'),
+  ('TW','Taiwan','台灣','yyyy/M/d','.',',','TWD','NT$',2,0,'NT$10,000.00','A'),
+  ('UA','Ukraine','Україна','dd.MM.yyyy',',',' ','UAH','₴',2,1,'10 000,00₴','A'),
+  ('US','United States','United States','M/d/yyyy','.',',','USD','$',2,0,'$10,000.00','A'),
+  ('UY','Uruguay','Uruguay','dd/MM/yyyy',',','.','UYU','$U',2,2,'$U 10.000,00','A'),
+  ('UZ','Uzbekistan','U''zbekiston Respublikasi','dd.MM.yyyy',',',' ','UZS','лв',0,3,'10 000 so''m','A'),
+  ('VE','Bolivarian Republic of Venezuela','Republica Bolivariana de Venezuela','dd/MM/yyyy',',','.','VEF','Bs.',2,2,'Bs. F. 10.000,00','A'),
+  ('VN','Vietnam','Việt Nam','dd/MM/yyyy',',','.','VND','₫',0,3,'10.000,00 ₫','A'),
+  ('YE','Yemen','اليمن','dd/MM/yyyy','.',',','YER','﷼',2,2,'ر.ي.‏ 10,000.00','A'),
+  ('ZA','South Africa','South Africa','yyyy/MM/dd',',',' ','ZAR','R',2,2,'R 10 000.00','A'),
+  ('ZW','Zimbabwe','Zimbabwe','M/d/yyyy','.',',','ZWL','Z$',2,0,'Z$10,000.00','A');
 /*
 select * from locale where country_code in('AF', 'CA', 'ZA') order by country_code;
 select * from locale where country_code in('BA', 'CA', 'CH', 'CN', 'DE', 'ES', 'IN', 'LU', 'MY', 'NZ', 'RU', 'UZ');
