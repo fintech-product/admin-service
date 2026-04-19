@@ -1,5 +1,5 @@
 import { UseCase } from "onecore"
-import { DB, Repository } from "query-core"
+import { DB, Repository } from "sql-core"
 import { CurrencyController } from "./controller"
 import { Currency, CurrencyFilter, currencyModel, CurrencyRepository, CurrencyService } from "./currency"
 export * from "./controller"

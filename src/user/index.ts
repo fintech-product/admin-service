@@ -1,6 +1,6 @@
 import { UseCase } from "onecore"
-import { DB } from "query-core"
 import { TemplateMap, useQuery } from "query-mappers"
+import { DB } from "sql-core"
 import { UserController } from "./controller"
 import { SqlUserRepository } from "./repository"
 import { User, UserFilter, userModel, UserRepository, UserService } from "./user"

@@ -1,6 +1,6 @@
 import { UseCase } from "onecore"
-import { DB } from "query-core"
 import { TemplateMap, useQuery } from "query-mappers"
+import { DB } from "sql-core"
 import { RoleController } from "./controller"
 import { SqlRoleRepository } from "./repository"
 import { Role, RoleFilter, roleModel, RoleRepository, RoleService } from "./role"

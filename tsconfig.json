@@ -3,10 +3,10 @@
   "compilerOptions": {
     "pretty": true,
     "target": "es6",
-    "baseUrl": "./src",
+    "rootDir": "./src",
     "outDir": "./es6",
-    "module": "commonjs",
-    "moduleResolution": "node",
+    "module": "nodenext",
+    "moduleResolution": "nodenext",
     "strict": true,
     "sourceMap": true,
     "esModuleInterop": true,

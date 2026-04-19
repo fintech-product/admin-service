@@ -1,7 +1,7 @@
 import { Request, Response } from "express"
 import { format, fromRequest, handleError } from "express-ext"
 import { Log } from "onecore"
-import { DB, Query } from "query-core"
+import { DB, Query } from "sql-core"
 import { AuditLog, AuditLogFilter, auditLogModel, AuditLogService } from "./audit-log"
 export * from "./audit-log"
 
