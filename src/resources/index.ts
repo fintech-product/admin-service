@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { query } from "express-ext"
+import { query } from "express-core-web"
 import { en as adminEN } from "./admin/en"
 import { vi as adminVI } from "./admin/vi"
 import { en as authenticationEN } from "./authentication/en"

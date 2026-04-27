@@ -1,7 +1,7 @@
 import { merge } from "config-plus"
 import dotenv from "dotenv"
 import express, { json } from "express"
-import { allow, loadTemplates, MiddlewareLogger, resources } from "express-ext"
+import { allow, loadTemplates, MiddlewareLogger, resources } from "express-core-web"
 import http from "http"
 import { createLogger } from "logger-core"
 import { Pool } from "pg"

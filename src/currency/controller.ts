@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
-import { format, fromRequest, handleError, isSuccessful, respondError } from "express-ext"
-import { validate } from "xvalidators"
+import { format, fromRequest, handleError, isSuccessful, respondError } from "express-core-web"
+import { validate } from "validation-core"
 import { getResource } from "../resources"
 import { Currency, CurrencyFilter, currencyModel, CurrencyService } from "./currency"
 
