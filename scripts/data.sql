@@ -325,10 +325,10 @@ create table country (
   currency_decimal_digits int2,
   currency_pattern int2,
   currency_sample varchar(40),
-  status char(1)
+  active char(1)
 );
 
-insert into currency (code,symbol,decimal_digits,status) values
+insert into currency (code,symbol,decimal_digits,active) values
   ('AED','د.إ',2,'A'),
   ('AFN','؋',2,'A'),
   ('ALL','Lek',2,'A'),
@@ -432,6 +432,8 @@ insert into currency (code,symbol,decimal_digits,status) values
   ('YER','﷼',2,'A'),
   ('ZAR','R',2,'A'),
   ('ZWL','Z$',2,'A');
+
+update currency set active = '1';
 
 insert into locale (code,name,native_name,country_code,country_name,native_country_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample) values
   ('af-ZA','Afrikaans (South Africa)','Afrikaans (Suid Afrika)','ZA','South Africa','Suid Afrika','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00'),

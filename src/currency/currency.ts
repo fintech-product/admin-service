@@ -10,13 +10,13 @@ export interface Currency {
   code: string
   symbol?: string
   decimalDigits?: number
-  status?: string
+  active?: string
 }
 export interface CurrencyFilter extends Filter {
   code?: string
   symbol?: string
   decimalDigits?: number
-  status: string[]
+  active: string[]
 }
 
 export interface CurrencyRepository {
@@ -53,7 +53,7 @@ export const currencyModel: Attributes = {
     min: 0,
     max: 3
   },
-  status: {
+  active: {
     length: 1,
     operator: "="
   },
