@@ -19,6 +19,7 @@ export class CountryController {
     if (!filter.sort) {
       filter.sort = "countryCode"
     }
+    console.log("filter " + JSON.stringify(filter))
     const { limit, page, fields } = filter
     try {
       const result = await this.service.search(filter, limit, page, fields)

@@ -26,7 +26,7 @@ export interface CountryFilter extends Filter {
   currencyDecimalDigits?: number
   currencyPattern?: number
   currencySample?: string
-  status?: string
+  status: string[]
 }
 
 export interface CountryRepository {
@@ -95,5 +95,9 @@ export const countryModel: Attributes = {
   currencySample: {
     column: "currency_sample",
     length: 40,
+  },
+  status: {
+    length: 1,
+    operator: "="
   },
 }

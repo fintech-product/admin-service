@@ -16,7 +16,7 @@ export interface CurrencyFilter extends Filter {
   code?: string
   symbol?: string
   decimalDigits?: number
-  status?: string[]
+  status: string[]
 }
 
 export interface CurrencyRepository {

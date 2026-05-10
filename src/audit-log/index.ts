@@ -1,11 +1,10 @@
 import { Request, Response } from "express"
 import { format, fromRequest, handleError } from "express-core-web"
-import { Log } from "onecore"
 import { DB, Query } from "sql-core"
 import { AuditLog, AuditLogFilter, auditLogModel, AuditLogService } from "./audit-log"
 export * from "./audit-log"
 
-export function useAuditLogController(log: Log, db: DB): AuditLogController {
+export function useAuditLogController(db: DB): AuditLogController {
   const query = new Query<AuditLog, string, AuditLogFilter>(db, "audit_logs", auditLogModel)
   return new AuditLogController(query);
 }

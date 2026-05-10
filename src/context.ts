@@ -1,15 +1,15 @@
 import { AuthenticationController, PrivilegeController } from "authen-express"
 import { Authenticator, initializeStatus, PrivilegeRepository, PrivilegesReader, SqlAuthConfig, User, useUserRepository } from "authen-service"
 import { compare, hash } from "bcryptjs"
-import { HealthController, LogController, Logger, Middleware, MiddlewareController, resources, Search, useSearchController } from "express-core-web"
+import { HealthController, LogController, Logger, Middleware, MiddlewareController, resources } from "express-core-web"
 import { buildJwtError, generateToken, Payload, verify } from "jsonwebtoken-plus"
 import { StringMap } from "onecore"
 import { TemplateMap } from "query-mappers"
 import { Authorize, Authorizer, PrivilegeLoader, useToken } from "security-express"
-import { createChecker, DB, SearchBuilder, useGet } from "sql-core"
+import { createChecker, DB } from "sql-core"
 import { check } from "types-validation"
 import { createValidator } from "validation-core"
-import { AuditLog, AuditLogFilter, auditLogModel } from "./audit-log"
+import { AuditLogController, useAuditLogController } from "./audit-log"
 import { CountryController, useCountryController } from "./country"
 import { CurrencyController, useCurrencyController } from "./currency"
 import { LocaleController, useLocaleController } from "./locale"
@@ -39,7 +39,7 @@ export interface ApplicationContext {
   privilege: PrivilegeController
   role: RoleController
   user: UserController
-  auditLog: Search
+  auditLog: AuditLogController
   locale: LocaleController
   country: CountryController
   currency: CurrencyController
@@ -92,10 +92,7 @@ export function useContext(db: DB, logger: Logger, midLogger: Middleware, cfg: C
 
   const role = useRoleController(db, mapper)
   const user = useUserController(db, mapper)
-
-  const builder = new SearchBuilder<AuditLog, AuditLogFilter>(db, "audit_logs", auditLogModel)
-  const getAuditLog = useGet<AuditLog, string>(db, "audit_logs", auditLogModel)
-  const auditLog = useSearchController(builder.search, getAuditLog, ["status"], ["timestamp"])
+  const auditLog = useAuditLogController(db)
 
   const locale = useLocaleController(db)
   const country = useCountryController(db)

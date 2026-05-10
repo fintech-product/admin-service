@@ -65,7 +65,6 @@ export function route(app: Application, ctx: ApplicationContext, secure?: boolea
   app.get("/audit-logs", readAuditLog, ctx.auditLog.search)
   app.post("/audit-logs/search", readAuditLog, ctx.auditLog.search)
   app.get("/audit-logs/search", readAuditLog, ctx.auditLog.search)
-  app.get("/audit-logs/:id", readAuditLog, ctx.auditLog.load)
 
   const readCurrency = ctx.authorize("currency", read)
   const writeCurrency = ctx.authorize("currency", write)
