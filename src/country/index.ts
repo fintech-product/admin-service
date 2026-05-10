@@ -1,15 +1,11 @@
 import { UseCase } from "onecore"
-import { DB, Repository } from "sql-core"
+import { DB } from "sql-core"
 import { CountryController } from "./controller"
-import { Country, CountryFilter, countryModel, CountryRepository, CountryService } from "./country"
+import { Country, CountryFilter, CountryRepository, CountryService } from "./country"
+import { SqlCountryRepository } from "./repository"
 export * from "./controller"
 export * from "./country"
 
-export class SqlCountryRepository extends Repository<Country, string, CountryFilter> implements CountryRepository {
-  constructor(db: DB) {
-    super(db, "country", countryModel)
-  }
-}
 export class CountryUseCase extends UseCase<Country, string, CountryFilter> implements CountryService {
   constructor(repository: CountryRepository) {
     super(repository)

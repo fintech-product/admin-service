@@ -294,7 +294,7 @@ create table currency (
   code varchar(3) primary key,
   symbol varchar(6) not null,
   decimal_digits int4,
-  status char(1)
+  active char(1)
 );
 create table locale (
   code varchar(40) primary key,
@@ -325,7 +325,7 @@ create table country (
   currency_decimal_digits int2,
   currency_pattern int2,
   currency_sample varchar(40),
-  active char(1)
+  status char(1)
 );
 
 insert into currency (code,symbol,decimal_digits,active) values

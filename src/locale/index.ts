@@ -1,15 +1,11 @@
 import { UseCase } from "onecore"
-import { DB, Repository } from "sql-core"
+import { DB } from "sql-core"
 import { LocaleController } from "./controller"
-import { Locale, LocaleFilter, localeModel, LocaleRepository, LocaleService } from "./locale"
+import { Locale, LocaleFilter, LocaleRepository, LocaleService } from "./locale"
+import { SqlLocaleRepository } from "./repository"
 export * from "./controller"
 export * from "./locale"
 
-export class SqlLocaleRepository extends Repository<Locale, string, LocaleFilter> implements LocaleRepository {
-  constructor(db: DB) {
-    super(db, "locale", localeModel)
-  }
-}
 export class LocaleUseCase extends UseCase<Locale, string, LocaleFilter> implements LocaleService {
   constructor(repository: LocaleRepository) {
     super(repository)
