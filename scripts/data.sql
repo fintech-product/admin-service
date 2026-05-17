@@ -290,11 +290,54 @@ alter table rolemodules add foreign key (roleid) references roles (roleid);
 alter table rolemodules add foreign key (moduleid) references modules (moduleid);
 */
 
+create table draft_currency (
+  code varchar(3) primary key,
+  symbol varchar(6) not null,
+  decimal_digits int4,
+  active char(1),
+  status char(1),
+
+  submitted_by varchar(40),
+  submitted_at timestamptz,
+  approved_by varchar(40),
+  approved_at timestamptz,
+
+  created_by varchar(40),
+  created_at timestamptz,
+  updated_by varchar(40),
+  updated_at timestamptz
+);
 create table currency (
   code varchar(3) primary key,
   symbol varchar(6) not null,
   decimal_digits int4,
-  active char(1)
+  active char(1),
+  status char(1),
+
+  submitted_by varchar(40),
+  submitted_at timestamptz,
+  approved_by varchar(40),
+  approved_at timestamptz,
+
+  created_by varchar(40),
+  created_at timestamptz,
+  updated_by varchar(40),
+  updated_at timestamptz
+);
+
+create table country (
+  country_code varchar(5) primary key,
+  country_name varchar(255),
+  native_country_name varchar(255),
+  date_format varchar(14),
+  decimal_separator varchar(3),
+  group_separator varchar(3),
+  currency_code char(3),
+  currency_symbol varchar(6),
+  currency_decimal_digits int2,
+  currency_pattern int2,
+  currency_sample varchar(40),
+  status char(1)
 );
 create table locale (
   code varchar(40) primary key,
@@ -313,22 +356,8 @@ create table locale (
   currency_pattern int2,
   currency_sample varchar(40)
 );
-create table country (
-  country_code varchar(5) primary key,
-  country_name varchar(255),
-  native_country_name varchar(255),
-  date_format varchar(14),
-  decimal_separator varchar(3),
-  group_separator varchar(3),
-  currency_code char(3),
-  currency_symbol varchar(6),
-  currency_decimal_digits int2,
-  currency_pattern int2,
-  currency_sample varchar(40),
-  status char(1)
-);
 
-insert into currency (code,symbol,decimal_digits,active) values
+insert into currency (code,symbol,decimal_digits,status) values
   ('AED','د.إ',2,'A'),
   ('AFN','؋',2,'A'),
   ('ALL','Lek',2,'A'),
@@ -433,7 +462,9 @@ insert into currency (code,symbol,decimal_digits,active) values
   ('ZAR','R',2,'A'),
   ('ZWL','Z$',2,'A');
 
-update currency set active = '1';
+update currency set status = 'P', active = '1', submitted_by = 'dXlkg4NA9J', submitted_at = now(), approved_by = 'ftMd80w4x2', approved_at = now(), created_by = 'dXlkg4NA9J', created_at = now(), updated_by = 'ftMd80w4x2', updated_at = now();
+insert into draft_currency (code, symbol, decimal_digits) select code, symbol, decimal_digits from currency;
+update draft_currency set status = 'P', active = '1', submitted_by = 'dXlkg4NA9J', submitted_at = now(), approved_by = 'ftMd80w4x2', approved_at = now(), created_by = 'dXlkg4NA9J', created_at = now(), updated_by = 'ftMd80w4x2', updated_at = now();
 
 insert into locale (code,name,native_name,country_code,country_name,native_country_name,date_format,first_day_of_week,decimal_separator,group_separator,currency_code,currency_symbol,currency_decimal_digits,currency_pattern,currency_sample) values
   ('af-ZA','Afrikaans (South Africa)','Afrikaans (Suid Afrika)','ZA','South Africa','Suid Afrika','yyyy/MM/dd',1,'.',',','ZAR','R',2,2,'R 10,000.00'),
