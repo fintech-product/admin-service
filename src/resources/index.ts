@@ -1,17 +1,15 @@
 import { Request, Response } from "express"
 import { query } from "express-core-web"
+import { getLocale, usLocale } from "locale-service"
 import { en as adminEN } from "./admin/en"
 import { vi as adminVI } from "./admin/vi"
 import { en as authenticationEN } from "./authentication/en"
 import { vi as authenticationVI } from "./authentication/vi"
+import { en as countryEN } from "./country/en"
+import { vi as countryVI } from "./country/vi"
 import { en as commonEN } from "./en"
 import { vi as commonVI } from "./vi"
 
-export interface Resource {
-  resource(): StringMap
-  value(key: string, param?: any): string
-  format(f: string, ...args: any[]): string
-}
 export interface StringMap {
   [key: string]: string
 }
@@ -23,11 +21,13 @@ const en: StringMap = {
   ...commonEN,
   ...authenticationEN,
   ...adminEN,
+  ...countryEN,
 }
 const vi: StringMap = {
   ...commonVI,
   ...authenticationVI,
   ...adminVI,
+  ...countryVI,
 }
 
 export const resources: Resources = {
@@ -36,10 +36,11 @@ export const resources: Resources = {
 }
 
 export function getDateFormat(lang?: string): string {
-  if (lang === "vi") {
-    return "D/M/YYYY"
+  if (!lang) {
+    return usLocale.dateFormat
   }
-  return "M/D/YYYY"
+  const locale = getLocale(lang) || usLocale
+  return locale.dateFormat
 }
 export function getLang(req: Request, res: Response): string {
   let lang = res.locals.lang

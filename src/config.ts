@@ -24,7 +24,7 @@ export const config = {
     size: "size",
   },
   db: {
-    connectionString: "postgres://postgres:abcd1234@localhost/backoffice",
+    connectionString: "postgres://postgres:abcd1234@localhost/backoffice2",
   },
   template: false,
   auth: {
@@ -48,7 +48,8 @@ export const config = {
       userType: "userType",
     },
     account: {
-      displayName: "displayname",
+      displayName: "display_name",
+      dateFormat: "date_format",
     },
     userStatus: {
       activated: "A",
@@ -68,7 +69,7 @@ export const config = {
       lockedUntilTime: "locked_until_time",
     },
     query: `
-      select u.user_id, u.username, u.display_name, email, u.status, u.max_password_age, 
+      select u.user_id, u.username, u.display_name, u.email, u.status, u.language, u.dateformat as date_format, u.max_password_age, 
         p.password, p.success_time, p.fail_time, p.fail_count, p.locked_until_time, p.changed_time
       from users u
       inner join passwords p

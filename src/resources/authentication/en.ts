@@ -11,7 +11,7 @@ export const en = {
   email: "Email",
   password: "Password",
   passcode: "Verification Code",
-  contact: "Contact",
+  contact: "Email",
 
   signin: "Sign in",
 
