@@ -6,7 +6,7 @@ export * from "./audit-log"
 
 export function useAuditLogController(db: DB): AuditLogController {
   const query = new Query<AuditLog, string, AuditLogFilter>(db, "audit_logs", auditLogModel)
-  return new AuditLogController(query);
+  return new AuditLogController(query)
 }
 export class AuditLogController {
   constructor(protected query: AuditLogService) {

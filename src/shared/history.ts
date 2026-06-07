@@ -1,5 +1,5 @@
-import { nanoid } from "nanoid";
-import { DB, Transaction } from "onecore";
+import { nanoid } from "nanoid"
+import { DB, Transaction } from "onecore"
 
 export class Action {
   static readonly Create = "C"
@@ -36,7 +36,19 @@ export class HistoryAdapter<T> implements HistoryRepository<T> {
   protected time: string
   protected action: string
   protected data: string
-  constructor(protected db: DB, protected type: string, protected table: string, ignoreFields?: string[], historyId?: string, entity?: string, id?: string, author?: string, time?: string, action?: string, data?: string) {
+  constructor(
+    protected db: DB,
+    protected type: string,
+    protected table: string,
+    ignoreFields?: string[],
+    historyId?: string,
+    entity?: string,
+    id?: string,
+    author?: string,
+    time?: string,
+    action?: string,
+    data?: string,
+  ) {
     this.ignoreFields = ignoreFields || []
     this.historyId = historyId || "history_id"
     this.entity = entity || "entity"

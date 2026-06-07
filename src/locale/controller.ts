@@ -31,7 +31,10 @@ export class LocaleController {
     const id = req.params.id as string
     try {
       const locale = await this.service.load(id)
-      res.status(locale ? 200 : 404).json(locale).end()
+      res
+        .status(locale ? 200 : 404)
+        .json(locale)
+        .end()
     } catch (err) {
       handleError(err, res)
     }
@@ -93,7 +96,10 @@ export class LocaleController {
     const id = req.params.id as string
     try {
       const result = await this.service.delete(id)
-      res.status(result > 0 ? 200 : 410).json(result).end()
+      res
+        .status(result > 0 ? 200 : 410)
+        .json(result)
+        .end()
     } catch (err) {
       handleError(err, res)
     }

@@ -190,7 +190,7 @@ export const en = {
   display_name: "Display Name",
   gender: "Gender",
   male: "Male",
-  female: "Female",  
+  female: "Female",
 
   please_select: "Please Select",
 

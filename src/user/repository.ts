@@ -22,7 +22,10 @@ export class SqlUserRepository extends SearchRepository<User, UserFilter> implem
   map: StringMap
   roleMap: StringMap
   attributes: Attributes
-  constructor(protected db: DB, query?: Query) {
+  constructor(
+    protected db: DB,
+    query?: Query,
+  ) {
     super(db, "users", userModel, query)
     this.attributes = userModel
     this.map = buildMap(userModel)

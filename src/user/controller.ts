@@ -43,7 +43,10 @@ export class UserController {
     const id = req.params.id as string
     try {
       const user = await this.service.load(id)
-      res.status(user ? 200 : 404).json(user).end()
+      res
+        .status(user ? 200 : 404)
+        .json(user)
+        .end()
     } catch (err) {
       handleError(err, res)
     }
@@ -111,7 +114,10 @@ export class UserController {
     const id = req.params.id as string
     try {
       const result = await this.service.delete(id)
-      res.status(result > 0 ? 200 : 410).json(result).end()
+      res
+        .status(result > 0 ? 200 : 410)
+        .json(result)
+        .end()
     } catch (err) {
       handleError(err, res)
     }

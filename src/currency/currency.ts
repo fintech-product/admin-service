@@ -1,16 +1,16 @@
 import { Attributes, Filter, SearchResult } from "onecore"
 
 export class Status {
-  static readonly Draft = 'D'
-  static readonly Submitted = 'S'
-  static readonly Approved = 'A'
+  static readonly Draft = "D"
+  static readonly Submitted = "S"
+  static readonly Approved = "A"
 }
 
 export interface Currency {
   code: string
   symbol?: string
   decimalDigits?: number
-  status?: string;
+  status?: string
 }
 export interface CurrencyFilter extends Filter {
   code?: string
@@ -40,21 +40,21 @@ export const currencyModel: Attributes = {
   code: {
     key: true,
     length: 3,
-    q: true
+    q: true,
   },
   symbol: {
     length: 4,
-    q: true
+    q: true,
   },
   decimalDigits: {
     column: "decimal_digits",
     type: "integer",
     operator: "=",
     min: 0,
-    max: 3
+    max: 3,
   },
   status: {
     length: 1,
-    operator: "="
+    operator: "=",
   },
 }

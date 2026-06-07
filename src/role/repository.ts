@@ -39,7 +39,10 @@ export class SqlRoleRepository extends SearchRepository<Role, RoleFilter> implem
   private roleModuleMap: StringMap
   map?: StringMap
   attributes: Attributes
-  constructor(protected db: DB, query?: Query) {
+  constructor(
+    protected db: DB,
+    query?: Query,
+  ) {
     super(db, "roles", roleModel, query)
     this.attributes = roleModel
     this.metadata = this.metadata.bind(this)

@@ -4,7 +4,10 @@ interface ID {
   id: string
 }
 export class ApproversAdapter implements ApproversPort {
-  constructor(protected db: DB, protected entity: string) {
+  constructor(
+    protected db: DB,
+    protected entity: string,
+  ) {
     this.getApprovers = this.getApprovers.bind(this)
   }
   getApprovers(): Promise<string[]> {

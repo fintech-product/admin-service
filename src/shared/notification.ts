@@ -15,7 +15,18 @@ export class NotificationAdapter implements NotificationPort {
   protected receiver: string
   protected message: string
   protected status: string
-  constructor(protected db: DB, protected table: string, unread?: string, time?: string, url?: string, id?: string, sender?: string, receiver?: string, message?: string, status?: string) {
+  constructor(
+    protected db: DB,
+    protected table: string,
+    unread?: string,
+    time?: string,
+    url?: string,
+    id?: string,
+    sender?: string,
+    receiver?: string,
+    message?: string,
+    status?: string,
+  ) {
     this.unread = unread && unread.length > 0 ? unread : "U"
     this.time = time && time.length > 0 ? time : "time"
     this.url = url && url.length > 0 ? url : "url"

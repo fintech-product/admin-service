@@ -8,7 +8,12 @@ export const approve = 8
 
 const prefix = "Bearer "
 export class TokenVerifier {
-  constructor(private secret: string, private account: string, private userId: string, private id: string) {
+  constructor(
+    private secret: string,
+    private account: string,
+    private userId: string,
+    private id: string,
+  ) {
     this.verify = this.verify.bind(this)
   }
   verify(req: Request, res: Response, next: NextFunction) {
@@ -20,7 +25,7 @@ export class TokenVerifier {
           next()
         } else {
           res.locals[this.account] = decoded
-          res.locals[this.userId] = (decoded as any)["id"]
+          res.locals[this.userId] = (decoded as any)[this.id]
           next()
         }
       })

@@ -32,7 +32,10 @@ export class CountryController {
     const id = req.params.id as string
     try {
       const country = await this.service.load(id)
-      res.status(country ? 200 : 404).json(country).end()
+      res
+        .status(country ? 200 : 404)
+        .json(country)
+        .end()
     } catch (err) {
       handleError(err, res)
     }
@@ -94,7 +97,10 @@ export class CountryController {
     const id = req.params.id as string
     try {
       const result = await this.service.delete(id)
-      res.status(result > 0 ? 200 : 410).json(result).end()
+      res
+        .status(result > 0 ? 200 : 410)
+        .json(result)
+        .end()
     } catch (err) {
       handleError(err, res)
     }

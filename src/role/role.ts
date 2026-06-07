@@ -56,7 +56,7 @@ export const roleModel: Attributes = {
   },
   status: {
     length: 1,
-    operator: "="
+    operator: "=",
   },
   remark: {
     length: 255,
@@ -79,7 +79,7 @@ export const roleModel: Attributes = {
   updatedAt: {
     column: "updated_at",
     type: "datetime",
-    updatedAt: true
+    updatedAt: true,
   },
 
   privileges: {

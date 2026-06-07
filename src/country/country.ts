@@ -98,6 +98,6 @@ export const countryModel: Attributes = {
   },
   status: {
     length: 1,
-    operator: "="
+    operator: "=",
   },
 }
