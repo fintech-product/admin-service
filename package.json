@@ -12,7 +12,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
-    "authen-service": "^0.3.0",
+    "authen-service": "^0.4.3",
     "bcrypt-plus": "^0.0.1",
     "bcryptjs": "^3.0.3",
     "config-plus": "^0.0.4",

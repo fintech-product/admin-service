@@ -1,7 +1,7 @@
-import { Authenticator, initializeStatus, PrivilegeRepository, PrivilegesReader, SqlAuthConfig, User, useUserRepository } from "authen-service"
+import { Authenticator, initializeStatus, PrivilegeRepository, PrivilegesReader, SqlAuthConfig, Token, User, useUserRepository } from "authen-service"
 import { compare, hash } from "bcryptjs"
 import { HealthController, LogController, Logger, Middleware, MiddlewareController, resources } from "express-core-web"
-import { buildJwtError, generateToken, Payload, verify } from "jsonwebtoken-plus"
+import { buildJwtError, Payload, verify } from "jsonwebtoken-plus"
 import { StringMap } from "onecore"
 import { TemplateMap } from "query-mappers"
 import { Authorize, Authorizer, PrivilegeLoader, useToken } from "security-express"
@@ -21,6 +21,7 @@ resources.check = check
 
 export interface Config {
   cookie?: boolean
+  token: Token
   auth: SqlAuthConfig
   map: StringMap
   sql: {
@@ -68,7 +69,7 @@ export function useContext(db: DB, logger: Logger, midLogger: Middleware, cfg: C
 
   const auth = cfg.auth
   const privilegeLoader = new PrivilegeLoader(cfg.sql.permission, db.query)
-  const token = useToken<Payload>(auth.token.secret, verify, buildJwtError, cfg.cookie)
+  const token = useToken<Payload>(cfg.token.secret, verify, buildJwtError, cfg.cookie)
   const authorizer = new Authorizer<Payload>(token, privilegeLoader.privilege, buildJwtError, true)
 
   const status = initializeStatus(auth.status)
@@ -77,16 +78,13 @@ export function useContext(db: DB, logger: Logger, midLogger: Middleware, cfg: C
   const authenticator = new Authenticator(
     status,
     compare,
-    generateToken,
-    auth.token,
-    auth.payload,
     auth.account,
     userRepository,
     privilegeRepository.privileges,
     auth.lockedMinutes,
     auth.maxPasswordFailed,
   )
-  const authentication = new AuthenticationController(logger.error, authenticator.authenticate, cfg.cookie)
+  const authentication = new AuthenticationController(logger.error, authenticator.authenticate, cfg.token.secret, cfg.token.expires, "token", cfg.cookie)
   const privilegesLoader = new PrivilegesReader(db.query, cfg.sql.allPrivileges)
   const privilege = new PrivilegeController(logger.error, privilegesLoader.privileges)
 

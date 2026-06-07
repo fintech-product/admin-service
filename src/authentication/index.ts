@@ -1,9 +1,15 @@
 import { AuthResult, Privilege, User } from 'authen-service';
 import { Request, Response } from 'express';
+import { sign } from 'jsonwebtoken';
 import { Log } from 'onecore';
 
 export class AuthenticationController<T extends User, ID> {
-  constructor (public log: Log, public login: (user: T) => Promise<AuthResult>, public cookie?: boolean, public decrypt?: (cipherText: string) => string|undefined) {
+  constructor (protected log: Log, protected login: (user: T) => Promise<AuthResult>,
+      private secret: string,
+      private expiresIn: number,
+      private token: string,
+      protected cookie?: boolean,
+      protected decrypt?: (cipherText: string) => string|undefined) {
     this.authenticate = this.authenticate.bind(this);
   }
   authenticate(req: Request, res: Response) {
@@ -27,16 +33,25 @@ export class AuthenticationController<T extends User, ID> {
     }
     this.login(user).then(r => {
       const account = r.user;
-      if (this.cookie && account && account.token && account.tokenExpiredTime) {
-        res.status(200).cookie(
-          'token', account.token,
+      if (account) {
+        if (!account.displayName) {
+          account.displayName = (account.username ? account.username : (account.email ? account.email :account.id))
+        }
+        const token = sign({ id: account.id, username: user.username, displayName: account.displayName, language: account.language, dateFormat: account.dateFormat }, this.secret, {
+          expiresIn: this.expiresIn,
+        });
+        (account as any).token = token
+        if (this.cookie && this.token ) {
+          res.cookie(this.token, token,
           {
-            sameSite: 'strict',
             path: '/',
-            expires: account.tokenExpiredTime,
             httpOnly: true,
             secure: true,
-          }).json(r).end();
+            sameSite: 'strict',
+            maxAge: this.expiresIn,
+          })
+        }
+        res.status(200).json(r).end();
       } else {
         res.status(200).json(r).end();
       }

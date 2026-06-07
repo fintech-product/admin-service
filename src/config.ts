@@ -27,11 +27,11 @@ export const config = {
     connectionString: "postgres://postgres:abcd1234@localhost/backoffice2",
   },
   template: false,
+  token: {
+    secret: "secretbackoffice",
+    expires: 86400000,
+  },
   auth: {
-    token: {
-      secret: "secretbackoffice",
-      expires: 86400000,
-    },
     status: {
       success: 1,
       password_expired: 3,

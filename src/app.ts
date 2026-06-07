@@ -21,7 +21,7 @@ resources.log = logger.error
 const middleware = new MiddlewareLogger(logger.info, cfg.middleware)
 app.use(allow(cfg.allow), json())
 
-const verifier = new TokenVerifier(cfg.auth.token.secret, "account", "userId", "id")
+const verifier = new TokenVerifier(cfg.token.secret, "account", "userId", "id")
 app.use(verifier.verify)
 
 const templates = loadTemplates(cfg.template, buildTemplates, trim, ["./config/query.xml"])
