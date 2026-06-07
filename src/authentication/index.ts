@@ -40,16 +40,9 @@ export class AuthenticationController<T extends User, ID> {
         const token = sign({ id: account.id, username: user.username, displayName: account.displayName, language: account.language, dateFormat: account.dateFormat }, this.secret, {
           expiresIn: this.expiresIn,
         });
-        (account as any).token = token
+        r.token = token
         if (this.cookie && this.token ) {
-          res.cookie(this.token, token,
-          {
-            path: '/',
-            httpOnly: true,
-            secure: true,
-            sameSite: 'strict',
-            maxAge: this.expiresIn,
-          })
+          res.cookie(this.token, token, { path: '/', httpOnly: true, secure: true, sameSite: 'strict', maxAge: this.expiresIn })
         }
         res.status(200).json(r).end();
       } else {
