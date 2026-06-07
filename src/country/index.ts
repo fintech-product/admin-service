@@ -1,5 +1,4 @@
-import { UseCase } from "onecore"
-import { DB } from "sql-core"
+import { DB, UseCase } from "onecore"
 import { CountryController } from "./controller"
 import { Country, CountryFilter, CountryRepository, CountryService } from "./country"
 import { SqlCountryRepository } from "./repository"
