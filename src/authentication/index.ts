@@ -48,9 +48,10 @@ export class AuthenticationController<T extends User, ID> {
               expiresIn: this.expiresIn,
             },
           )
-          r.token = token
           if (this.cookie && this.token) {
             res.cookie(this.token, token, { path: "/", httpOnly: true, secure: true, sameSite: "strict", maxAge: this.expiresIn })
+          } else {
+            r.token = token
           }
           res.status(200).json(r).end()
         } else {
