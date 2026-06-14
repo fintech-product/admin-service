@@ -24,7 +24,7 @@ export const config = {
     size: "size",
   },
   db: {
-    connectionString: "postgres://postgres:abcd1234@localhost/backoffice2",
+    connectionString: "postgres://postgres:abcd1234@localhost/backoffice",
   },
   template: false,
   token: {

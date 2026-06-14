@@ -1,15 +1,9 @@
-import { DB, UseCase } from "onecore"
+import { DB } from "onecore"
 import { CurrencyController } from "./controller"
-import { Currency, CurrencyFilter, CurrencyRepository, CurrencyService } from "./currency"
 import { SqlCurrencyRepository } from "./repository"
+import { CurrencyUseCase } from "./service"
 export * from "./controller"
 export * from "./currency"
-
-export class CurrencyUseCase extends UseCase<Currency, string, CurrencyFilter> implements CurrencyService {
-  constructor(repository: CurrencyRepository) {
-    super(repository)
-  }
-}
 
 export function useCurrencyController(db: DB): CurrencyController {
   const repository = new SqlCurrencyRepository(db)

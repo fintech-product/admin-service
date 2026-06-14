@@ -1,6 +1,6 @@
-import { Attributes, StringMap } from "onecore"
+import { Attributes, DB, StringMap } from "onecore"
 import { Query } from "query-mappers"
-import { buildMap, buildToInsert, buildToInsertBatch, buildToUpdate, DB, SearchRepository, Statement } from "sql-core"
+import { buildMap, buildToInsert, buildToInsertBatch, buildToUpdate, SearchRepository, Statement } from "sql-core"
 import { User, UserFilter, userModel, UserRepository } from "./user"
 
 const userRoleModel: Attributes = {
