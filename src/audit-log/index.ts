@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { format, fromRequest, handleError } from "express-core-web"
+import { format, fromRequest, handleError } from "express-web-kit"
 import { DB, Query } from "sql-core"
 import { AuditLog, AuditLogFilter, auditLogModel, AuditLogService } from "./audit-log"
 export * from "./audit-log"

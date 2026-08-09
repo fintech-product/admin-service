@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { format, fromRequest, handleError, isSuccessful, respondError } from "express-core-web"
+import { format, fromRequest, handleError, isSuccessful, respondError } from "express-web-kit"
 import { validate } from "validation-core"
 import { getResource } from "../resources"
 import { Currency, CurrencyFilter, currencyModel, CurrencyService } from "./currency"

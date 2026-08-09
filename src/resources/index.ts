@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { query } from "express-core-web"
+import { query } from "express-web-kit"
 import { getLocale, usLocale } from "locale-service"
 import { en as adminEN } from "./admin/en"
 import { vi as adminVI } from "./admin/vi"

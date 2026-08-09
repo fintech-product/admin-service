@@ -1,7 +1,8 @@
 import { Authenticator, initializeStatus, PrivilegeRepository, PrivilegesReader, SqlAuthConfig, Token, User, useUserRepository } from "authen-service"
 import { compare, hash } from "bcryptjs"
-import { HealthController, LogController, Logger, Middleware, MiddlewareController, resources } from "express-core-web"
+import { HealthController, LogController, Logger, Middleware, MiddlewareController, resources } from "express-web-kit"
 import { buildJwtError, Payload, verify } from "jsonwebtoken-plus"
+import { updateLogger } from "logger-core"
 import { StringMap } from "onecore"
 import { TemplateMap } from "query-mappers"
 import { Authorize, Authorizer, PrivilegeLoader, useToken } from "security-express"
@@ -62,7 +63,7 @@ export class Comparator {
 }
 
 export function useContext(db: DB, logger: Logger, midLogger: Middleware, cfg: Config, mapper?: TemplateMap): ApplicationContext {
-  const log = new LogController(logger)
+  const log = new LogController(logger, updateLogger)
   const middleware = new MiddlewareController(midLogger)
   const sqlChecker = createChecker(db)
   const health = new HealthController([sqlChecker])

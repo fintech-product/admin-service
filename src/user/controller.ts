@@ -1,5 +1,5 @@
 import { Request, Response } from "express"
-import { fromRequest, handleError, isSuccessful, queryParam, respondError } from "express-core-web"
+import { fromRequest, handleError, isSuccessful, queryParam, respondError } from "express-web-kit"
 import { validate } from "validation-core"
 import { getResource } from "../resources"
 import { User, UserFilter, userModel, UserService } from "./user"
