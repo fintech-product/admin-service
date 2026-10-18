@@ -1,11 +1,10 @@
 import { Authenticator, initializeStatus, PrivilegeRepository, PrivilegesReader, SqlAuthConfig, Token, User, useUserRepository } from "authen-service"
 import { compare, hash } from "bcryptjs"
 import { HealthController, LogController, Logger, Middleware, MiddlewareController, resources } from "express-web-kit"
-import { buildJwtError, Payload, verify } from "jsonwebtoken-plus"
 import { updateLogger } from "logger-core"
 import { StringMap } from "onecore"
 import { TemplateMap } from "query-mappers"
-import { Authorize, Authorizer, PrivilegeLoader, useToken } from "security-express"
+import { Authorize, Authorizer, PrivilegeLoader } from "security-express"
 import { createChecker, DB } from "sql-core"
 import { check } from "types-validation"
 import { createValidator } from "validation-core"
@@ -70,8 +69,7 @@ export function useContext(db: DB, logger: Logger, midLogger: Middleware, cfg: C
 
   const auth = cfg.auth
   const privilegeLoader = new PrivilegeLoader(cfg.sql.permission, db.query)
-  const token = useToken<Payload>(cfg.token.secret, verify, buildJwtError, cfg.cookie)
-  const authorizer = new Authorizer<Payload>(token, privilegeLoader.privilege, buildJwtError, true)
+  const authorizer = new Authorizer(privilegeLoader.privilege, logger.error, true, "userId", "permissions")
 
   const status = initializeStatus(auth.status)
   const privilegeRepository = new PrivilegeRepository(db.query, cfg.sql.privileges)

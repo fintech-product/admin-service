@@ -1,7 +1,7 @@
 import { Application, NextFunction, Request, Response } from "express"
 import { verify } from "jsonwebtoken"
 import multer from "multer"
-import { del, get, patch, post, put, read, write } from "security-express"
+import { read, write } from "security-express"
 import { ApplicationContext } from "./context"
 
 export const approve = 8
@@ -44,15 +44,15 @@ export function route(app: Application, ctx: ApplicationContext, secure?: boolea
 
   const readRole = ctx.authorize("role", read)
   const writeRole = ctx.authorize("role", write)
-  get(app, "/privileges", readRole, ctx.privilege.all, secure)
-  put(app, "/roles/:id/assign", writeRole, ctx.role.assign, secure)
-  post(app, "/roles/search", readRole, ctx.role.search, secure)
-  get(app, "/roles/search", readRole, ctx.role.search, secure)
-  get(app, "/roles/:id", readRole, ctx.role.load, secure)
-  post(app, "/roles", writeRole, ctx.role.create, secure)
-  put(app, "/roles/:id", writeRole, ctx.role.update, secure)
-  patch(app, "/roles/:id", writeRole, ctx.role.patch, secure)
-  del(app, "/roles/:id", writeRole, ctx.role.delete, secure)
+  app.get("/privileges", readRole, ctx.privilege.all)
+  app.put("/roles/:id/assign", writeRole, ctx.role.assign)
+  app.post("/roles/search", readRole, ctx.role.search)
+  app.get("/roles/search", readRole, ctx.role.search)
+  app.get("/roles/:id", readRole, ctx.role.load)
+  app.post("/roles", writeRole, ctx.role.create)
+  app.put("/roles/:id", writeRole, ctx.role.update)
+  app.patch("/roles/:id", writeRole, ctx.role.patch)
+  app.delete("/roles/:id", writeRole, ctx.role.delete)
 
   const readUser = ctx.authorize("user", read)
   const writeUser = ctx.authorize("user", write)
